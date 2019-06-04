@@ -18,6 +18,12 @@ footer {
       margin-left: $grid-gutter-width/2;
       margin-right: $grid-gutter-width/2;
       display: inline-block;
+      a {
+        color: $gray-200;
+        &:hover {
+          color: $white;
+        }
+      }
     }
   }
 }

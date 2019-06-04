@@ -3,4 +3,19 @@
 
 // Custom variables go here
 
+$font-family-sans-serif: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+  'Segoe UI Symbol', 'Noto Color Emoji';
+$headings-font-family: 'Zilla Slab', serif;
+$headings-font-weight: 500;
+
+$doc-yellow: #ffc51d;
+$doc-green: #194036;
+
+$primary: $doc-yellow;
+$secondary: $doc-green;
+
+$link-color: $doc-green;
+$link-decoration: underline;
+
 @import 'node_modules/bootstrap/scss/variables';

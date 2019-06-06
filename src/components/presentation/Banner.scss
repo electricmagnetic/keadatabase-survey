@@ -3,8 +3,10 @@
 .Banner {
   background: $gray-300;
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center 15%;
   background-size: cover;
+  max-width: 1920px; // Actual image maximum size
+  margin: auto;
 
   h1,
   h2,
@@ -36,5 +38,12 @@
   &.size-small {
     padding-top: $spacer * 3;
     padding-bottom: $spacer * 3;
+  }
+
+  .banner-title {
+    padding: $spacer;
+    background: rgba($dark, 0.85);
+    display: inline-block;
+    color: $white;
   }
 }

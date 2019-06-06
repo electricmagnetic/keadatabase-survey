@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 
 import Banner from '../components/presentation/Banner';
 
+import banner from '../assets/img/banner.jpg';
+
 const HomePage = props => {
   return (
     <div className="HomePage">
       <Helmet title="Kea Survey Tool" />
       <section className="mb-4">
-        <Banner size="large">
-          <h1 className="mb-3">Kea Survey Tool</h1>
+        <Banner backgroundImage={banner}>
+          <h1 className="mb-3 banner-title">Kea Survey Tool</h1>
           <div className="home-buttons">
             <Link to="/report" className="btn btn-lg btn-primary mr-3">
               Report Survey

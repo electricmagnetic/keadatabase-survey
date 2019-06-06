@@ -2,14 +2,14 @@
 
 header {
   .doc-stripe {
-    height: 20px;
+    height: $spacer;
     background-color: $doc-yellow;
   }
   nav {
     text-transform: uppercase;
 
     .navbar-brand img {
-      height: 28px;
+      height: 48px;
 
       @include media-breakpoint-up(sm) {
         height: 64px;

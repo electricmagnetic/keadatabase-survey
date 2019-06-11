@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-import logo from '../../assets/img/doc_logo.svg';
+import logo from '../../assets/img/logo.svg';
 import './Header.css';
 
 const Header = props => {
   return (
     <header>
-      <div className="doc-stripe" />
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
         <div className="container">
           <Link to="/" className="navbar-brand">

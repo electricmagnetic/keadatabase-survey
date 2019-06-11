@@ -9,12 +9,12 @@ $font-family-sans-serif: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe 
 $headings-font-family: 'Zilla Slab', serif;
 $headings-font-weight: 500;
 
-$doc-yellow: #ffc51d;
-$doc-green: #194036;
+$orange-dark: #df5206;
+$green-dark: #6a7029;
+$brown-dull: #dfd4ba;
+$brown-faded: #e6dfcc;
 
-$primary: $doc-yellow;
-$secondary: $doc-green;
-
-$link-color: $doc-green;
+$primary: $orange-dark;
+$secondary: $green-dark;
 
 @import 'node_modules/bootstrap/scss/variables';

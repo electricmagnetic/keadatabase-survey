@@ -32,6 +32,11 @@ const Header = props => {
                 </NavLink>
               </li>
               <li className="nav-item">
+                <NavLink to="/grid/tile" className="nav-link">
+                  Grid Tile
+                </NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink to="/report" className="nav-link">
                   Report
                 </NavLink>

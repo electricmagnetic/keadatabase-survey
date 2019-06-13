@@ -17,6 +17,9 @@ const HomePage = props => {
             <Link to="/report" className="btn btn-lg btn-primary mr-3">
               Report Survey
             </Link>
+            <Link to="/grid" className="btn btn-lg btn-light mr-3">
+              View Grid Map
+            </Link>
           </div>
         </Banner>
       </section>

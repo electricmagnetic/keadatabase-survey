@@ -31,6 +31,11 @@ const Header = props => {
                 </NavLink>
               </li>
               <li className="nav-item">
+                <NavLink exact to="/grid" className="nav-link">
+                  Grid Map
+                </NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink to="/grid/tile" className="nav-link">
                   Grid Tile
                 </NavLink>

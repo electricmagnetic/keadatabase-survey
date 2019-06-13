@@ -10,6 +10,7 @@ import LegalPage from './views/legal';
 
 import ReportPage from './views/report/index';
 
+import GridPage from './views/grid/index';
 import GridTilePage from './views/grid/tile';
 
 import NoMatchPage from './views/nomatch';
@@ -28,6 +29,7 @@ function App() {
 
             <Route exact path="/report" component={ReportPage} />
 
+            <Route exact path="/grid" component={GridPage} />
             <Route exact path="/grid/tile" component={GridTilePage} />
 
             <Route component={NoMatchPage} />

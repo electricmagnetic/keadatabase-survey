@@ -9,7 +9,7 @@ import gridTiles from '../../assets/geo/tiles.json';
 
 class GridTileMap extends Component {
   gridTileOnEachFeature(feature, layer) {
-    layer.bindTooltip(
+    layer.bindPopup(
       `
       <h2>${feature.id}</h2>
       <dl>
@@ -18,6 +18,7 @@ class GridTileMap extends Component {
         <dt class="sr-only">Max</dt>
         <dd>${feature.properties.max.coordinates[0]}, ${feature.properties.max.coordinates[1]}</dd>
       </dl>
+      <a href="/grid/${feature.id}">View details</a>
     `,
       { direction: 'center', className: 'tile-tooltip' }
     );

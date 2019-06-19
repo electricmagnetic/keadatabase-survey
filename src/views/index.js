@@ -14,11 +14,11 @@ const HomePage = props => {
         <Banner backgroundImage={banner}>
           <h1 className="mb-3 banner-title">Kea Survey Tool</h1>
           <div className="home-buttons">
-            <Link to="/report" className="btn btn-lg btn-primary mr-3">
+            <Link to="/report" className="btn btn-lg btn-primary mr-3 mb-3">
               Report Survey
             </Link>
-            <Link to="/grid" className="btn btn-lg btn-light mr-3">
-              View Grid Map
+            <Link to="/grid" className="btn btn-lg btn-light mr-3 mb-3">
+              View Grid
             </Link>
           </div>
         </Banner>

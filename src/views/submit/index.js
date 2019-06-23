@@ -2,23 +2,24 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Banner from '../../components/presentation/Banner';
+import SubmissionForm from '../../components/submit/SubmissionForm';
 
-const ReportPage = props => {
+const SubmissionPage = props => {
   return (
-    <div className="ReportPage">
-      <Helmet title="Report" />
+    <div className="SubmissionPage">
+      <Helmet title="Survey Submission" />
       <section className="mb-4">
         <Banner size="small">
-          <h1>Report</h1>
+          <h1>Survey Submission</h1>
         </Banner>
       </section>
       <section className="mb-4">
         <div className="container">
-          <p>Report tool goes here</p>
+          <SubmissionForm />
         </div>
       </section>
     </div>
   );
 };
 
-export default ReportPage;
+export default SubmissionPage;

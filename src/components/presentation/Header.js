@@ -36,8 +36,8 @@ const Header = props => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/report" className="nav-link">
-                  Report
+                <NavLink to="/submit" className="nav-link">
+                  Submit Survey
                 </NavLink>
               </li>
             </ul>

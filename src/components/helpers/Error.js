@@ -6,7 +6,9 @@ import './Error.css';
 const Error = ({ message, children }) => {
   return (
     <div className="Error alert alert-primary" role="alert">
-      <p className="m-0">{message}</p>
+      <p className="m-0">
+        <strong>{message}</strong>
+      </p>
       {children}
     </div>
   );

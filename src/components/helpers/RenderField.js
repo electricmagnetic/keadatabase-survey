@@ -6,6 +6,7 @@ export const RenderField = props => {
   // Use label if provided, otherwise default on OPTIONS label
   const { field, form, options, placeholder, type, addBlank, readOnly } = props;
   const label = props.label || options.label;
+  const choices = props.choices || options.choices;
   const touched = getIn(form.touched, field.name);
   const error = getIn(form.errors, field.name);
   const status = getIn(form.status, field.name);
@@ -27,7 +28,7 @@ export const RenderField = props => {
         >
           {/* Add blank to compulsory fields (requiring the user to make a selection) */}
           {addBlank && <option default value={''} />}
-          {options.choices.map(option => (
+          {choices.map(option => (
             <option value={option.value} key={option.value}>
               {option.display_name}
             </option>

@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-refetch';
 import { Form, withFormik } from 'formik';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
+
 import SurveyHourFieldset from './fieldsets/SurveyHourFieldset';
 import SurveyFieldset from './fieldsets/SurveyFieldset';
 import FurtherInformationFieldset from './fieldsets/FurtherInformationFieldset';
 import SubmitFieldset from './fieldsets/SubmitFieldset';
+
 import { initialValues } from './schema/initialValues';
 import validationSchema from './schema/validationSchema';
 
@@ -52,6 +55,7 @@ class FormComponent extends Component {
       const options = submissionOptions.value.actions.POST;
       return (
         <div>
+          {/*<h1>Check passed gridTiles: {this.props.queryString.gridTiles && this.props.queryString.gridTiles}. Also validate no more than 20 of them.</h1>*/}
           <p>All fields are required, except where indicated.</p>
           <Form>
             <SurveyFieldset {...this.props} options={options} />
@@ -72,6 +76,10 @@ const SubmissionForm = withFormik({
     actions.props.postSubmission(values);
   },
 })(FormComponent);
+
+SubmissionForm.propTypes = {
+  queryString: PropTypes.object.isRequired,
+};
 
 export default withRouter(
   connect(props => ({

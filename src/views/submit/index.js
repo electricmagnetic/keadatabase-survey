@@ -63,7 +63,7 @@ class SubmissionPage extends Component {
   updateStateFromQueryString() {
     // Store query string in state
     this.setState({
-      queryString: queryString.parse(this.props.location.search, { arrayFormat: 'comma' }),
+      queryString: queryString.parse(this.props.location.search, { arrayFormat: 'bracket' }),
     });
   }
 

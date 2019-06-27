@@ -1,5 +1,8 @@
 import moment from 'moment';
 
+/**
+  Specifies initial values and shape for submission to API. Includes API challenge.
+ */
 export const initialValues = {
   observer: {
     name: '',
@@ -13,6 +16,9 @@ export const initialValues = {
   challenge: 'kea',
 };
 
+/**
+  Specifies initial hour values (nested object).
+ */
 export const initialHourValues = {
   hour: '',
   activity: '',

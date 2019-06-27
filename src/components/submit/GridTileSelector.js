@@ -3,11 +3,17 @@ import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
+import { maximumGridTiles } from './schema/surveyParameters';
+
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 
 import tiles from '../../assets/geo/tiles.json';
 
+/**
+  Enables user to select a set of gridTiles as specified in `tiles.json`.
+  Submission results in an appropriately formatted query string pushed to same URL.
+ */
 class GridTileSelector extends Component {
   constructor(props) {
     super(props);
@@ -20,18 +26,24 @@ class GridTileSelector extends Component {
   }
 
   handleSubmit(event) {
-    if (this.state.gridTiles.length > 0) {
+    if (this.state.gridTiles.length > maximumGridTiles) {
+      this.setState({
+        error: `You have selected too many grid tiles. The limit is ${maximumGridTiles}.`,
+      });
+    } else if (this.state.gridTiles.length === 0) {
+      this.setState({ error: 'You must select at least one grid tile.' });
+    } else {
       // As typeahead passes through the whole gridTile object, just get id
       const gridTilesById = this.state.gridTiles.map(gridTile => gridTile.id);
 
       // Format into a valid query string
       const qs = `?${queryString.stringify(
         { gridTiles: gridTilesById },
-        { arrayFormat: 'comma' }
+        { arrayFormat: 'bracket' }
       )}`;
 
-      this.props.history.push(`/submit/${qs}`);
-    } else this.setState({ error: 'You must select at least one grid tile.' });
+      this.props.history.push(`${qs}`);
+    }
 
     event.preventDefault();
   }

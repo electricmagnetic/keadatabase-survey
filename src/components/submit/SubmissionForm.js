@@ -14,9 +14,19 @@ import SubmitFieldset from './fieldsets/SubmitFieldset';
 
 import { initialValues } from './schema/initialValues';
 import validationSchema from './schema/validationSchema';
+import queryStringValidationSchema from './schema/queryStringValidationSchema';
 
 const API_URL = `http://localhost:8000/report/survey/`;
 
+/**
+  Master form layout for survey submission.
+
+  Verifies that gridTiles have been passed via URL parameters. Also checks to see if parameters are valid.
+  Loads permissible choices using react-refetch from an OPTIONS call to the API.
+  Validates data using yup, reports errors back to user. Also reports API errors back to user using 'status' field.
+
+  On successful client-side validation, values are posted to server and user is redirected to success page.
+ */
 class FormComponent extends Component {
   componentDidUpdate(prevProps) {
     // Handle react-refetch response (either successful POST or error handling for fields)
@@ -44,6 +54,10 @@ class FormComponent extends Component {
   render() {
     const { submissionOptions } = this.props;
 
+    // Validate parameters passed via queryString
+    if (!queryStringValidationSchema.isValidSync(this.props.queryString))
+      return <Error message="Invalid URL parameters" />;
+
     if (submissionOptions.pending) return <Loader />;
     else if (submissionOptions.rejected)
       return (
@@ -55,7 +69,6 @@ class FormComponent extends Component {
       const options = submissionOptions.value.actions.POST;
       return (
         <div>
-          {/*<h1>Check passed gridTiles: {this.props.queryString.gridTiles && this.props.queryString.gridTiles}. Also validate no more than 20 of them.</h1>*/}
           <p>All fields are required, except where indicated.</p>
           <Form>
             <SurveyFieldset {...this.props} options={options} />
@@ -78,7 +91,9 @@ const SubmissionForm = withFormik({
 })(FormComponent);
 
 SubmissionForm.propTypes = {
-  queryString: PropTypes.object.isRequired,
+  queryString: PropTypes.shape({
+    gridTiles: PropTypes.array.isRequired,
+  }).isRequired,
 };
 
 export default withRouter(

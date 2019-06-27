@@ -4,7 +4,7 @@ import { Field, FieldArray } from 'formik';
 
 import { RenderField } from '../../helpers/RenderField';
 import { initialHourValues } from '../schema/initialValues';
-import surveyHours from '../schema/surveyHours';
+import { surveyHours } from '../schema/surveyParameters';
 
 const RenderHours = ({ arrayHelpers, options }) => {
   const { values } = arrayHelpers.form;

@@ -5,6 +5,9 @@ const notNumber = 'This field must be a number.';
 const emailInvalid = 'Invalid email address.';
 const hourRequired = 'At least one survey hour is required.';
 
+/**
+  Specifies master validation schema for form. Values are verified by API, yup is used to provide immediate (async) feedback to users.
+ */
 const validationSchema = yup.object().shape({
   observer: yup.object().shape({
     name: yup.string().required(requiredMessage),

@@ -7,50 +7,79 @@ import Error from '../helpers/Error';
 
 import './GetGridTile.css';
 
-const GridTileDetailView = ({ value }) => {
+const API_URL = `https://data.keadatabase.nz/geojson/grid_tiles/`;
+
+/**
+  Presents a nicely formatted card for a given tile.
+ */
+const GridTileDetailView = ({ tile }) => {
   return (
-    <div className="row">
-      <div className="col-lg-8 order-lg-2 mb-3">
-        <dl>
-          <dt>Grid ID</dt>
-          <dd>{value.id}</dd>
-          <dt>Lower Left (NZTM)</dt>
-          <dd>
-            {value.min.coordinates[0]}, {value.min.coordinates[1]}
-          </dd>
-          <dt>Upper Right (NZTM)</dt>
-          <dd>
-            {value.max.coordinates[0]}, {value.max.coordinates[1]}
-          </dd>
-          <dt>Source</dt>
-          <dd>Land Information New Zealand, licensed for reuse under the CC BY 4.0.</dd>
-        </dl>
-      </div>
-      <div className="col-lg-4 order-lg-1">
-        <img src={value.get_image} alt="Map tile" className="img-fluid img-full" />
+    <div className="card mt-3">
+      <div className="row no-gutters">
+        <div className="col-md-3">
+          <img src={tile.properties.get_image} alt="Map tile" className="card-img img-full" />
+        </div>
+        <div className="col-md-9">
+          <div className="card-body">
+            <h2 className="card-title">{tile.id}</h2>
+            <dl className="card-text">
+              <dt>Lower Left (NZTM)</dt>
+              <dd>
+                {tile.properties.min.coordinates[0]}, {tile.properties.min.coordinates[1]}
+              </dd>
+              <dt>Upper Right (NZTM)</dt>
+              <dd>
+                {tile.properties.max.coordinates[0]}, {tile.properties.max.coordinates[1]}
+              </dd>
+              <dt>Source</dt>
+              <dd>
+                <small>Land Information New Zealand, licensed for reuse (CC BY 4.0).</small>
+              </dd>
+            </dl>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
+/**
+  Displays a grid tile (if one given), or downloads information from API (if ID provided).
+ */
 class GridTileDetail extends Component {
-  render() {
-    const { gridTileFetch } = this.props;
+  componentDidMount() {
+    if (this.props.id) this.props.lazyFetchGridTile(this.props.id);
+  }
 
-    if (gridTileFetch.pending) {
-      return <Loader />;
-    } else if (gridTileFetch.rejected) {
-      return <Error message="Tile ID invalid" />;
-    } else if (gridTileFetch.fulfilled) {
-      return <GridTileDetailView value={gridTileFetch.value} />;
-    }
+  componentDidUpdate(prevProps) {
+    if (this.props.id)
+      if (this.props.id !== prevProps.id) this.props.lazyFetchGridTile(this.props.id);
+  }
+
+  render() {
+    if (this.props.gridTileFetch) {
+      const { gridTileFetch } = this.props;
+
+      if (gridTileFetch.pending) {
+        return <Loader />;
+      } else if (gridTileFetch.rejected) {
+        return <Error message="Tile ID invalid" />;
+      } else if (gridTileFetch.fulfilled) {
+        return <GridTileDetailView tile={gridTileFetch.value} />;
+      }
+    } else if (this.props.tile) {
+      return <GridTileDetailView tile={this.props.tile} />;
+    } else return null;
   }
 }
 
 GridTileDetail.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  tile: PropTypes.object,
 };
 
 export default connect(props => ({
-  gridTileFetch: `https://data.keadatabase.nz/surveys/grid_tiles/${props.id}/`,
+  lazyFetchGridTile: id => ({
+    gridTileFetch: `${API_URL}${props.id}/`,
+  }),
 }))(GridTileDetail);

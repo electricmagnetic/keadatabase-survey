@@ -4,6 +4,7 @@ import queryString from 'query-string';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 import { maximumGridTiles } from './schema/surveyParameters';
+import GridTileDetail from '../grid/GridTileDetail';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
@@ -59,7 +60,7 @@ class GridTileSelector extends Component {
             <Typeahead
               options={tiles.features}
               labelKey={option => `${option.id}`}
-              minLength={2}
+              minLength={4}
               multiple
               selectHintOnEnter
               highlightOnlyResult
@@ -69,10 +70,14 @@ class GridTileSelector extends Component {
               ignoreDiacritics={false}
               maxResults={4}
               onChange={selected => this.setState({ gridTiles: selected })}
+              autoFocus
             />
           </div>
           <input type="submit" value="I have selected all grid tiles" className="btn btn-primary" />
           {this.state.error && <div className="alert alert-primary mt-3">{this.state.error}</div>}
+          {this.state.gridTiles.map(gridTile => (
+            <GridTileDetail tile={gridTile} key={gridTile.id} />
+          ))}
         </form>
       </div>
     );

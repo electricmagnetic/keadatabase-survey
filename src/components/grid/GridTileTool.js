@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Typeahead } from 'react-bootstrap-typeahead';
 
 import GridTileDetail from './GridTileDetail';
 
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
+
+import tiles from '../../assets/geo/tiles.json';
+
+/**
+  Provides a typeahead interface, returning a single GridTile.
+*/
 class GridTileTool extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      id: '',
+      gridTile: [],
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value.toUpperCase() });
-  }
-
   handleSubmit(event) {
-    // Disallow fetching without a value (so it doesn't try fetch all grid tiles)
-    if (this.state.value) this.setState({ id: this.state.value });
-
     event.preventDefault();
   }
 
@@ -30,25 +30,31 @@ class GridTileTool extends Component {
     return (
       <div className="GridTileTool">
         <form onSubmit={this.handleSubmit} className="form-inline d-print-none mb-3">
-          <div className="input-group">
-            <label htmlFor="id" className="sr-only">
+          <div className="form-group">
+            <label htmlFor="gridTile" className="sr-only">
               Grid ID:
             </label>
-            <input
-              className="form-control"
-              id="id"
-              type="text"
-              value={this.state.value}
-              onChange={this.handleChange}
-              maxLength="7"
+            <Typeahead
+              options={tiles.features}
+              labelKey={option => `${option.id}`}
+              minLength={4}
+              selectHintOnEnter
+              highlightOnlyResult
+              name="gridTile"
               placeholder="Grid ID (XXXX-XX)"
+              id="gridTile"
+              ignoreDiacritics={false}
+              maxResults={4}
+              onChange={selected => this.setState({ gridTile: selected })}
+              autoFocus
             />
-            <div className="input-group-append">
-              <input type="submit" value="Get Tile" className="btn btn-primary" />
-            </div>
           </div>
         </form>
-        <div className="result">{this.state.id && <GridTileDetail id={this.state.id} />}</div>
+        <div className="result">
+          {this.state.gridTile.map(gridTile => (
+            <GridTileDetail tile={gridTile} key={gridTile.id} />
+          ))}
+        </div>
       </div>
     );
   }

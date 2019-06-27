@@ -16,7 +16,7 @@ import { initialValues } from './schema/initialValues';
 import validationSchema from './schema/validationSchema';
 import queryStringValidationSchema from './schema/queryStringValidationSchema';
 
-const API_URL = `http://localhost:8000/report/survey/`;
+const API_URL = `https://data.keadatabase.nz/report/survey/`;
 
 /**
   Master form layout for survey submission.

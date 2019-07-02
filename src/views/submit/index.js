@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import queryString from 'query-string';
+import qs from 'qs';
 import PropTypes from 'prop-types';
 
+import { qsOptions } from '../../components/submit/schema/surveyParameters';
 import Banner from '../../components/presentation/Banner';
 import GridTileSelector from '../../components/submit/GridTileSelector';
 import SubmissionForm from '../../components/submit/SubmissionForm';
@@ -63,7 +64,7 @@ class SubmissionPage extends Component {
   updateStateFromQueryString() {
     // Store query string in state
     this.setState({
-      queryString: queryString.parse(this.props.location.search, { arrayFormat: 'bracket' }),
+      queryString: qs.parse(this.props.location.search, qsOptions),
     });
   }
 

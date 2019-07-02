@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import queryString from 'query-string';
+import qs from 'qs';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
-import { maximumGridTiles } from './schema/surveyParameters';
+import { maximumGridTiles, qsOptions } from './schema/surveyParameters';
 import GridTileDetail from '../grid/GridTileDetail';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
@@ -38,12 +38,9 @@ class GridTileSelector extends Component {
       const gridTilesById = this.state.gridTiles.map(gridTile => gridTile.id);
 
       // Format into a valid query string
-      const qs = `?${queryString.stringify(
-        { gridTiles: gridTilesById },
-        { arrayFormat: 'bracket' }
-      )}`;
+      const queryString = `${qs.stringify({ gridTiles: gridTilesById }, qsOptions)}`;
 
-      this.props.history.push(`${qs}`);
+      this.props.history.push(`${queryString}`);
     }
 
     event.preventDefault();
@@ -52,33 +49,45 @@ class GridTileSelector extends Component {
   render() {
     return (
       <div className="GridTileSelector">
-        <form onSubmit={this.handleSubmit} className="form mb-3">
-          <div className="form-group">
-            <label htmlFor="id" className="sr-only">
-              Grid ID:
-            </label>
-            <Typeahead
-              options={tiles.features}
-              labelKey={option => `${option.id}`}
-              minLength={4}
-              multiple
-              selectHintOnEnter
-              highlightOnlyResult
-              name="gridTiles"
-              placeholder="Grid ID (XXXX-XX)"
-              id="gridTiles"
-              ignoreDiacritics={false}
-              maxResults={4}
-              onChange={selected => this.setState({ gridTiles: selected })}
-              autoFocus
-            />
+        <div className="row">
+          <div className="col-md-3">
+            <form onSubmit={this.handleSubmit} className="form mb-3">
+              <div className="form-group">
+                <label htmlFor="id" className="sr-only">
+                  Grid ID:
+                </label>
+                <Typeahead
+                  options={tiles.features}
+                  labelKey={option => `${option.id}`}
+                  minLength={4}
+                  multiple
+                  selectHintOnEnter
+                  highlightOnlyResult
+                  name="gridTiles"
+                  placeholder="Grid ID (XXXX-XX)"
+                  id="gridTiles"
+                  ignoreDiacritics={false}
+                  maxResults={4}
+                  onChange={selected => this.setState({ gridTiles: selected })}
+                  autoFocus
+                />
+              </div>
+              <input
+                type="submit"
+                value="I have selected all grid tiles"
+                className="btn btn-primary"
+              />
+              {this.state.error && (
+                <div className="alert alert-primary mt-3">{this.state.error}</div>
+              )}
+            </form>
           </div>
-          <input type="submit" value="I have selected all grid tiles" className="btn btn-primary" />
-          {this.state.error && <div className="alert alert-primary mt-3">{this.state.error}</div>}
-          {this.state.gridTiles.map(gridTile => (
-            <GridTileDetail tile={gridTile} key={gridTile.id} />
-          ))}
-        </form>
+          <div className="col-md-9">
+            {this.state.gridTiles.map(gridTile => (
+              <GridTileDetail tile={gridTile} key={gridTile.id} />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

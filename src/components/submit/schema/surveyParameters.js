@@ -18,3 +18,14 @@ export const surveyHours = {
   Exports maximum allowable number of grid tiles per given survey.
  */
 export const maximumGridTiles = 15;
+
+/**
+  Exports default qs settings to ensure consistency across components.
+  */
+export const qsOptions = {
+  encode: false,
+  arrayFormat: 'brackets',
+  ignoreQueryPrefix: true,
+  addQueryPrefix: true,
+  allowDots: true,
+};

@@ -19,9 +19,10 @@ const queryStringValidationSchema = yup
       email: yup.string().email(),
       purpose: yup.string(),
     }),
-    date: yup.date(),
+    date: yup.string(), // TODO Maybe validate date?
     gridTiles: gridTileValidationSchema,
   })
+  .strict()
   .noUnknown()
   .required();
 

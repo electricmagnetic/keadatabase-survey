@@ -83,7 +83,7 @@ class FormComponent extends Component {
 }
 
 const SubmissionForm = withFormik({
-  mapPropsToValues: () => initialValues,
+  mapPropsToValues: (props) => Object.assign({}, initialValues, props.queryString),
   validationSchema: validationSchema,
   handleSubmit: (values, actions) => {
     actions.props.postSubmission(values);

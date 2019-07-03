@@ -13,7 +13,7 @@ const SubmitFieldset = ({ submitCount, isValid, isSubmitting, postSubmissionResp
   const isFulfilled = postSubmissionResponse && postSubmissionResponse.fulfilled;
 
   return (
-    <fieldset>
+    <fieldset className="mb-3">
       <legend className="sr-only">Submission</legend>
       <p>
         <button type="submit" className="btn btn-primary mr-3" disabled={isLoading || !isValid}>

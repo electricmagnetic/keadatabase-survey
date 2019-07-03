@@ -5,7 +5,7 @@ import { Field } from 'formik';
 import { RenderField } from '../../helpers/RenderField';
 
 const TripFieldset = ({ options, values, setFieldValue }) => (
-  <fieldset>
+  <fieldset className="mb-3">
     <legend>1. Trip Details</legend>
     <div className="row">
       <div className="col-md-4">

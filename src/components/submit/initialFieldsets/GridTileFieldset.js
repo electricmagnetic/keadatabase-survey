@@ -2,8 +2,6 @@ import React from 'react';
 import { Field, getIn } from 'formik';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
-import GridTileDetail from '../../grid/GridTileDetail';
-
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 
@@ -42,23 +40,9 @@ const GridTileSelector = ({ field, form }) => {
 };
 
 const GridTileFieldset = ({ values }) => (
-  <fieldset>
+  <fieldset className="mb-3">
     <legend>2. Grid Tiles</legend>
-    <div className="row">
-      <div className="col-md-4">
-        <Field name="gridTiles" component={GridTileSelector} />
-      </div>
-      <div className="col-md-8">
-        <div className="card bg-light">
-          <div className="card-body my-n3">
-            {values.gridTiles.map(gridTile => (
-              <GridTileDetail id={gridTile} key={gridTile} />
-            ))}
-            {values.gridTiles.length === 0 && <p className="my-3">No tiles selected.</p>}
-          </div>
-        </div>
-      </div>
-    </div>
+    <Field name="gridTiles" component={GridTileSelector} />
   </fieldset>
 );
 

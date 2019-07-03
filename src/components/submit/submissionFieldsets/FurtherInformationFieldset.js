@@ -5,7 +5,7 @@ import { Field } from 'formik';
 import { RenderField } from '../../helpers/RenderField';
 
 const FurtherInformationFieldset = ({ options }) => (
-  <fieldset>
+  <fieldset className="mb-3">
     <legend>3. Further Information</legend>
     <div className="row">
       <div className="col-md-4">

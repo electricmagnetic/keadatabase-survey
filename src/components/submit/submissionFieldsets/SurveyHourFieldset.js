@@ -104,7 +104,7 @@ const RenderHours = ({ arrayHelpers, options }) => {
 
 const HourFieldset = ({ options, values }) => {
   return (
-    <fieldset>
+    <fieldset className="mb-3">
       <legend>2. Hours</legend>
       <FieldArray
         initialValues={initialHourValues}

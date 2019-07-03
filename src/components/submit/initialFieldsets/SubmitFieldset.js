@@ -3,11 +3,13 @@ import React from 'react';
 import Error from '../../helpers/Error';
 
 const SubmitFieldset = ({ isValid, submitCount, errors }) => (
-  <fieldset>
+  <fieldset className="mb-3">
     <legend className="sr-only">Submission</legend>
-    <input type="submit" value="Next" className="btn btn-primary mr-3" disabled={!isValid} />
+    <input type="submit" value="Next" className="btn btn-primary mr-3 mb-3" disabled={!isValid} />
     {!isValid && (
-      <small>You cannot submit the form until all data has been entered correctly.</small>
+      <small className="d-inline-block">
+        You cannot submit the form until all data has been entered correctly.
+      </small>
     )}
     {submitCount > 0 && errors && !isValid && (
       <Error message="Error">

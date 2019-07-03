@@ -6,6 +6,7 @@ import qs from 'qs';
 import ObserverFieldset from './initialFieldsets/ObserverFieldset';
 import GridTileFieldset from './initialFieldsets/GridTileFieldset';
 import SubmitFieldset from './initialFieldsets/SubmitFieldset';
+import SelectedGridTiles from './initialFieldsets/SelectedGridTiles';
 
 import { qsOptions } from './schema/surveyParameters';
 import { initialInitialValues } from './schema/initialValues';
@@ -21,8 +22,15 @@ class InitialSurveyFormComponent extends Component {
       <div className="InitialSurveyForm">
         <Form className="form mb-3">
           <ObserverFieldset {...this.props} />
-          <GridTileFieldset {...this.props} />
-          <SubmitFieldset {...this.props} />
+          <div className="row">
+            <div className="col-md-5">
+              <GridTileFieldset {...this.props} />
+              <SubmitFieldset {...this.props} />
+            </div>
+            <div className="col-md-7">
+              <SelectedGridTiles gridTiles={this.props.values.gridTiles} />
+            </div>
+          </div>
         </Form>
       </div>
     );

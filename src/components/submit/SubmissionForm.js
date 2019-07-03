@@ -71,13 +71,13 @@ class FormComponent extends Component {
           <div className="card">
             <div className="card-body">
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-3">
                   <dl>
                     <dt>Name</dt>
                     <dd>{this.props.queryString.observer.name}</dd>
                   </dl>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <dl>
                     <dt>Email</dt>
                     <dd>{this.props.queryString.observer.email}</dd>

@@ -4,7 +4,7 @@ import { Field } from 'formik';
 import { RenderField } from '../../helpers/RenderField';
 
 const ObserverFieldset = ({ values, setFieldValue }) => (
-  <fieldset>
+  <fieldset className="mb-3">
     <legend>1. Your Details</legend>
     <div className="row">
       <div className="col-md-3">

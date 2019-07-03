@@ -91,6 +91,13 @@ const RenderHours = ({ arrayHelpers, options }) => {
       >
         Winter
       </button>
+      <button
+        type="button"
+        className="btn btn-primary mr-3"
+        onClick={() => arrayHelpers.push(Object.assign({}, initialHourValues, { hour: 6 }))}
+      >
+        Test
+      </button>
     </div>
   );
 };

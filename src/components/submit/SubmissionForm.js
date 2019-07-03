@@ -7,14 +7,13 @@ import PropTypes from 'prop-types';
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
 
-import SurveyHourFieldset from './fieldsets/SurveyHourFieldset';
-import SurveyFieldset from './fieldsets/SurveyFieldset';
-import FurtherInformationFieldset from './fieldsets/FurtherInformationFieldset';
-import SubmitFieldset from './fieldsets/SubmitFieldset';
+import SurveyHourFieldset from './submissionFieldsets/SurveyHourFieldset';
+import TripFieldset from './submissionFieldsets/TripFieldset';
+import FurtherInformationFieldset from './submissionFieldsets/FurtherInformationFieldset';
+import SubmitFieldset from './submissionFieldsets/SubmitFieldset';
 
-import { initialValues } from './schema/initialValues';
-import validationSchema from './schema/validationSchema';
-import queryStringValidationSchema from './schema/queryStringValidationSchema';
+import { initialFullValues } from './schema/initialValues';
+import { fullValidationSchema, initialValidationSchema } from './schema/validationSchemas';
 
 const API_URL = `https://data.keadatabase.nz/report/survey/`;
 
@@ -55,8 +54,8 @@ class FormComponent extends Component {
     const { submissionOptions } = this.props;
 
     // Validate parameters passed via queryString
-    if (!queryStringValidationSchema.isValidSync(this.props.queryString))
-      return <Error message="Invalid URL parameters" />;
+    if (!initialValidationSchema.isValidSync(this.props.queryString))
+      return <Error message="Invalid or missing URL parameters" />;
 
     if (submissionOptions.pending) return <Loader />;
     else if (submissionOptions.rejected)
@@ -68,23 +67,52 @@ class FormComponent extends Component {
     else if (submissionOptions.fulfilled) {
       const options = submissionOptions.value.actions.POST;
       return (
-        <div>
+        <>
+          <div className="card">
+            <div className="card-body">
+              <div className="row">
+                <div className="col-md-6">
+                  <dl>
+                    <dt>Name</dt>
+                    <dd>{this.props.queryString.observer.name}</dd>
+                  </dl>
+                </div>
+                <div className="col-md-6">
+                  <dl>
+                    <dt>Email</dt>
+                    <dd>{this.props.queryString.observer.email}</dd>
+                  </dl>
+                </div>
+              </div>
+              <em>
+                If you expect to be entering data for these grid squares regularly, you can bookmark
+                this page to save time.
+              </em>
+            </div>
+          </div>
+          <div className="alert alert-primary">
+            <dl>
+              <dt>Grid Tiles</dt>
+              <dd>{this.props.queryString.gridTiles.map(gridTile => `${gridTile} `)}</dd>
+            </dl>
+            <p>Nothing happens with these yet</p>
+          </div>
           <p>All fields are required, except where indicated.</p>
           <Form>
-            <SurveyFieldset {...this.props} options={options} />
+            <TripFieldset {...this.props} options={options} />
             <SurveyHourFieldset {...this.props} options={options} />
             <FurtherInformationFieldset {...this.props} options={options} />
             <SubmitFieldset {...this.props} />
           </Form>
-        </div>
+        </>
       );
     } else return null;
   }
 }
 
 const SubmissionForm = withFormik({
-  mapPropsToValues: (props) => Object.assign({}, initialValues, props.queryString),
-  validationSchema: validationSchema,
+  mapPropsToValues: props => Object.assign({}, initialFullValues, props.queryString),
+  validationSchema: fullValidationSchema,
   handleSubmit: (values, actions) => {
     actions.props.postSubmission(values);
   },

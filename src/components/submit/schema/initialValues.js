@@ -1,14 +1,30 @@
 import moment from 'moment';
 
 /**
-  Specifies initial values and shape for submission to API. Includes API challenge.
+  Specifies initial values for Observer object.
+  See also: observerValidationSchema.
  */
-export const initialValues = {
-  observer: {
-    name: '',
-    email: '',
-    purpose: '',
-  },
+export const initialObserverValues = {
+  name: '',
+  email: '',
+  purpose: '',
+};
+
+/**
+  Specifics initial values for initial form.
+  See also: initialValidationSchema, gridTileValidationSchema.
+  */
+export const initialInitialValues = {
+  observer: initialObserverValues,
+  gridTiles: [],
+};
+
+/**
+  Specifies initial values and shape for submission to API. Includes API challenge.
+  See also: fullValidationSchema.
+ */
+export const initialFullValues = {
+  observer: initialObserverValues,
   date: moment().format('YYYY-MM-DD'),
   hours: [],
   max_flock_size: '',

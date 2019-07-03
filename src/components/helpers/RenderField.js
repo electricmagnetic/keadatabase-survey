@@ -61,3 +61,7 @@ export const RenderField = props => {
     </div>
   );
 };
+
+RenderField.defaultProps = {
+  options: {},
+};

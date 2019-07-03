@@ -32,7 +32,7 @@ class GridTileTool extends Component {
         <form onSubmit={this.handleSubmit} className="form-inline d-print-none mb-3">
           <div className="form-group">
             <label htmlFor="gridTile" className="sr-only">
-              Grid ID:
+              Grid ID
             </label>
             <Typeahead
               options={tiles.features}

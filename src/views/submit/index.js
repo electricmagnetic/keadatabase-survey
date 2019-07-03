@@ -5,25 +5,25 @@ import PropTypes from 'prop-types';
 
 import { qsOptions } from '../../components/submit/schema/surveyParameters';
 import Banner from '../../components/presentation/Banner';
-import GridTileSelector from '../../components/submit/GridTileSelector';
+import InitialSurveyForm from '../../components/submit/InitialSurveyForm';
 import SubmissionForm from '../../components/submit/SubmissionForm';
 
-const GridTileSelectorPage = props => {
+const InitialSurveyFormPage = props => {
   return (
     <div className="SubmissionPage">
-      <Helmet title="Grid Tile Selection (Survey Submission)" />
+      <Helmet title="1. Details | Survey Submission" />
       <section className="mb-4">
         <Banner size="small">
           <h1>Survey Submission</h1>
           <h2 className="mt-3">Step 1</h2>
           <p className="lead mb-0">
-            Please select all grid tiles that were surveyed during the day.
+            Please enter your details and the grid tiles you were in during the survey period.
           </p>
         </Banner>
       </section>
       <section className="mb-4">
         <div className="container">
-          <GridTileSelector />
+          <InitialSurveyForm />
         </div>
       </section>
     </div>
@@ -33,11 +33,14 @@ const GridTileSelectorPage = props => {
 const SubmissionFormPage = props => {
   return (
     <div className="SubmissionPage">
-      <Helmet title="Form (Survey Submission)" />
+      <Helmet title="2. Surveyed Hours | Survey Submission" />
       <section className="mb-4">
         <Banner size="small">
           <h1>Survey Submission</h1>
           <h2 className="mt-3">Step 2</h2>
+          <p className="lead mb-0">
+            Please enter the specific details of your trip and the hours observed.
+          </p>
         </Banner>
       </section>
       <section className="mb-4">
@@ -82,7 +85,7 @@ class SubmissionPage extends Component {
     return this.state.queryString.gridTiles ? (
       <SubmissionFormPage queryString={this.state.queryString} />
     ) : (
-      <GridTileSelectorPage />
+      <InitialSurveyFormPage />
     );
   }
 }

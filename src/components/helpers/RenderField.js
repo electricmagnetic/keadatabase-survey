@@ -4,19 +4,24 @@ import classnames from 'classnames';
 
 export const RenderField = props => {
   // Use label if provided, otherwise default on OPTIONS label
-  const { field, form, options, placeholder, type, addBlank, readOnly } = props;
+  const { field, form, options, placeholder, type, addBlank, readOnly, hideLabel } = props;
   const label = props.label || options.label;
   const choices = props.choices || options.choices;
   const touched = getIn(form.touched, field.name);
   const error = getIn(form.errors, field.name);
   const status = getIn(form.status, field.name);
-  const formControlClasses = classnames('form-control', {
+  const formLabelClasses = classnames('control-label', {
+    'sr-only': hideLabel,
+  });
+  const formControlClasses = classnames({
+    'form-control': !readOnly,
+    'form-control-plaintext': readOnly,
     'is-invalid': (touched && error) || status,
   });
 
   return (
     <div className="form-group">
-      <label className="control-label" htmlFor={field.name}>
+      <label className={formLabelClasses} htmlFor={field.name}>
         {label}
       </label>
 

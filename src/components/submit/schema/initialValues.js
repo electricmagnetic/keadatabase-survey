@@ -1,5 +1,4 @@
 import moment from 'moment';
-
 /**
   Specifies initial values for Observer object.
   See also: observerValidationSchema.
@@ -20,6 +19,16 @@ export const initialInitialValues = {
 };
 
 /**
+  Specifies initial hour values (nested object).
+ */
+export const initialHourValues = {
+  hour: '',
+  activity: '',
+  kea: false,
+  grid_tile: '',
+};
+
+/**
   Specifies initial values and shape for submission to API. Includes API challenge.
   See also: fullValidationSchema.
  */
@@ -30,14 +39,4 @@ export const initialFullValues = {
   max_flock_size: '',
   comments: '',
   challenge: 'kea',
-};
-
-/**
-  Specifies initial hour values (nested object).
- */
-export const initialHourValues = {
-  hour: '',
-  activity: '',
-  kea: false,
-  grid_tile: '',
 };

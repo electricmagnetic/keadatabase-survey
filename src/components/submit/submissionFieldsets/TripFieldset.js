@@ -11,6 +11,26 @@ const TripFieldset = ({ options, values, setFieldValue }) => (
       <div className="col-md-4">
         <Field
           component={RenderField}
+          options={options.observer.children.name}
+          name="observer.name"
+          type="text"
+          readOnly
+        />
+      </div>
+      <div className="col-md-5">
+        <Field
+          component={RenderField}
+          options={options.observer.children.email}
+          name="observer.email"
+          type="email"
+          readOnly
+        />
+      </div>
+    </div>
+    <div className="row">
+      <div className="col-md-4">
+        <Field
+          component={RenderField}
           options={options.date}
           name="date"
           type="date"

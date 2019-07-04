@@ -15,7 +15,7 @@ const InitialSurveyFormPage = props => {
       <section className="mb-4">
         <Banner size="small">
           <h1>Survey Submission</h1>
-          <h2 className="mt-3">Step 1</h2>
+          <h2 className="mt-3 mb-1">Step 1</h2>
           <p className="lead mb-0">
             Please enter your details and the grid tiles you were in during the survey period.
           </p>
@@ -37,9 +37,16 @@ const SubmissionFormPage = props => {
       <section className="mb-4">
         <Banner size="small">
           <h1>Survey Submission</h1>
-          <h2 className="mt-3">Step 2</h2>
+          <h2 className="mt-3 mb-1">Step 2</h2>
           <p className="lead mb-0">
-            Please enter the specific details of your trip and the hours observed.
+            Please enter the specific details of your trip and the hours observed. All fields are
+            required except where indicated.
+          </p>
+          <p>
+            <em>
+              If you expect to be entering data for these grid squares regularly, you can bookmark
+              this page to save time.
+            </em>
           </p>
         </Banner>
       </section>

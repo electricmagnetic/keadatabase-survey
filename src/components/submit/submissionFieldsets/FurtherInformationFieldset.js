@@ -4,18 +4,23 @@ import { Field } from 'formik';
 
 import { RenderField } from '../../helpers/RenderField';
 
-const FurtherInformationFieldset = ({ options }) => (
+const atLeastOneKeaObserved = values =>
+  values.hours.reduce((accumulator, current) => accumulator || current.kea, false);
+
+const FurtherInformationFieldset = ({ options, values }) => (
   <fieldset className="mb-3">
     <legend>3. Further Information</legend>
     <div className="row">
       <div className="col-md-4">
-        <Field
-          component={RenderField}
-          options={options.max_flock_size}
-          name="max_flock_size"
-          type="number"
-          label="Max kea seen"
-        />
+        {values.hours.length > 0 && atLeastOneKeaObserved(values) && (
+          <Field
+            component={RenderField}
+            options={options.max_flock_size}
+            name="max_flock_size"
+            type="number"
+            label="Max kea seen"
+          />
+        )}
       </div>
     </div>
 

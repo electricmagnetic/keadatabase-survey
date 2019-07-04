@@ -10,94 +10,80 @@ const RenderHours = ({ arrayHelpers, options }) => {
   const { values } = arrayHelpers.form;
 
   return (
-    <div className="RenderHours">
-      {values.hours &&
-        values.hours.length > 0 &&
-        values.hours.map((hour, index) => (
-          <div key={index}>
-            <div className="card">
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-md-2">
+    <div className="RenderHours table-responsive">
+      {values.gridTiles && values.gridTiles.length === 1 && (
+        <div className="alert alert-info">
+          Only one grid tile has been selected, so this has been added to every hour.
+        </div>
+      )}
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th style={{ width: '10%' }}>Hour</th>
+            <th>Activity</th>
+            <th>Kea?</th>
+            <th>Grid Tile</th>
+          </tr>
+        </thead>
+        <tbody>
+          {values.hours &&
+            values.hours.length > 0 &&
+            values.hours.map((hour, index) => (
+              <tr
+                key={index}
+                className={
+                  !surveyHours.winter.includes(hour.hour) ? 'table-warning summer' : 'winter'
+                }
+              >
+                <td>
+                  <Field
+                    component={RenderField}
+                    options={options.hour}
+                    name={`hours.${index}.hour`}
+                    type="number"
+                    label="Hour"
+                    readOnly
+                    hideLabel
+                  />
+                </td>
+                <td>
+                  <Field
+                    component={RenderField}
+                    options={options.activity}
+                    name={`hours.${index}.activity`}
+                    type="choice"
+                    label="Activity"
+                    addBlank
+                    hideLabel
+                  />
+                </td>
+                <td>
+                  <div className="form-check">
                     <Field
-                      component={RenderField}
-                      options={options.hour}
-                      name={`hours.${index}.hour`}
-                      type="number"
-                      label="Hour"
-                      readOnly
+                      type="checkbox"
+                      name={`hours.${index}.kea`}
+                      className="form-check-input"
+                      id={`hours.${index}.kea`}
                     />
+                    <label className="form-check-label" htmlFor={`hours.${index}.kea`}>
+                      Kea
+                    </label>
                   </div>
-
-                  <div className="col-md-4">
-                    <Field
-                      component={RenderField}
-                      options={options.activity}
-                      name={`hours.${index}.activity`}
-                      type="choice"
-                      label="Activity"
-                      addBlank
-                    />
-                  </div>
-
-                  <div className="col-md-2">
-                    <div className="form-check">
-                      <Field
-                        type="checkbox"
-                        name={`hours.${index}.kea`}
-                        className="form-check-input"
-                        id={`hours.${index}.kea`}
-                      />
-                      <label className="form-check-label" htmlFor={`hours.${index}.kea`}>
-                        Kea observed?
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="col-md-4">
-                    <Field
-                      component={RenderField}
-                      options={options.grid_tile}
-                      name={`hours.${index}.grid_tile`}
-                      type="text"
-                      label="Grid Tile"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-
-      <button
-        type="button"
-        className="btn btn-primary mr-3"
-        onClick={() => {
-          surveyHours.summer.map(hour =>
-            arrayHelpers.push(Object.assign({}, initialHourValues, { hour: hour }))
-          );
-        }}
-      >
-        Summer
-      </button>
-      <button
-        type="button"
-        className="btn btn-primary mr-3"
-        onClick={() => {
-          surveyHours.winter.map(hour =>
-            arrayHelpers.push(Object.assign({}, initialHourValues, { hour: hour }))
-          );
-        }}
-      >
-        Winter
-      </button>
-      <button
-        type="button"
-        className="btn btn-primary mr-3"
-        onClick={() => arrayHelpers.push(Object.assign({}, initialHourValues, { hour: 6 }))}
-      >
-        Test
-      </button>
+                </td>
+                <td>
+                  <Field
+                    component={RenderField}
+                    options={options.grid_tile}
+                    name={`hours.${index}.grid_tile`}
+                    type="text"
+                    label="Grid Tile"
+                    hideLabel
+                  />
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </div>
   );
 };

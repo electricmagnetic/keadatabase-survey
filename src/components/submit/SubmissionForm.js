@@ -12,7 +12,8 @@ import TripFieldset from './submissionFieldsets/TripFieldset';
 import FurtherInformationFieldset from './submissionFieldsets/FurtherInformationFieldset';
 import SubmitFieldset from './submissionFieldsets/SubmitFieldset';
 
-import { initialFullValues } from './schema/initialValues';
+import { surveyHours } from './schema/surveyParameters';
+import { initialFullValues, initialHourValues } from './schema/initialValues';
 import { fullValidationSchema, initialValidationSchema } from './schema/validationSchemas';
 
 const API_URL = `https://data.keadatabase.nz/report/survey/`;
@@ -68,36 +69,6 @@ class FormComponent extends Component {
       const options = submissionOptions.value.actions.POST;
       return (
         <>
-          <div className="card">
-            <div className="card-body">
-              <div className="row">
-                <div className="col-md-3">
-                  <dl>
-                    <dt>Name</dt>
-                    <dd>{this.props.queryString.observer.name}</dd>
-                  </dl>
-                </div>
-                <div className="col-md-4">
-                  <dl>
-                    <dt>Email</dt>
-                    <dd>{this.props.queryString.observer.email}</dd>
-                  </dl>
-                </div>
-              </div>
-              <em>
-                If you expect to be entering data for these grid squares regularly, you can bookmark
-                this page to save time.
-              </em>
-            </div>
-          </div>
-          <div className="alert alert-primary">
-            <dl>
-              <dt>Grid Tiles</dt>
-              <dd>{this.props.queryString.gridTiles.map(gridTile => `${gridTile} `)}</dd>
-            </dl>
-            <p>Nothing happens with these yet</p>
-          </div>
-          <p>All fields are required, except where indicated.</p>
           <Form>
             <TripFieldset {...this.props} options={options} />
             <SurveyHourFieldset {...this.props} options={options} />
@@ -110,8 +81,28 @@ class FormComponent extends Component {
   }
 }
 
+/**
+  Computes initial values for the form, based on gridTiles provided via the queryString.
+ */
+const computeInitialValues = props => {
+  const { queryString } = props;
+
+  const singleGridTile = queryString.gridTiles.length === 1 ? queryString.gridTiles[0] : false;
+
+  const hours = surveyHours.summer.map(hour =>
+    Object.assign(
+      {},
+      initialHourValues,
+      { hour: hour },
+      singleGridTile && { grid_tile: singleGridTile }
+    )
+  );
+
+  return Object.assign({}, initialFullValues, { hours: hours }, queryString);
+};
+
 const SubmissionForm = withFormik({
-  mapPropsToValues: props => Object.assign({}, initialFullValues, props.queryString),
+  mapPropsToValues: props => computeInitialValues(props),
   validationSchema: fullValidationSchema,
   handleSubmit: (values, actions) => {
     actions.props.postSubmission(values);

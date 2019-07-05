@@ -7,9 +7,9 @@ import 'leaflet/dist/leaflet.css';
 // Import JS from Leaflet and plugins.
 import 'leaflet/dist/leaflet';
 
-import './Map.css';
+import './BaseMap.css';
 
-class Map extends Component {
+class BaseMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +28,7 @@ class Map extends Component {
         zoom={this.state.zoom}
         minZoom={7}
         maxZoom={14}
+        {...this.props}
       >
         <TileLayer
           attribution="Mapbox"
@@ -44,4 +45,4 @@ class Map extends Component {
   }
 }
 
-export default Map;
+export default BaseMap;

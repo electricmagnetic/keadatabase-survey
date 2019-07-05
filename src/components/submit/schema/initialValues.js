@@ -1,4 +1,5 @@
 import moment from 'moment';
+
 /**
   Specifies initial values for Observer object.
   See also: observerValidationSchema.

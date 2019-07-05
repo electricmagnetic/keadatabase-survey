@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { GeoJSON, LayersControl, ScaleControl } from 'react-leaflet';
 
-import Map from '../map/Map';
+import BaseMap from '../map/BaseMap';
 
 import './GridTileMap.css';
 
-import gridTiles from '../../assets/geo/tiles.json';
+import tiles from '../../assets/geo/tiles.json';
 
 class GridTileMap extends Component {
   gridTileOnEachFeature(feature, layer) {
@@ -27,11 +27,11 @@ class GridTileMap extends Component {
   render() {
     return (
       <div className="GridTileMap">
-        <Map>
+        <BaseMap>
           <LayersControl position="topright" collapsed={false}>
             <LayersControl.Overlay name="<strong>Grid Tiles</strong>" checked>
               <GeoJSON
-                data={gridTiles}
+                data={tiles}
                 onEachFeature={this.gridTileOnEachFeature}
                 style={{
                   color: '#222222',
@@ -43,7 +43,7 @@ class GridTileMap extends Component {
             </LayersControl.Overlay>
           </LayersControl>
           <ScaleControl />
-        </Map>
+        </BaseMap>
       </div>
     );
   }

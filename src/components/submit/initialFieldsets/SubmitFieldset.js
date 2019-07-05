@@ -2,6 +2,9 @@ import React from 'react';
 
 import Error from '../../helpers/Error';
 
+/**
+  Submission fieldset, modelled off the main form submission SubmitFieldset, except without API interaction.
+ */
 const SubmitFieldset = ({ isValid, submitCount, errors }) => (
   <fieldset className="mb-3">
     <legend className="sr-only">Submission</legend>

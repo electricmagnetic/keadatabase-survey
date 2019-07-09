@@ -4,22 +4,22 @@ import Helmet from 'react-helmet';
 import Banner from '../components/presentation/Banner';
 import Page from '../components/presentation/Page';
 
-const AboutPage = props => {
+const InstructionsPage = props => {
   return (
-    <div className="AboutPage">
-      <Helmet title="About" />
+    <div className="InstructionsPage">
+      <Helmet title="Instructions" />
       <section className="mb-4">
         <Banner size="small">
-          <h1>About</h1>
+          <h1>How To Survey</h1>
         </Banner>
       </section>
       <section className="mb-4">
         <div className="container">
-          <Page id={474} />
+          <Page id={478} />
         </div>
       </section>
     </div>
   );
 };
 
-export default AboutPage;
+export default InstructionsPage;

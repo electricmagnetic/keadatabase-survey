@@ -2,7 +2,9 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 
+import RecentGridTiles from '../components/grid/RecentGridTiles';
 import Banner from '../components/presentation/Banner';
+import Page from '../components/presentation/Page';
 
 import banner from '../assets/img/banner.jpg';
 
@@ -12,13 +14,21 @@ const HomePage = props => {
       <Helmet title="Kea Survey Tool" />
       <section className="mb-4">
         <Banner backgroundImage={banner}>
-          <h1 className="mb-3 banner-title">Kea Survey Tool</h1>
+          <h1 className="mb-5 banner-title">Kea Survey Tool</h1>
           <div className="home-buttons">
             <Link to="/submit" className="btn btn-lg btn-primary mr-3 mb-3">
               Submit Survey
             </Link>
-            <Link to="/grid" className="btn btn-lg btn-light mr-3 mb-3">
+            <Link to="/instructions" className="btn btn-lg btn-light mr-3 mb-3">
+              How To Survey
+            </Link>
+          </div>
+          <div className="home-buttons">
+            <Link to="/grid" className="btn btn-light mr-3 mb-3">
               View Grid
+            </Link>
+            <Link to="/surveys" className="btn btn-light mr-3 mb-3">
+              Browse Surveys
             </Link>
           </div>
         </Banner>
@@ -27,22 +37,10 @@ const HomePage = props => {
         <div className="container">
           <div className="row">
             <div className="col-md-6">
-              <h2>What is this?</h2>
-              <p>
-                This tool designed to inform understanding of kea populations, through better
-                capturing the relationship between time spent and kea sighted.
-              </p>
+              <Page id={480} />
             </div>
             <div className="col-md-6">
-              <h2>How can I help?</h2>
-              <p>
-                Presently this is restricted to authorised personnel only. For general sightings
-                please use the{' '}
-                <a href="https://keadatabase.nz" target="_blank" rel="noopener noreferrer">
-                  Kea Database
-                </a>
-                .
-              </p>
+              <RecentGridTiles />
             </div>
           </div>
         </div>

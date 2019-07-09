@@ -18,12 +18,16 @@ const API_URL = `https://data.keadatabase.nz/geojson/grid_tiles/`;
   * `id` and `api` (will fetch details from API)
   * `tile` (will display provided tile)
  */
-const GridTileDetailCard = ({ tile, hideDetails }) => {
+export const GridTileDetailCard = ({ tile, hideDetails, children }) => {
+  /* GeoJSON has tile data in properties, regular API endpoint does not */
+  const tileData = tile.properties || tile;
+
   return (
     <div className={['GridTileDetailCard', 'card', 'my-3', hideDetails && 'hideDetails'].join(' ')}>
-      <img src={tile.properties.get_large_image} alt="Map tile" className="card-img-top img-full" />
+      <img src={tileData.get_large_image} alt="Map tile" className="card-img-top img-full" />
       <div className="card-body">
         <h2 className="card-title">{tile.id}</h2>
+        {children && children}
         {!hideDetails && (
           <div className="card-text">
             <div className="row">
@@ -33,7 +37,7 @@ const GridTileDetailCard = ({ tile, hideDetails }) => {
                     SW <small>NZTM</small>
                   </dt>
                   <dd>
-                    {tile.properties.min.coordinates[0]}, {tile.properties.min.coordinates[1]}
+                    {tileData.min.coordinates[0]}, {tileData.min.coordinates[1]}
                   </dd>
                 </dl>
               </div>
@@ -43,7 +47,7 @@ const GridTileDetailCard = ({ tile, hideDetails }) => {
                     NE <small>NZTM</small>
                   </dt>
                   <dd>
-                    {tile.properties.max.coordinates[0]}, {tile.properties.max.coordinates[1]}
+                    {tileData.max.coordinates[0]}, {tileData.max.coordinates[1]}
                   </dd>
                 </dl>
               </div>
@@ -72,7 +76,7 @@ class GridTileDetail extends Component {
   }
 
   render() {
-    const { hideDetails, api } = this.props;
+    const { hideDetails, api, children } = this.props;
 
     if (this.props.gridTileFetch) {
       const { gridTileFetch } = this.props;
@@ -82,15 +86,24 @@ class GridTileDetail extends Component {
       } else if (gridTileFetch.rejected) {
         return <Error message="Tile ID invalid" />;
       } else if (gridTileFetch.fulfilled) {
-        return <GridTileDetailCard tile={gridTileFetch.value} hideDetails={hideDetails} />;
+        return (
+          <GridTileDetailCard
+            tile={gridTileFetch.value}
+            hideDetails={hideDetails}
+            children={children}
+          />
+        );
       }
     } else if (this.props.tile) {
-      return <GridTileDetailCard tile={this.props.tile} hideDetails={hideDetails} />;
+      return (
+        <GridTileDetailCard tile={this.props.tile} hideDetails={hideDetails} children={children} />
+      );
     } else if (this.props.id && !api) {
       return (
         <GridTileDetailCard
           tile={tiles.features.find(tile => tile.id === this.props.id)}
           hideDetails={hideDetails}
+          children={children}
         />
       );
     } else return null;
@@ -102,6 +115,7 @@ GridTileDetail.propTypes = {
   tile: PropTypes.object,
   api: PropTypes.bool.isRequired,
   hideDetails: PropTypes.bool.isRequired,
+  children: PropTypes.any,
 };
 
 GridTileDetail.defaultProps = {

@@ -14,6 +14,9 @@ const Footer = props => {
             </NavLink>
           </li>
           <li>
+            <NavLink to="/instructions">How To Survey</NavLink>
+          </li>
+          <li>
             <NavLink to="/legal">Legal</NavLink>
           </li>
           <li>

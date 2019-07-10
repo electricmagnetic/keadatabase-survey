@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import GridTileDetail from './GridTileDetail';
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
+import getUniqueGridTiles from '../helpers/getUniqueGridTiles';
 
 const API_URL = `https://data.keadatabase.nz/surveys/hours/?page_size=45`;
 
@@ -17,10 +18,7 @@ const RecentGridTiles = ({ recentSurveyHoursFetch }) => {
   } else if (recentSurveyHoursFetch.rejected) {
     return <Error message="Error loading grid tiles" />;
   } else if (recentSurveyHoursFetch.fulfilled) {
-    const allGridTileIds = recentSurveyHoursFetch.value.results
-      .filter(surveyHour => surveyHour.grid_tile)
-      .map(surveyHour => surveyHour.grid_tile);
-    const gridTileIds = [...new Set(allGridTileIds)].slice(-4);
+    const gridTileIds = getUniqueGridTiles(recentSurveyHoursFetch.value.results).slice(-4);
 
     return (
       <div className="RecentGridTiles">

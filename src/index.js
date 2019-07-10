@@ -1,9 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Moment from 'react-moment';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import 'moment/locale/en-nz';
+
 import './assets/css/custom.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
+Moment.globalLocale = 'en-nz';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

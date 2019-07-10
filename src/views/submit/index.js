@@ -12,7 +12,7 @@ const InitialSurveyFormPage = props => {
   return (
     <div className="SubmissionPage">
       <Helmet title="1. Details | Survey Submission" />
-      <section className="mb-4">
+      <section className="mb-5">
         <Banner size="small">
           <h1>Survey Submission</h1>
           <h2 className="mt-3 mb-1">Step 1</h2>
@@ -21,7 +21,7 @@ const InitialSurveyFormPage = props => {
           </p>
         </Banner>
       </section>
-      <section className="mb-4">
+      <section className="mb-5">
         <div className="container">
           <InitialSurveyForm />
         </div>
@@ -34,7 +34,7 @@ const SubmissionFormPage = props => {
   return (
     <div className="SubmissionPage">
       <Helmet title="2. Surveyed Hours | Survey Submission" />
-      <section className="mb-4">
+      <section className="mb-5">
         <Banner size="small">
           <h1>Survey Submission</h1>
           <h2 className="mt-3 mb-1">Step 2</h2>
@@ -50,7 +50,7 @@ const SubmissionFormPage = props => {
           </p>
         </Banner>
       </section>
-      <section className="mb-4">
+      <section className="mb-5">
         <div className="container">
           <SubmissionForm queryString={props.queryString} />
         </div>

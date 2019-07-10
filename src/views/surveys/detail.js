@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Banner from '../../components/presentation/Banner';
+import Survey from '../../components/surveys/Survey';
 
 const SurveyDetailPage = ({ match }) => {
   const slug = match.params.slug;
@@ -9,14 +10,14 @@ const SurveyDetailPage = ({ match }) => {
   return (
     <div className="SurveyDetailPage">
       <Helmet title="Grid Tile" />
-      <section className="mb-4">
+      <section className="mb-5">
         <Banner size="small">
-          <h1>Survey: {slug}</h1>
+          <h1>Survey #{slug}</h1>
         </Banner>
       </section>
-      <section className="mb-4">
+      <section className="mb-5">
         <div className="container">
-          <p>TODO</p>
+          <Survey id={slug} type="page" />
         </div>
       </section>
     </div>

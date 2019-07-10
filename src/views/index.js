@@ -12,9 +12,9 @@ const HomePage = props => {
   return (
     <div className="HomePage">
       <Helmet title="Kea Survey Tool" />
-      <section className="mb-4">
+      <section className="mb-5">
         <Banner backgroundImage={banner}>
-          <h1 className="mb-5 banner-title">Kea Survey Tool</h1>
+          <h1 className="mb-4 banner-title">Kea Survey Tool</h1>
           <div className="home-buttons">
             <Link to="/submit" className="btn btn-lg btn-primary mr-3 mb-3">
               Submit Survey
@@ -33,7 +33,7 @@ const HomePage = props => {
           </div>
         </Banner>
       </section>
-      <section className="mb-4">
+      <section className="mb-5">
         <div className="container">
           <div className="row">
             <div className="col-md-6">

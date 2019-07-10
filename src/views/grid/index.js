@@ -9,18 +9,18 @@ const GridPage = props => {
   return (
     <div className="GridPage">
       <Helmet title="Grid Tiles" />
-      <section className="mb-4">
+      <section className="mb-5">
         <Banner size="small">
           <h1>Grid Tiles</h1>
         </Banner>
       </section>
-      <section className="mb-4">
+      <section className="mb-5">
         <div className="container">
           <h2>Quick Search</h2>
           <GridTileTool />
         </div>
       </section>
-      <section className="mb-4">
+      <section className="py-4 bg-light mb-5">
         <div className="container">
           <h2>Map</h2>
           <GridTileMap />

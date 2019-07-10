@@ -8,12 +8,12 @@ const LegalPage = props => {
   return (
     <div className="LegalPage">
       <Helmet title="About" />
-      <section className="mb-4">
+      <section className="mb-5">
         <Banner size="small">
           <h1>Legal</h1>
         </Banner>
       </section>
-      <section className="mb-4">
+      <section className="mb-5">
         <div className="container">
           <Page id={476} />
         </div>

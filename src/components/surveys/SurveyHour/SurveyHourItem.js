@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import ActivityIcon from '../../helpers/ActivityIcon';
+
 import './SurveyHour.css';
 
 /**
@@ -36,8 +38,8 @@ const SurveyHourItem = ({ surveyHour, swapGridTileSurvey }) => {
             <i className="fa-fw fas fa-clock mr-3"></i>
             {surveyHour.get_hour_display}
           </div>
-          <div className="col-md-3 field-activity">
-            <i className="fa-fw fas fa-walking mr-3"></i>
+          <div className="col-md-4 field-activity">
+            <ActivityIcon activity={surveyHour.activity} />
             {surveyHour.get_activity_display}
           </div>
           {!notSurveying && (
@@ -47,7 +49,7 @@ const SurveyHourItem = ({ surveyHour, swapGridTileSurvey }) => {
                 {hasKea ? 'Kea' : 'No Kea'}
               </div>
               {showGridTile && (
-                <div className="col-md-5 field-gridTile">
+                <div className="col-md-4 field-gridTile">
                   <i className="fa-fw fas fa-map-marker-alt mr-3"></i>
                   <Link to={`/grid/${surveyHour.grid_tile}`}>{surveyHour.grid_tile}</Link>
                 </div>

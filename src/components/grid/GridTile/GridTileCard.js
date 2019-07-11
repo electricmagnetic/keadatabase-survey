@@ -16,7 +16,10 @@ const GridTileCard = ({ gridTile, hideDetails }) => {
     <div className={classNames.join(' ')}>
       <img src={tileData.get_large_image} alt="Map grid tile" className="card-img-top" />
       <div className="card-body">
-        <h2 className="card-title">{gridTile.id}</h2>
+        <h2 className="card-title">
+          <i className="fa-fw fas fa-map-marker-alt mr-1"></i>
+          {gridTile.id}
+        </h2>
         {!hideDetails && (
           <div className="card-text">
             <dl>

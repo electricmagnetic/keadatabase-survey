@@ -25,6 +25,20 @@ To build the app for production use, run:
 Some basic documentation can be generated using:
 `jsdoc src/**/*.js`
 
+## Layout
+
+- `public/` Static HTML files included in build
+- `src/` Main source code
+  - `assets/` Static assets, including SCSS, grid tiles JSON and logos/banners
+  - `components/` View and form components
+    - `grid/` Grid components for fetching and displaying tiles and tile maps
+    - `helpers/` Various helper components, including loading spinners, date formatting and field rendering
+    - `map/` Base map using Leaflet
+    - `presentation/` Presentational components, including WordPress fetching
+    - `submit/` Survey entry form fieldsets and logic
+    - `surveys/` Survey components for fetching and displaying surveys and survey hours
+  - `views/` Layouts constructed from components
+
 ## Deploying
 
 Ensure you have the following:

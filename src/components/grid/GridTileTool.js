@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
-import GridTileDetail from './GridTileDetail';
+import GridTile from './GridTile';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
@@ -52,7 +52,7 @@ class GridTileTool extends Component {
         </form>
         <div className="result">
           {this.state.gridTile.map(gridTile => (
-            <GridTileDetail tile={gridTile} key={gridTile.id} />
+            <GridTile id={gridTile.id} key={gridTile.id} type="item" />
           ))}
         </div>
       </div>

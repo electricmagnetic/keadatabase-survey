@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import FormatDate from '../helpers/FormatDate';
-import getUniqueGridTiles from '../helpers/getUniqueGridTiles';
+import FormatDate from '../../helpers/FormatDate';
+import getUniqueGridTiles from '../../helpers/getUniqueGridTiles';
 
 /**
   Presents a nicely formatted list item for a given survey.

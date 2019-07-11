@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import GridTileDetail from '../../components/grid/GridTileDetail';
+import GridTile from '../../components/grid/GridTile';
 import Banner from '../../components/presentation/Banner';
 
 const GridDetailPage = ({ match }) => {
@@ -17,7 +17,7 @@ const GridDetailPage = ({ match }) => {
       </section>
       <section className="mb-5">
         <div className="container">
-          <GridTileDetail id={slug} />
+          <GridTile id={slug} type="page" />
         </div>
       </section>
     </div>

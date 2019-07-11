@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import SurveyHourItem from './SurveyHourItem';
-import FormatDate from '../helpers/FormatDate';
-import GridTileDetail from '../grid/GridTileDetail';
-import getUniqueGridTiles from '../helpers/getUniqueGridTiles';
+import SurveyHour from '../SurveyHour';
+import FormatDate from '../../helpers/FormatDate';
+import GridTile from '../../grid/GridTile';
+import getUniqueGridTiles from '../../helpers/getUniqueGridTiles';
 
 /**
   Presents a nicely formatted page for a given survey.
@@ -45,22 +45,22 @@ const SurveyPage = ({ survey }) => {
         </dl>
       </section>
       <section className="mb-5">
-        <h2>Hours</h2>
-        {survey.hours.map(surveyHour => (
-          <SurveyHourItem surveyHour={surveyHour} key={surveyHour.id} />
-        ))}
-      </section>
-      <section className="mb-5">
         <h2>Grid Tiles</h2>
         <div className="row my-n3">
           {gridTileIds.map(gridTileId => (
             <div className="col-md-3" key={gridTileId}>
               <Link to={`/grid/${gridTileId}`}>
-                <GridTileDetail id={gridTileId} hideDetails />
+                <GridTile id={gridTileId} hideDetails type="card" />
               </Link>
             </div>
           ))}
         </div>
+      </section>
+      <section className="mb-5">
+        <h2>Hours</h2>
+        {survey.hours.map(surveyHour => (
+          <SurveyHour surveyHour={surveyHour} key={surveyHour.id} type="item" />
+        ))}
       </section>
     </div>
   );

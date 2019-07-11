@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 
-import RecentGridTiles from '../components/grid/RecentGridTiles';
+import GridTilesFromSurveyHours from '../components/grid/GridTilesFromSurveyHours';
 import Banner from '../components/presentation/Banner';
 import Page from '../components/presentation/Page';
 
@@ -40,7 +40,8 @@ const HomePage = props => {
               <Page id={480} />
             </div>
             <div className="col-md-6">
-              <RecentGridTiles />
+              <h2>Recent Grid Tiles</h2>
+              <GridTilesFromSurveyHours type="card" hideDetails />
             </div>
           </div>
         </div>

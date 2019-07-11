@@ -21,7 +21,7 @@ const SurveyItem = ({ survey }) => {
             </strong>
           </div>
           <div className="col-md-2 field-date">
-            <i className="fa-fw far fa-calendar-alt mr-3"></i>
+            <i className="fa-fw fas fa-calendar-alt mr-3"></i>
             <FormatDate format="medium">{survey.date}</FormatDate>
           </div>
           <div className="col-md-3 field-observer">
@@ -29,7 +29,7 @@ const SurveyItem = ({ survey }) => {
             {survey.observer}
           </div>
           <div className="col-md-4 field-gridTile">
-            <i className="fa-fw far fa-map mr-3"></i>
+            <i className="fa-fw fas fa-map mr-3"></i>
             {gridTileIds.map(gridTileId => (
               <Link to={`/grid/${gridTileId}`} key={gridTileId} className="mr-3">
                 {gridTileId}

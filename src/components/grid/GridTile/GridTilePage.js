@@ -43,8 +43,10 @@ const GridTilePage = ({ gridTile }) => {
         </div>
       </section>
       <section className="mb-5">
-        <h2>Recent Hours</h2>
-        <SurveyHours queryString={`?grid_tile=${gridTile.id}`} swapGridTileSurvey />
+        <h2>
+          Recent Hours <small>(last 25)</small>
+        </h2>
+        <SurveyHours queryString={`?grid_tile=${gridTile.id}&page_size=25`} swapGridTileSurvey />
       </section>
     </div>
   );

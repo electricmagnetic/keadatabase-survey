@@ -18,9 +18,12 @@ class SurveyHours extends Component {
     } else if (surveyHoursFetch.rejected) {
       return <Error message="Error fetching survey hours" />;
     } else if (surveyHoursFetch.fulfilled) {
-      return surveyHoursFetch.value.results.map(surveyHour => (
-        <SurveyHour surveyHour={surveyHour} key={surveyHour.id} {...others} />
-      ));
+      const surveyHours = surveyHoursFetch.value.results;
+      if (surveyHours.length > 0) {
+        return surveyHours.map(surveyHour => (
+          <SurveyHour surveyHour={surveyHour} key={surveyHour.id} {...others} />
+        ));
+      } else return <Error message="No hours found" info />;
     } else return null;
   }
 }

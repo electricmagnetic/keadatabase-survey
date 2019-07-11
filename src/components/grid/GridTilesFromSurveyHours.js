@@ -25,7 +25,7 @@ const GridTilesFromSurveyHours = ({ surveyHoursFetch, limit, ...others }) => {
       <div className="RecentGridTiles">
         <div className="form-row my-n3">
           {gridTileIds.map(gridTileId => (
-            <div className="col-md" key={gridTileId}>
+            <div className="col-6 col-md-4 col-lg-3" key={gridTileId}>
               <Link to={`/grid/${gridTileId}`}>
                 <GridTile id={gridTileId} {...others} />
               </Link>

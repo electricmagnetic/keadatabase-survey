@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import GridTileDetail from '../../grid/GridTileDetail';
+import GridTile from '../../grid/GridTile';
 
 /**
   Displays a given set of gridTile IDs as a grid (without additional details).
@@ -12,7 +12,7 @@ const SelectedGridTiles = ({ gridTiles }) => (
       <div className="form-row">
         {gridTiles.map(gridTile => (
           <div className="col-6 col-md-4" key={gridTile}>
-            <GridTileDetail id={gridTile} hideDetails />
+            <GridTile id={gridTile} hideDetails type="card" />
           </div>
         ))}
       </div>

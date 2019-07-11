@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 import './Error.css';
 
-const Error = ({ message, children }) => {
+const Error = ({ message, children, info }) => {
+  const classNames = ['Error', 'alert', info ? 'alert-light' : 'alert-primary'];
   return (
-    <div className="Error alert alert-primary" role="alert">
+    <div className={classNames.join(' ')} role="alert">
       <p className="m-0">
         <strong>{message}</strong>
       </p>
@@ -16,11 +17,13 @@ const Error = ({ message, children }) => {
 
 Error.propTypes = {
   message: PropTypes.string.isRequired,
+  info: PropTypes.bool.isRequired,
   children: PropTypes.node,
 };
 
 Error.defaultProps = {
   message: 'Error',
+  info: false,
 };
 
 export default Error;

@@ -2,7 +2,7 @@ import React from 'react';
 import { getIn } from 'formik';
 import classnames from 'classnames';
 
-export const RenderField = props => {
+const RenderField = props => {
   // Use label if provided, otherwise default on OPTIONS label
   const {
     field,
@@ -84,3 +84,5 @@ export const RenderField = props => {
 RenderField.defaultProps = {
   options: {},
 };
+
+export default RenderField;

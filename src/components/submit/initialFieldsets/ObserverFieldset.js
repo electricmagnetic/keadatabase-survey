@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'formik';
 
-import { RenderField } from '../../helpers/RenderField';
+import RenderField from '../../form/RenderField';
 
 /**
   Fieldset for two of three observer fields (observer.purpose is part of submissionFieldsets)

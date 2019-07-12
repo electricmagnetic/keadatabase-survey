@@ -31,9 +31,10 @@ Some basic documentation can be generated using:
 - `src/` Main source code
   - `assets/` Static assets, including SCSS, grid tiles JSON and logos/banners
   - `components/` View and form components
+    - `form/` Form fields and helper components
     - `grid/` Grid components for fetching and displaying tiles and tile maps
     - `helpers/` Various helper components, including loading spinners, date formatting and field rendering
-    - `map/` Base map using Leaflet
+    - `map/` Various map components using Leaflet
     - `presentation/` Presentational components, including WordPress fetching
     - `submit/` Survey entry form fieldsets and logic
     - `surveys/` Survey components for fetching and displaying surveys and survey hours

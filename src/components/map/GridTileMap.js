@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { GeoJSON, LayersControl, ScaleControl } from 'react-leaflet';
 
-import BaseMap from '../map/BaseMap';
+import BaseMap from './BaseMap';
 
 import './GridTileMap.css';
 
 import tiles from '../../assets/geo/tiles.json';
 
+/**
+  Map component for grid tile display. Using base map with added GeoJSON and popups.
+ */
 class GridTileMap extends Component {
   gridTileOnEachFeature(feature, layer) {
     layer.bindPopup(

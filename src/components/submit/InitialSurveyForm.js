@@ -7,7 +7,7 @@ import ObserverFieldset from './initialFieldsets/ObserverFieldset';
 import GridTileFieldset from './initialFieldsets/GridTileFieldset';
 import SubmitFieldset from './initialFieldsets/SubmitFieldset';
 import SelectedGridTiles from './initialFieldsets/SelectedGridTiles';
-import GridTileSelectMap from '../grid/GridTileSelectMap';
+import GridTileSelectMap from '../map/GridTileSelectMap';
 
 import { qsOptions } from './schema/surveyParameters';
 import { initialInitialValues } from './schema/initialValues';

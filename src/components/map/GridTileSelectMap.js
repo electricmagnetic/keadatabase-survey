@@ -9,8 +9,8 @@ import {
 } from 'react-leaflet';
 import { latLngBounds, GeoJSON as LeafletGeoJSON } from 'leaflet';
 
-import BaseMap from '../map/BaseMap';
-
+import BaseMap from './BaseMap';
+import { DEFAULT_ZOOM, DEFAULT_BOUNDS, SELECT_ZOOM } from '../map/defaults';
 import './GridTileSelectMap.css';
 
 import tiles from '../../assets/geo/tiles.json';
@@ -23,11 +23,45 @@ class GridTileSelectMap extends Component {
     super(props);
 
     this.state = {
-      bounds: latLngBounds,
+      gridBounds: latLngBounds,
+      viewport: {
+        center: DEFAULT_BOUNDS.getCenter(),
+        zoom: DEFAULT_ZOOM,
+      },
     };
 
     this.baseGridTileOnEachFeature = this.baseGridTileOnEachFeature.bind(this);
     this.gridTileSelected = this.gridTileSelected.bind(this);
+    this.updateGridBounds = this.updateGridBounds.bind(this);
+    this.onViewportChanged = this.onViewportChanged.bind(this);
+  }
+
+  /**
+    On viewport changed
+  */
+  onViewportChanged(viewport) {
+    this.setState({ viewport: viewport });
+  }
+
+  /**
+    Update the gridBounds in state
+  */
+  updateGridBounds(event) {
+    this.setState({ gridBounds: event.target.getBounds() });
+  }
+
+  /**
+    Changes viewport on selection of object if viewport is at defaults.
+  */
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.gridBounds !== prevState.gridBounds) {
+      const isValid = this.state.gridBounds.isValid();
+      const zoom =
+        this.state.viewport.zoom === DEFAULT_ZOOM ? SELECT_ZOOM : this.state.viewport.zoom;
+      const center = isValid ? this.state.gridBounds.getCenter() : this.state.viewport.center;
+
+      this.setState({ viewport: { center: center, zoom: zoom } });
+    }
   }
 
   /**
@@ -79,7 +113,10 @@ class GridTileSelectMap extends Component {
   render() {
     return (
       <div className="GridTileMap">
-        <BaseMap>
+        <p>
+          <em>You can select grid tiles on the map below.</em>
+        </p>
+        <BaseMap viewport={this.state.viewport} onViewportChanged={this.onViewportChanged}>
           <LayersControl position="topright" collapsed={false}>
             <LayersControl.Overlay name="<strong>Grid Tiles</strong>" checked>
               <GeoJSON
@@ -95,7 +132,10 @@ class GridTileSelectMap extends Component {
             </LayersControl.Overlay>
           </LayersControl>
           {this.props.values.gridTiles && (
-            <FeatureGroup>
+            <FeatureGroup
+              onLayerAdd={event => this.updateGridBounds(event)}
+              onLayerRemove={event => this.updateGridBounds(event)}
+            >
               {this.props.values.gridTiles.map(selectedTile =>
                 this.createSelectedGridTile(selectedTile)
               )}

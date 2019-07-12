@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Banner from '../../components/presentation/Banner';
-import GridTileMap from '../../components/grid/GridTileMap';
+import GridTileMap from '../../components/map/GridTileMap';
 import GridTileTool from '../../components/grid/GridTileTool';
 
 const GridPage = props => {
@@ -47,13 +47,13 @@ const GridPage = props => {
               href="https://geo.keadatabase.nz/grid/grid_tiles.gpx"
               className="btn btn-primary mr-3 mb-3"
             >
-              <i class="fa-fw fas fa-file-download mr-1"></i>Download GPX
+              <i className="fa-fw fas fa-file-download mr-1"></i>Download GPX
             </a>
             <a
               href="https://geo.keadatabase.nz/grid/grid_tiles.geojson"
               className="btn btn-primary mr-3 mb-3"
             >
-              <i class="fa-fw fas fa-file-download mr-1"></i>Download GeoJSON
+              <i className="fa-fw fas fa-file-download mr-1"></i>Download GeoJSON
             </a>
           </p>
         </div>

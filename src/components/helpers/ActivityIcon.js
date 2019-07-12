@@ -18,7 +18,7 @@ const ActivityIcon = ({ activity }) => {
     }
   })(activity);
 
-  return <i className={`fa-fw fas fa-${icon} mr-3`}></i>;
+  return <i className={`fa-fw fas fa-${icon} mr-2`}></i>;
 };
 
 export default ActivityIcon;

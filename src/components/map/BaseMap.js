@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Map as LeafletMap, TileLayer } from 'react-leaflet';
 
-// Import CSS from Leaflet and plugins.
 import 'leaflet/dist/leaflet.css';
-
-// Import JS from Leaflet and plugins.
 import 'leaflet/dist/leaflet';
+
+import { DEFAULT_ZOOM, DEFAULT_BOUNDS } from '../map/defaults';
 
 import './BaseMap.css';
 
@@ -13,9 +12,10 @@ class BaseMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lat: props.lat || -43.983333,
-      lng: props.lng || 170.45,
-      zoom: props.zoom || 7,
+      viewport: {
+        center: DEFAULT_BOUNDS.getCenter(),
+        zoom: DEFAULT_ZOOM,
+      },
     };
   }
 
@@ -24,8 +24,7 @@ class BaseMap extends Component {
     return (
       <LeafletMap
         className="map"
-        center={[this.state.lat, this.state.lng]}
-        zoom={this.state.zoom}
+        viewport={this.state.viewport}
         minZoom={7}
         maxZoom={14}
         {...this.props}

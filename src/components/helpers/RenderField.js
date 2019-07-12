@@ -4,7 +4,17 @@ import classnames from 'classnames';
 
 export const RenderField = props => {
   // Use label if provided, otherwise default on OPTIONS label
-  const { field, form, options, placeholder, type, addBlank, readOnly, hideLabel } = props;
+  const {
+    field,
+    form,
+    options,
+    placeholder,
+    type,
+    addBlank,
+    hideLabel,
+    readOnly,
+    ...others
+  } = props;
   const label = props.label || options.label;
   const choices = props.choices || options.choices;
   const touched = getIn(form.touched, field.name);
@@ -30,6 +40,7 @@ export const RenderField = props => {
           {...field}
           className={classnames(formControlClasses, 'custom-select')}
           id={field.name}
+          {...others}
         >
           {/* Add blank to compulsory fields (requiring the user to make a selection) */}
           {addBlank && <option default value={''} />}
@@ -47,6 +58,8 @@ export const RenderField = props => {
           placeholder={placeholder}
           className={formControlClasses}
           id={field.name}
+          readOnly={readOnly}
+          {...others}
         />
       )}
 
@@ -58,6 +71,7 @@ export const RenderField = props => {
           className={formControlClasses}
           id={field.name}
           readOnly={readOnly}
+          {...others}
         />
       )}
 

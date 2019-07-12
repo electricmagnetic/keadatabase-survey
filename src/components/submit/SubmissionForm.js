@@ -101,11 +101,24 @@ const computeInitialValues = props => {
   return Object.assign({}, initialFullValues, { hours: hours }, queryString);
 };
 
+/**
+  Transforms survey hour grid_tiles from an array of one (as provided by the typeahed) to a string
+*/
+const transformSurveyHours = values =>
+  values.hours.map(surveyHour =>
+    Object.assign({}, surveyHour, { grid_tile: surveyHour.grid_tile[0] })
+  );
+
+/**
+  Primary submission form, using formik, yup and react-refetch
+*/
 const SubmissionForm = withFormik({
   mapPropsToValues: props => computeInitialValues(props),
   validationSchema: fullValidationSchema,
   handleSubmit: (values, actions) => {
-    actions.props.postSubmission(values);
+    actions.props.postSubmission(
+      Object.assign({}, values, { hours: transformSurveyHours(values) })
+    );
   },
 })(FormComponent);
 

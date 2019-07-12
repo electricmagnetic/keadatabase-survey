@@ -15,6 +15,7 @@ const TripFieldset = ({ options, values, setFieldValue }) => (
           name="observer.name"
           type="text"
           readOnly
+          tabIndex={-1}
         />
       </div>
       <div className="col-md-5">
@@ -24,6 +25,7 @@ const TripFieldset = ({ options, values, setFieldValue }) => (
           name="observer.email"
           type="email"
           readOnly
+          tabIndex={-1}
         />
       </div>
     </div>
@@ -35,6 +37,7 @@ const TripFieldset = ({ options, values, setFieldValue }) => (
           name="date"
           type="date"
           placeholder="Date"
+          autoFocus
         />
       </div>
       <div className="col-md-5">

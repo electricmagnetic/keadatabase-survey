@@ -2,7 +2,6 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Banner from '../../components/presentation/Banner';
-import GridTileMap from '../../components/map/GridTileMap';
 import GridTileTool from '../../components/grid/GridTileTool';
 
 const GridPage = props => {
@@ -15,18 +14,9 @@ const GridPage = props => {
         </Banner>
       </section>
       <section className="mb-5">
-        <div className="container">
-          <h2>Quick Search</h2>
-          <GridTileTool />
-        </div>
+        <GridTileTool />
       </section>
-      <section className="py-4 bg-light mb-5">
-        <div className="container">
-          <h2>Map</h2>
-          <GridTileMap />
-        </div>
-      </section>
-      <section className="mb-5">
+      <section className="bg-faded py-5">
         <div className="container">
           <h2>Download Grid</h2>
           <p>
@@ -42,7 +32,7 @@ const GridPage = props => {
             (NW/NE/SW/SE).
           </p>
           <p>It is provided in multiple formats below for download.</p>
-          <p>
+          <p className="m-0">
             <a
               href="https://geo.keadatabase.nz/grid/grid_tiles.gpx"
               className="btn btn-primary mr-3 mb-3"

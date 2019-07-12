@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import './Error.css';
 
 const Error = ({ message, children, info }) => {
-  const classNames = ['Error', 'alert', info ? 'alert-light' : 'alert-primary'];
+  const classNames = ['Error', 'alert', info ? 'alert-faded' : 'alert-primary'];
   return (
     <div className={classNames.join(' ')} role="alert">
       <p className="m-0">
-        <strong>{message}</strong>
+        <em>{message}</em>
       </p>
       {children}
     </div>

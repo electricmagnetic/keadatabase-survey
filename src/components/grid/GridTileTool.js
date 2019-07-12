@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Typeahead } from 'react-bootstrap-typeahead';
 
+import GridTileTypeahead from './GridTileTypeahead';
+import GridTileMap from '../map/GridTileMap';
 import GridTile from './GridTile';
-
-import 'react-bootstrap-typeahead/css/Typeahead.css';
-import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
-
-import tiles from '../../assets/geo/tiles.json';
+import Error from '../helpers/Error';
 
 /**
   Provides a typeahead interface, returning a single GridTile.
@@ -27,33 +24,39 @@ class GridTileTool extends Component {
   }
 
   render() {
+    const hasTile = this.state.gridTile.length > 0 ? true : false;
+
     return (
       <div className="GridTileTool">
-        <form onSubmit={this.handleSubmit} className="form-inline d-print-none mb-3">
-          <div className="form-group">
-            <label htmlFor="gridTile" className="sr-only">
-              Grid ID
-            </label>
-            <Typeahead
-              options={tiles.features}
-              labelKey={option => `${option.id}`}
-              minLength={4}
-              selectHintOnEnter
-              highlightOnlyResult
-              name="gridTile"
-              placeholder="Grid ID (XXXX-XX)"
-              id="gridTile"
-              ignoreDiacritics={false}
-              maxResults={4}
-              onChange={selected => this.setState({ gridTile: selected })}
-              autoFocus
-            />
+        <div className="container">
+          <h2>Quick Search</h2>
+          <div className="row">
+            <div className="col-md-3">
+              <form onSubmit={this.handleSubmit} className="form d-print-none mb-3">
+                <div className="form-group">
+                  <label htmlFor="gridTile" className="sr-only">
+                    Grid ID
+                  </label>
+                  <GridTileTypeahead
+                    onChange={selected => this.setState({ gridTile: selected })}
+                    autoFocus
+                  />
+                </div>
+              </form>
+              <div className="result">
+                {hasTile ? (
+                  this.state.gridTile.map(gridTile => (
+                    <GridTile id={gridTile} key={gridTile} type="card" />
+                  ))
+                ) : (
+                  <Error message="No grid tile selected" info />
+                )}
+              </div>
+            </div>
+            <div className="col-md-9">
+              <GridTileMap />
+            </div>
           </div>
-        </form>
-        <div className="result">
-          {this.state.gridTile.map(gridTile => (
-            <GridTile id={gridTile.id} key={gridTile.id} type="item" />
-          ))}
         </div>
       </div>
     );

@@ -8,3 +8,12 @@ table .form-group {
 .control-label {
   font-weight: bold;
 }
+
+.bg-faded {
+  background-color: rgba($brown-faded, 0.5);
+}
+
+.alert-faded {
+  background-color: rgba($brown-faded, 0.5);
+  border-color: $brown-faded;
+}

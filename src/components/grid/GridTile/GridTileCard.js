@@ -22,7 +22,7 @@ const GridTileCard = ({ gridTile, hideDetails }) => {
         </h2>
         {!hideDetails && (
           <div className="card-text">
-            <dl>
+            <dl className="m-0">
               <div className="row">
                 <div className="col-6">
                   <dt>
@@ -41,8 +41,6 @@ const GridTileCard = ({ gridTile, hideDetails }) => {
                   </dd>
                 </div>
               </div>
-              <dt>Source</dt>
-              <dd>LINZ (CC BY 4.0)</dd>
             </dl>
           </div>
         )}

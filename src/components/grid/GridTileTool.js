@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import GridTileTypeahead from './GridTileTypeahead';
-import GridTileMap from '../map/GridTileMap';
+import GridTileSelectMap from '../map/GridTileSelectMap';
 import GridTile from './GridTile';
 import Error from '../helpers/Error';
 
@@ -13,23 +13,40 @@ class GridTileTool extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gridTile: [],
+      gridTiles: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setGridTiles = this.setGridTiles.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
   }
 
+  setGridTiles(name, value) {
+    // Name does not have an effect, just retained for compatibility with GridTileSelectMap.
+    this.setState({ gridTiles: value });
+  }
+
   render() {
-    const hasTile = this.state.gridTile.length > 0 ? true : false;
+    const hasTile = this.state.gridTiles.length > 0 ? true : false;
 
     return (
       <div className="GridTileTool">
         <div className="container">
-          <h2>Quick Search</h2>
+          <section className="d-print-none">
+            <h2>Browse Grid Tiles</h2>
+            <p>
+              Grid tiles are 5km by 5km and are at regular intervals on the standard Topo50 map
+              grid.
+            </p>
+          </section>
+          {this.state.gridTiles && (
+            <h2 className="d-none d-print-block my-5">
+              Grid Tiles: {this.state.gridTiles.join(' ')}
+            </h2>
+          )}
           <div className="row">
             <div className="col-md-3">
               <form onSubmit={this.handleSubmit} className="form d-print-none mb-3">
@@ -38,23 +55,29 @@ class GridTileTool extends Component {
                     Grid ID
                   </label>
                   <GridTileTypeahead
-                    onChange={selected => this.setState({ gridTile: selected })}
+                    onChange={selected => this.setGridTiles('gridTiles', selected)}
                     autoFocus
+                    selected={this.state.gridTiles}
+                    multiple
                   />
                 </div>
               </form>
               <div className="result">
                 {hasTile ? (
-                  this.state.gridTile.map(gridTile => (
-                    <GridTile id={gridTile} key={gridTile} type="card" />
+                  this.state.gridTiles.map(gridTileId => (
+                    <GridTile id={gridTileId} key={gridTileId} type="card" hideImage addLink />
                   ))
                 ) : (
-                  <Error message="No grid tile selected" info />
+                  <Error message="No grid tiles selected" info />
                 )}
               </div>
             </div>
             <div className="col-md-9">
-              <GridTileMap />
+              <GridTileSelectMap
+                {...this.props}
+                values={{ gridTiles: this.state.gridTiles }}
+                setFieldValue={this.setGridTiles}
+              />
             </div>
           </div>
         </div>

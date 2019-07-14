@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './GridTileCard.css';
 
 /**
   Presents a nicely formatted card for a given grid tile.
  */
-const GridTileCard = ({ gridTile, hideDetails }) => {
+const GridTileCard = ({ gridTile, hideDetails, hideImage, addLink }) => {
   /* GeoJSON has tile data in properties, regular API endpoint does not */
   const tileData = gridTile.properties || gridTile;
 
@@ -14,11 +15,13 @@ const GridTileCard = ({ gridTile, hideDetails }) => {
 
   return (
     <div className={classNames.join(' ')}>
-      <img src={tileData.get_large_image} alt="Map grid tile" className="card-img-top" />
+      {!hideImage && (
+        <img src={tileData.get_large_image} alt="Map grid tile" className="card-img-top" />
+      )}
       <div className="card-body">
-        <h2 className="card-title">
+        <h2 className="card-title h3">
           <i className="fa-fw fas fa-map-marker-alt mr-1"></i>
-          {gridTile.id}
+          {addLink ? <Link to={`/grid/${gridTile.id}`}>{gridTile.id}</Link> : gridTile.id}
         </h2>
         {!hideDetails && (
           <div className="card-text">
@@ -52,10 +55,14 @@ const GridTileCard = ({ gridTile, hideDetails }) => {
 GridTileCard.propTypes = {
   gridTile: PropTypes.object.isRequired,
   hideDetails: PropTypes.bool.isRequired,
+  hideImage: PropTypes.bool.isRequired,
+  addLink: PropTypes.bool.isRequired,
 };
 
 GridTileCard.defaultProps = {
   hideDetails: false,
+  hideImage: false,
+  addLink: false,
 };
 
 export default GridTileCard;

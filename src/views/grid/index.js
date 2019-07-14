@@ -7,16 +7,16 @@ import GridTileTool from '../../components/grid/GridTileTool';
 const GridPage = props => {
   return (
     <div className="GridPage">
-      <Helmet title="Grid Tiles" />
-      <section className="mb-5">
+      <Helmet title="Grid Tiles Map" />
+      <section className="mb-5 d-print-none">
         <Banner size="small">
-          <h1>Grid Tiles</h1>
+          <h1>Grid Tiles Map</h1>
         </Banner>
       </section>
       <section className="mb-5">
         <GridTileTool />
       </section>
-      <section className="bg-faded py-5">
+      <section className="bg-faded py-5 d-print-none">
         <div className="container">
           <h2>Download Grid</h2>
           <p>

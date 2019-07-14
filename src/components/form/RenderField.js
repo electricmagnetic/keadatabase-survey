@@ -2,7 +2,7 @@ import React from 'react';
 import { getIn } from 'formik';
 import classnames from 'classnames';
 
-import GridTileSelectTypeahead from './fields/GridTileSelectTypeahead';
+import GridTileSelectTypeahead from './GridTileSelectTypeahead';
 
 /**
   Principal method for rendering all fields. Handles logic for displaying checkboxes, select field,

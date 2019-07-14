@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import GridTileTypeahead from '../../grid/GridTileTypeahead';
+import GridTileTypeahead from '../grid/GridTileTypeahead';
 
 /**
   Field component for grid tile selection. Using react-bootstrap-typeahead.

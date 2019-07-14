@@ -20,6 +20,7 @@ const RenderField = props => {
   const touched = getIn(form.touched, field.name);
   const error = getIn(form.errors, field.name);
   const status = getIn(form.status, field.name);
+  const value = getIn(form.values, field.name);
 
   const isInvalid = (touched && error) || status ? true : false;
 
@@ -80,6 +81,8 @@ const RenderField = props => {
         return <textarea {...inputAttributes} />;
       case 'gridTileSelect':
         return <GridTileSelectTypeahead {...inputAttributes} form={form} isInvalid={isInvalid} />;
+      case 'checkbox':
+        return <input {...inputAttributes} type={type} checked={value} />;
       default:
         return <input {...inputAttributes} type={type} />;
     }

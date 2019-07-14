@@ -7,7 +7,8 @@ import GridTile from '../../grid/GridTile';
 /**
   Displays a given set of gridTile IDs as a grid (without additional details).
  */
-const SelectedGridTiles = ({ gridTiles }) => {
+const SelectedGridTiles = ({ values }) => {
+  const { gridTiles } = values;
   if (gridTiles.length > 0) {
     return (
       <div className="SelectedGridTiles card bg-faded mb-3">
@@ -28,7 +29,7 @@ const SelectedGridTiles = ({ gridTiles }) => {
 };
 
 SelectedGridTiles.propTypes = {
-  gridTiles: PropTypes.array.isRequired,
+  values: PropTypes.object.isRequired,
 };
 
 export default SelectedGridTiles;

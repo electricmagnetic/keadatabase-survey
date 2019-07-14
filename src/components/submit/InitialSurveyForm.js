@@ -27,9 +27,12 @@ class InitialSurveyFormComponent extends Component {
               <ObserverFieldset {...this.props} />
               <GridTileFieldset {...this.props} />
               <SubmitFieldset {...this.props} />
-              <SelectedGridTiles gridTiles={this.props.values.gridTiles} />
+              <SelectedGridTiles {...this.props} />
             </div>
             <div className="col-md-6">
+              <p>
+                <em>You can select grid tiles on the map below.</em>
+              </p>
               <GridTileSelectMap {...this.props} />
             </div>
           </div>

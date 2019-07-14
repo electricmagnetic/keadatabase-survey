@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  GeoJSON,
-  LayersControl,
-  ScaleControl,
-  Polygon,
-  Tooltip,
-  FeatureGroup,
-} from 'react-leaflet';
+import { GeoJSON, ScaleControl, Polygon, Tooltip, FeatureGroup } from 'react-leaflet';
 import { latLngBounds, GeoJSON as LeafletGeoJSON } from 'leaflet';
 
 import BaseMap from './BaseMap';
@@ -113,24 +106,17 @@ class GridTileSelectMap extends Component {
   render() {
     return (
       <div className="GridTileMap">
-        <p>
-          <em>You can select grid tiles on the map below.</em>
-        </p>
         <BaseMap viewport={this.state.viewport} onViewportChanged={this.onViewportChanged}>
-          <LayersControl position="topright" collapsed={false}>
-            <LayersControl.Overlay name="<strong>Grid Tiles</strong>" checked>
-              <GeoJSON
-                data={tiles}
-                onEachFeature={this.baseGridTileOnEachFeature}
-                style={{
-                  color: '#222222',
-                  weight: 2,
-                  opacity: 0.6,
-                  fillOpacity: 0,
-                }}
-              />
-            </LayersControl.Overlay>
-          </LayersControl>
+          <GeoJSON
+            data={tiles}
+            onEachFeature={this.baseGridTileOnEachFeature}
+            style={{
+              color: '#222222',
+              weight: 2,
+              opacity: 0.6,
+              fillOpacity: 0,
+            }}
+          />
           {this.props.values.gridTiles && (
             <FeatureGroup
               onLayerAdd={event => this.updateGridBounds(event)}

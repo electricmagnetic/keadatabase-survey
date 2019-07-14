@@ -10,7 +10,7 @@ const ObserverFieldset = ({ values, setFieldValue }) => (
   <fieldset className="mb-3">
     <legend>1. Your Details</legend>
     <div className="row">
-      <div className="col-md-3">
+      <div className="col-md-5">
         <Field
           component={RenderField}
           name="observer.name"
@@ -19,7 +19,7 @@ const ObserverFieldset = ({ values, setFieldValue }) => (
           label="Name"
         />
       </div>
-      <div className="col-md-4">
+      <div className="col-md-7">
         <Field
           component={RenderField}
           name="observer.email"

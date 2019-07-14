@@ -7,7 +7,7 @@ import GridTile from '../../grid/GridTile';
   Displays a given set of gridTile IDs as a grid (without additional details).
  */
 const SelectedGridTiles = ({ gridTiles }) => (
-  <div className="SelectedGridTiles card bg-faded">
+  <div className="SelectedGridTiles card bg-faded mb-3">
     <div className="card-body my-n3">
       <div className="form-row">
         {gridTiles.map(gridTile => (

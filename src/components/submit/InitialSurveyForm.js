@@ -22,9 +22,9 @@ class InitialSurveyFormComponent extends Component {
     return (
       <div className="InitialSurveyForm">
         <Form className="form mb-3">
-          <ObserverFieldset {...this.props} />
           <div className="row">
             <div className="col-md-6">
+              <ObserverFieldset {...this.props} />
               <GridTileFieldset {...this.props} />
               <SubmitFieldset {...this.props} />
               <SelectedGridTiles gridTiles={this.props.values.gridTiles} />

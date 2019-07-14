@@ -26,8 +26,8 @@ const SubmitFieldset = ({ submitCount, isValid, isSubmitting, postSubmissionResp
       {isRejected && (
         <Error message="Error">
           <p>An error was encountered. Please double-check the form for errors.</p>
-          {postSubmissionResponse.reason.cause.detail &&
-            `(${postSubmissionResponse.reason.cause.detail})`}
+          {postSubmissionResponse.reason.cause && `(${postSubmissionResponse.reason.cause.detail})`}
+          {postSubmissionResponse.reason.message && `(${postSubmissionResponse.reason.message})`}
         </Error>
       )}
       {isLoading && <Loader />}

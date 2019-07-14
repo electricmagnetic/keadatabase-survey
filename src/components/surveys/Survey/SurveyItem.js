@@ -30,11 +30,12 @@ const SurveyItem = ({ survey }) => {
           </div>
           <div className="col-md-4 field-gridTile">
             <i className="fa-fw fas fa-map mr-3"></i>
-            {gridTileIds.map(gridTileId => (
+            {gridTileIds.slice(0, 3).map(gridTileId => (
               <Link to={`/grid/${gridTileId}`} key={gridTileId} className="mr-3">
                 {gridTileId}
               </Link>
             ))}
+            {gridTileIds.length > 3 && <span className="more">…</span>}
           </div>
           <div className="col-md-2">
             <i className="fa-fw fas fa-info-circle mr-3"></i>

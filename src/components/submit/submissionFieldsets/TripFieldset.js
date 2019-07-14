@@ -4,14 +4,14 @@ import { Field } from 'formik';
 
 import RenderField from '../../form/RenderField';
 
-const TripFieldset = ({ options, values, setFieldValue }) => (
+const TripFieldset = ({ fieldOptions, values, setFieldValue }) => (
   <fieldset className="mb-3">
     <legend>1. Trip Details</legend>
     <div className="row">
       <div className="col-md-4">
         <Field
           component={RenderField}
-          options={options.observer.children.name}
+          fieldOptions={fieldOptions.observer.children.name}
           name="observer.name"
           type="text"
           readOnly
@@ -21,7 +21,7 @@ const TripFieldset = ({ options, values, setFieldValue }) => (
       <div className="col-md-5">
         <Field
           component={RenderField}
-          options={options.observer.children.email}
+          fieldOptions={fieldOptions.observer.children.email}
           name="observer.email"
           type="email"
           readOnly
@@ -33,7 +33,7 @@ const TripFieldset = ({ options, values, setFieldValue }) => (
       <div className="col-md-4">
         <Field
           component={RenderField}
-          options={options.date}
+          fieldOptions={fieldOptions.date}
           name="date"
           type="date"
           placeholder="Date"
@@ -43,7 +43,7 @@ const TripFieldset = ({ options, values, setFieldValue }) => (
       <div className="col-md-5">
         <Field
           component={RenderField}
-          options={options.observer.children.purpose}
+          fieldOptions={fieldOptions.observer.children.purpose}
           name="observer.purpose"
           type="choice"
         />
@@ -53,7 +53,7 @@ const TripFieldset = ({ options, values, setFieldValue }) => (
 );
 
 TripFieldset.propTypes = {
-  options: PropTypes.object.isRequired,
+  fieldOptions: PropTypes.object.isRequired,
 };
 
 export default TripFieldset;

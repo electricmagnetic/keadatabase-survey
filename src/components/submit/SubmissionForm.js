@@ -66,13 +66,13 @@ class FormComponent extends Component {
         </Error>
       );
     else if (submissionOptions.fulfilled) {
-      const options = submissionOptions.value.actions.POST;
+      const fieldOptions = submissionOptions.value.actions.POST;
       return (
         <>
           <Form>
-            <TripFieldset {...this.props} options={options} />
-            <SurveyHourFieldset {...this.props} options={options} />
-            <FurtherInformationFieldset {...this.props} options={options} />
+            <TripFieldset {...this.props} fieldOptions={fieldOptions} />
+            <SurveyHourFieldset {...this.props} fieldOptions={fieldOptions} />
+            <FurtherInformationFieldset {...this.props} fieldOptions={fieldOptions} />
             <SubmitFieldset {...this.props} />
           </Form>
         </>

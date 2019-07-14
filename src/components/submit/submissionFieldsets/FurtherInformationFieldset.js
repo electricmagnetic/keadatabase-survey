@@ -7,7 +7,7 @@ import RenderField from '../../form/RenderField';
 const atLeastOneKeaObserved = values =>
   values.hours.reduce((accumulator, current) => accumulator || current.kea, false);
 
-const FurtherInformationFieldset = ({ options, values }) => (
+const FurtherInformationFieldset = ({ fieldOptions, values }) => (
   <fieldset className="mb-3">
     <legend>3. Further Information</legend>
     <div className="row">
@@ -15,7 +15,7 @@ const FurtherInformationFieldset = ({ options, values }) => (
         {values.hours.length > 0 && atLeastOneKeaObserved(values) && (
           <Field
             component={RenderField}
-            options={options.max_flock_size}
+            fieldOptions={fieldOptions.max_flock_size}
             name="max_flock_size"
             type="number"
             label="Max kea seen"
@@ -26,7 +26,7 @@ const FurtherInformationFieldset = ({ options, values }) => (
 
     <Field
       component={RenderField}
-      options={options.comments}
+      fieldOptions={fieldOptions.comments}
       name="comments"
       type="textarea"
       placeholder="Any comments? (optional)"
@@ -35,7 +35,7 @@ const FurtherInformationFieldset = ({ options, values }) => (
 );
 
 FurtherInformationFieldset.propTypes = {
-  options: PropTypes.object.isRequired,
+  fieldOptions: PropTypes.object.isRequired,
 };
 
 export default FurtherInformationFieldset;

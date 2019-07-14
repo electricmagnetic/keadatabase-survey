@@ -2,87 +2,127 @@ import React from 'react';
 import { getIn } from 'formik';
 import classnames from 'classnames';
 
+import GridTileSelectTypeahead from './fields/GridTileSelectTypeahead';
+
 const RenderField = props => {
-  // Use label if provided, otherwise default on OPTIONS label
-  const {
-    field,
-    form,
-    options,
-    placeholder,
-    type,
-    addBlank,
-    hideLabel,
-    readOnly,
-    ...others
-  } = props;
-  const label = props.label || options.label;
-  const choices = props.choices || options.choices;
+  const { field, form, fieldOptions, type, addBlank, hideLabel, ...others } = props;
+
+  // Use label if provided, otherwise default on OPTIONS (fieldOptions) label
+  const label = props.label || fieldOptions.label;
+  const choices = props.choices || fieldOptions.choices;
+
   const touched = getIn(form.touched, field.name);
   const error = getIn(form.errors, field.name);
   const status = getIn(form.status, field.name);
-  const formLabelClasses = classnames('control-label', {
-    'sr-only': hideLabel,
-  });
-  const formControlClasses = classnames({
-    'form-control': !readOnly,
-    'form-control-plaintext': readOnly,
-    'is-invalid': (touched && error) || status,
-  });
 
-  return (
-    <div className="form-group">
-      <label className={formLabelClasses} htmlFor={field.name}>
-        {label}
-      </label>
+  const isInvalid = (touched && error) || status ? true : false;
 
-      {type === 'choice' && (
-        <select
-          {...field}
-          className={classnames(formControlClasses, 'custom-select')}
-          id={field.name}
-          {...others}
-        >
-          {/* Add blank to compulsory fields (requiring the user to make a selection) */}
-          {addBlank && <option default value={''} />}
-          {choices.map(option => (
-            <option value={option.value} key={option.value}>
-              {option.display_name}
-            </option>
-          ))}
-        </select>
-      )}
+  const formControlClasses = (type => {
+    const baseClasses = classnames({
+      'is-invalid': isInvalid,
+    });
+    switch (type) {
+      case 'checkbox':
+        return classnames(baseClasses, 'form-check-input');
+      case 'choice':
+        return classnames(baseClasses, 'custom-select');
+      case 'gridTileSelect':
+        return classnames(baseClasses);
+      default:
+        return classnames(
+          baseClasses,
+          { 'form-control': !props.readOnly },
+          { 'form-control-plaintext': props.readOnly }
+        );
+    }
+  })(type);
 
-      {type === 'textarea' && (
-        <textarea
-          {...field}
-          placeholder={placeholder}
-          className={formControlClasses}
-          id={field.name}
-          readOnly={readOnly}
-          {...others}
-        />
-      )}
+  const formLabelClasses = (type => {
+    const baseClasses = classnames({
+      'sr-only': hideLabel,
+    });
+    switch (type) {
+      case 'checkbox':
+        return classnames(baseClasses, 'form-check-label');
+      default:
+        return classnames(baseClasses, 'control-label');
+    }
+  })(type);
 
-      {type !== 'choice' && type !== 'textarea' && (
-        <input
-          {...field}
-          type={type}
-          placeholder={placeholder}
-          className={formControlClasses}
-          id={field.name}
-          readOnly={readOnly}
-          {...others}
-        />
-      )}
+  const inputAttributes = {
+    ...field,
+    id: field.name,
+    className: formControlClasses,
+    ...others,
+  };
 
-      {touched && error && <span className="invalid-feedback">{error}</span>}
-      {status && <span className="invalid-feedback">{status}</span>}
-    </div>
+  const fieldElement = (type => {
+    switch (type) {
+      case 'choice':
+        return (
+          <select {...inputAttributes}>
+            {/* Add blank to compulsory fields (requiring the user to make a selection) */}
+            {addBlank && <option default value={''} />}
+            {choices.map(option => (
+              <option value={option.value} key={option.value}>
+                {option.display_name}
+              </option>
+            ))}
+          </select>
+        );
+      case 'textarea':
+        return <textarea {...inputAttributes} />;
+      case 'gridTileSelect':
+        return <GridTileSelectTypeahead {...inputAttributes} form={form} isInvalid={isInvalid} />;
+      default:
+        return <input {...inputAttributes} type={type} />;
+    }
+  })(type);
+
+  const labelElement = (
+    <label className={formLabelClasses} htmlFor={field.name}>
+      {label}
+    </label>
   );
+
+  const errorElement = (
+    <>
+      {/* `d-inline` is used to force visibility due to incompatibility of Typeahead with BS4 */}
+      {isInvalid && error && <span className="invalid-feedback d-inline">{error}</span>}
+      {isInvalid && status && <span className="invalid-feedback d-inline">{status}</span>}
+    </>
+  );
+
+  const groupElement = (type => {
+    switch (type) {
+      case 'checkbox':
+        return (
+          <div className="form-check">
+            {fieldElement}
+            {labelElement}
+            {errorElement}
+          </div>
+        );
+      default:
+        return (
+          <div className="form-group">
+            {labelElement}
+            {fieldElement}
+            {errorElement}
+          </div>
+        );
+    }
+  })(type);
+
+  return groupElement;
 };
 
 RenderField.defaultProps = {
-  options: {},
+  fieldOptions: {},
+  addBlank: false,
+  readOnly: false,
+  disabled: false,
+  hideLabel: false,
 };
 
 export default RenderField;

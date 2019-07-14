@@ -4,6 +4,12 @@ import classnames from 'classnames';
 
 import GridTileSelectTypeahead from './fields/GridTileSelectTypeahead';
 
+/**
+  Principal method for rendering all fields. Handles logic for displaying checkboxes, select field,
+  typeahead and regular input fields.
+
+  Also handles `error` messages (from yup) and `status` messages (from back-end).
+*/
 const RenderField = props => {
   const { field, form, fieldOptions, type, addBlank, hideLabel, ...others } = props;
 

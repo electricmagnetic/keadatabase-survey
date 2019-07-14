@@ -5,6 +5,7 @@ import GridTileTypeahead from '../../grid/GridTileTypeahead';
 
 /**
   Field component for grid tile selection. Using react-bootstrap-typeahead.
+  Builds on GridTileTypeahead to add functions necessary for use with Formik.
  */
 const GridTileSelectTypeahead = ({ name, form, ...field }) => {
   return (

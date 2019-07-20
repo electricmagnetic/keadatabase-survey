@@ -21,12 +21,13 @@ export const initialInitialValues = {
 
 /**
   Specifies initial hour values (nested object).
+  grid_tile will always be an array of one due to the use of the typeahead field.
  */
 export const initialHourValues = {
   hour: '',
   activity: '',
   kea: false,
-  grid_tile: '',
+  grid_tile: [],
 };
 
 /**

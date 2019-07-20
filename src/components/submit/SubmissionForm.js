@@ -94,7 +94,7 @@ const computeInitialValues = props => {
       {},
       initialHourValues,
       { hour: hour },
-      singleGridTile && { grid_tile: singleGridTile }
+      singleGridTile && { grid_tile: [singleGridTile] }
     )
   );
 

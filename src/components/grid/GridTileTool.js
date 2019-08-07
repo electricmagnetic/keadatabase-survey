@@ -1,54 +1,86 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import GridTileDetail from './GridTileDetail';
+import GridTileTypeahead from './GridTileTypeahead';
+import GridTileSelectMap from '../map/GridTileSelectMap';
+import GridTile from './GridTile';
+import Error from '../helpers/Error';
 
+/**
+  Provides a typeahead interface, returning a single GridTile.
+*/
 class GridTileTool extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      id: '',
+      gridTiles: [],
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ value: event.target.value.toUpperCase() });
+    this.setGridTiles = this.setGridTiles.bind(this);
   }
 
   handleSubmit(event) {
-    // Disallow fetching without a value (so it doesn't try fetch all grid tiles)
-    if (this.state.value) this.setState({ id: this.state.value });
-
     event.preventDefault();
   }
 
+  setGridTiles(name, value) {
+    // Name does not have an effect, just retained for compatibility with GridTileSelectMap.
+    this.setState({ gridTiles: value });
+  }
+
   render() {
+    const hasTile = this.state.gridTiles.length > 0 ? true : false;
+
     return (
       <div className="GridTileTool">
-        <form onSubmit={this.handleSubmit} className="form-inline d-print-none mb-3">
-          <div className="input-group">
-            <label htmlFor="id" className="sr-only">
-              Grid ID:
-            </label>
-            <input
-              className="form-control"
-              id="id"
-              type="text"
-              value={this.state.value}
-              onChange={this.handleChange}
-              maxLength="7"
-              placeholder="Grid ID (XXXX-XX)"
-            />
-            <div className="input-group-append">
-              <input type="submit" value="Get Tile" className="btn btn-primary" />
+        <div className="container">
+          <section className="d-print-none">
+            <h2>Browse Grid Tiles</h2>
+            <p>
+              Grid tiles are 5km by 5km and are at regular intervals on the standard Topo50 map
+              grid.
+            </p>
+          </section>
+          {this.state.gridTiles && (
+            <h2 className="d-none d-print-block my-5">
+              Grid Tiles: {this.state.gridTiles.join(' ')}
+            </h2>
+          )}
+          <div className="row">
+            <div className="col-md-3">
+              <form onSubmit={this.handleSubmit} className="form d-print-none mb-3">
+                <div className="form-group">
+                  <label htmlFor="gridTile" className="sr-only">
+                    Grid ID
+                  </label>
+                  <GridTileTypeahead
+                    onChange={selected => this.setGridTiles('gridTiles', selected)}
+                    autoFocus
+                    selected={this.state.gridTiles}
+                    multiple
+                  />
+                </div>
+              </form>
+              <div className="result">
+                {hasTile ? (
+                  this.state.gridTiles.map(gridTileId => (
+                    <GridTile id={gridTileId} key={gridTileId} type="card" hideImage addLink />
+                  ))
+                ) : (
+                  <Error message="No grid tiles selected" info />
+                )}
+              </div>
+            </div>
+            <div className="col-md-9">
+              <GridTileSelectMap
+                {...this.props}
+                values={{ gridTiles: this.state.gridTiles }}
+                setFieldValue={this.setGridTiles}
+              />
             </div>
           </div>
-        </form>
-        <div className="result">{this.state.id && <GridTileDetail id={this.state.id} />}</div>
+        </div>
       </div>
     );
   }

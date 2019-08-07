@@ -31,13 +31,18 @@ const Header = props => {
                 </NavLink>
               </li>
               <li className="nav-item">
+                <NavLink to="/surveys" className="nav-link">
+                  Browse Surveys
+                </NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink to="/grid" className="nav-link">
                   View Grid
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/report" className="nav-link">
-                  Report
+                <NavLink to="/submit" className="nav-link">
+                  Submit Survey
                 </NavLink>
               </li>
             </ul>

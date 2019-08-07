@@ -7,12 +7,12 @@ const NoMatchPage = props => {
   return (
     <div className="NoMatchPage">
       <Helmet title="Page Not Found" />
-      <section className="mb-4">
+      <section className="mb-5">
         <Banner size="small">
           <h1>Page Not Found</h1>
         </Banner>
       </section>
-      <section className="mb-4">
+      <section className="mb-5">
         <div className="container">
           <p>
             You seem to have encountered a page that doesn't exist. If you think it should exist,

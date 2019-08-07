@@ -2,7 +2,9 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 
+import GridTilesFromSurveyHours from '../components/grid/GridTilesFromSurveyHours';
 import Banner from '../components/presentation/Banner';
+import Page from '../components/presentation/Page';
 
 import banner from '../assets/img/banner.jpg';
 
@@ -10,39 +12,36 @@ const HomePage = props => {
   return (
     <div className="HomePage">
       <Helmet title="Kea Survey Tool" />
-      <section className="mb-4">
+      <section className="mb-5">
         <Banner backgroundImage={banner}>
-          <h1 className="mb-3 banner-title">Kea Survey Tool</h1>
+          <h1 className="mb-4 banner-title">Kea Survey Tool</h1>
           <div className="home-buttons">
-            <Link to="/report" className="btn btn-lg btn-primary mr-3 mb-3">
-              Report Survey
+            <Link to="/submit" className="btn btn-lg btn-primary mr-3 mb-3">
+              <i className="fa-fw fas fa-clipboard-list mr-1"></i>Submit Survey
             </Link>
-            <Link to="/grid" className="btn btn-lg btn-light mr-3 mb-3">
-              View Grid
+            <Link to="/instructions" className="btn btn-lg btn-light mr-3 mb-3">
+              <i className="fa-fw fas fa-question-circle mr-1"></i>How To Survey
+            </Link>
+          </div>
+          <div className="home-buttons">
+            <Link to="/grid" className="btn btn-light mr-3 mb-3">
+              <i className="fa-fw far fa-map mr-1"></i>View Grid
+            </Link>
+            <Link to="/surveys" className="btn btn-light mr-3 mb-3">
+              <i className="fa-fw far fa-list-alt mr-1"></i>Browse Surveys
             </Link>
           </div>
         </Banner>
       </section>
-      <section className="mb-4">
+      <section className="mb-5">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
-              <h2>What is this?</h2>
-              <p>
-                This tool designed to inform understanding of kea populations, through better
-                capturing the relationship between time spent and kea sighted.
-              </p>
+              <Page id={480} />
             </div>
             <div className="col-md-6">
-              <h2>How can I help?</h2>
-              <p>
-                Presently this is restricted to authorised personnel only. For general sightings
-                please use the{' '}
-                <a href="https://keadatabase.nz" target="_blank" rel="noopener noreferrer">
-                  Kea Database
-                </a>
-                .
-              </p>
+              <h2>Recent Grid Tiles</h2>
+              <GridTilesFromSurveyHours type="card" hideDetails />
             </div>
           </div>
         </div>

@@ -1,0 +1,17 @@
+@import 'variables';
+
+.GridTileMap {
+  height: 640px;
+  width: 100%;
+
+  .tile-tooltip {
+    h2 {
+      font-size: $font-size-lg;
+    }
+    dl,
+    dt,
+    dd {
+      margin-bottom: 0;
+    }
+  }
+}

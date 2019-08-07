@@ -1,94 +1,160 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'formik';
 
 import RenderField from '../../form/RenderField';
+
 import { initialHourValues } from '../schema/initialValues';
 import { surveyHours } from '../schema/surveyParameters';
 
-const RenderHours = ({ arrayHelpers, options }) => {
-  const { values } = arrayHelpers.form;
+import './SurveyHourFieldset.css';
 
-  return (
-    <div className="RenderHours table-responsive">
-      {values.gridTiles && values.gridTiles.length === 1 && (
-        <div className="alert alert-info">
-          Only one grid tile has been selected, so this has been added to every hour.
-        </div>
-      )}
-      <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th style={{ width: '10%' }}>Hour</th>
-            <th>Activity</th>
-            <th>Kea?</th>
-            <th>Grid Tile</th>
-          </tr>
-        </thead>
-        <tbody>
-          {values.hours &&
-            values.hours.length > 0 &&
-            values.hours.map((hour, index) => (
-              <tr
-                key={index}
-                className={
-                  !surveyHours.winter.includes(hour.hour) ? 'table-warning summer' : 'winter'
-                }
-              >
-                <td>
-                  <Field
-                    component={RenderField}
-                    options={options.hour}
-                    name={`hours.${index}.hour`}
-                    type="number"
-                    label="Hour"
-                    readOnly
-                    hideLabel
-                  />
-                </td>
-                <td>
-                  <Field
-                    component={RenderField}
-                    options={options.activity}
-                    name={`hours.${index}.activity`}
-                    type="choice"
-                    label="Activity"
-                    addBlank
-                    hideLabel
-                  />
-                </td>
-                <td>
-                  <div className="form-check">
-                    <Field
-                      type="checkbox"
-                      name={`hours.${index}.kea`}
-                      className="form-check-input"
-                      id={`hours.${index}.kea`}
-                    />
-                    <label className="form-check-label" htmlFor={`hours.${index}.kea`}>
-                      Kea
-                    </label>
-                  </div>
-                </td>
-                <td>
-                  <Field
-                    component={RenderField}
-                    options={options.grid_tile}
-                    name={`hours.${index}.grid_tile`}
-                    type="text"
-                    label="Grid Tile"
-                    hideLabel
-                  />
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+const isWinter = hour => surveyHours.winter.includes(hour);
+const hasSingleGridTile = values => values.gridTiles && values.gridTiles.length === 1;
+const isNotSurveying = surveyHour => surveyHour.activity === 'X';
 
-const HourFieldset = ({ options, values }) => {
+class RenderHour extends Component {
+  componentDidUpdate(prevProps) {
+    if (this.props.surveyHour !== prevProps.surveyHour) {
+      if (isNotSurveying(this.props.surveyHour)) {
+        const { form, index } = this.props;
+        if (!hasSingleGridTile(form.values)) {
+          form.setFieldValue(`hours.${index}.grid_tile`, '');
+        }
+        form.setFieldValue(`hours.${index}.kea`, false);
+      }
+    }
+  }
+
+  render() {
+    const { surveyHour, index, fieldOptions, form } = this.props;
+    const name = `hours.${index}`;
+
+    const gridTileField = (() => {
+      const { values } = form;
+      const gridTileName = `${name}.grid_tile`;
+
+      if (hasSingleGridTile(values)) {
+        return (
+          <Field
+            component={RenderField}
+            fieldOptions={fieldOptions.grid_tile}
+            name={gridTileName}
+            type="text"
+            readOnly
+            hideLabel
+            tabIndex={-1}
+          />
+        );
+      } else if (isNotSurveying(surveyHour)) {
+        return (
+          <Field
+            component={RenderField}
+            fieldOptions={fieldOptions.grid_tile}
+            name={gridTileName}
+            type="text"
+            disabled
+            hideLabel
+            tabIndex={-1}
+          />
+        );
+      } else {
+        return (
+          <Field
+            component={RenderField}
+            fieldOptions={fieldOptions.grid_tile}
+            type="gridTileSelect"
+            name={gridTileName}
+            hideLabel
+            selected={surveyHour.grid_tile}
+            options={values.gridTiles}
+            minLength={0}
+            maxResults={15}
+            paginate={false}
+          />
+        );
+      }
+    })();
+
+    return (
+      <tr key={index} className={isWinter(surveyHour.hour) ? 'winter' : 'summer'}>
+        <td>
+          <Field
+            component={RenderField}
+            fieldOptions={fieldOptions.hour}
+            name={`${name}.hour`}
+            type="number"
+            readOnly
+            hideLabel
+            tabIndex={-1}
+          />
+          {!isWinter(surveyHour.hour) && <small>summer only</small>}
+        </td>
+        <td>
+          <Field
+            component={RenderField}
+            fieldOptions={fieldOptions.activity}
+            name={`${name}.activity`}
+            type="choice"
+            addBlank
+            hideLabel
+          />
+        </td>
+        <td>
+          <Field
+            component={RenderField}
+            fieldOptions={fieldOptions.kea}
+            name={`${name}.kea`}
+            type="checkbox"
+            hideLabel
+            disabled={isNotSurveying(surveyHour)}
+          />
+        </td>
+        <td>{gridTileField}</td>
+      </tr>
+    );
+  }
+}
+
+class RenderHours extends Component {
+  render() {
+    const { values } = this.props.form;
+
+    return (
+      <div className="RenderHours">
+        {hasSingleGridTile(values) && (
+          <div className="alert alert-info">
+            Only one grid tile has been selected, so this has been added to every hour.
+          </div>
+        )}
+        <table className="table table-bordered">
+          <thead>
+            <tr>
+              <th style={{ width: '10%' }}>Hour</th>
+              <th>Activity</th>
+              <th>Kea?</th>
+              <th>Grid Tile</th>
+            </tr>
+          </thead>
+          <tbody>
+            {values.hours &&
+              values.hours.length > 0 &&
+              values.hours.map((surveyHour, index) => (
+                <RenderHour
+                  surveyHour={surveyHour}
+                  index={index}
+                  {...this.props}
+                  key={surveyHour.hour}
+                />
+              ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+}
+
+const HourFieldset = ({ fieldOptions }) => {
   return (
     <fieldset className="mb-3">
       <legend>2. Hours</legend>
@@ -96,7 +162,7 @@ const HourFieldset = ({ options, values }) => {
         initialValues={initialHourValues}
         name="hours"
         render={arrayHelpers => (
-          <RenderHours arrayHelpers={arrayHelpers} options={options.hours.child.children} />
+          <RenderHours fieldOptions={fieldOptions.hours.child.children} {...arrayHelpers} />
         )}
       />
     </fieldset>
@@ -104,7 +170,7 @@ const HourFieldset = ({ options, values }) => {
 };
 
 HourFieldset.propTypes = {
-  options: PropTypes.object.isRequired,
+  fieldOptions: PropTypes.object.isRequired,
 };
 
 export default HourFieldset;

@@ -4,6 +4,16 @@ import Helmet from 'react-helmet';
 import Banner from '../../components/presentation/Banner';
 import GridTileTool from '../../components/grid/GridTileTool';
 
+const DownloadLink = ({ title, filename }) => {
+  return (
+    <li>
+      <a href={`https://geo.keadatabase.nz/grid/${filename}`} className="mr-3 mb-3">
+        <i className="fa-fw fas fa-file-download mr-1"></i>Download {title}
+      </a>
+    </li>
+  );
+};
+
 const GridPage = props => {
   return (
     <div className="GridPage">
@@ -31,21 +41,41 @@ const GridPage = props => {
             further divided into four 5km by 5km tiles with one of four cardinal marker suffixes
             (NW/NE/SW/SE).
           </p>
-          <p>It is provided in multiple formats below for download.</p>
-          <p className="m-0">
-            <a
-              href="https://geo.keadatabase.nz/grid/grid_tiles.gpx"
-              className="btn btn-primary mr-3 mb-3"
-            >
-              <i className="fa-fw fas fa-file-download mr-1"></i>Download GPX
-            </a>
-            <a
-              href="https://geo.keadatabase.nz/grid/grid_tiles.geojson"
-              className="btn btn-primary mr-3 mb-3"
-            >
-              <i className="fa-fw fas fa-file-download mr-1"></i>Download GeoJSON
-            </a>
-          </p>
+          <div className="row">
+            <div className="col-md-6">
+              <h3>Garmin KMZ grids</h3>
+              <ul className="nav flex-column mb-3">
+                <DownloadLink title="South Island" filename="garmin/SouthIsland.kmz" />
+                <DownloadLink title="Kahurangi" filename="garmin/Kahurangi.kmz" />
+                <DownloadLink
+                  title="Nelson Lakes &amp; Kaikoura"
+                  filename="garmin/NelsonLakes-Kaikoura.kmz"
+                />
+                <DownloadLink title="Mid Canterbury" filename="garmin/MidCanterbury.kmz" />
+                <DownloadLink title="Aoraki &amp; Franz Josef" filename="garmin/Aoraki-Franz.kmz" />
+                <DownloadLink
+                  title="Wanaka &amp; North Fiordland"
+                  filename="garmin/Wanaka-NorthFiordland.kmz"
+                />
+                <DownloadLink
+                  title="Wakatipu &amp; Mid Fiordland"
+                  filename="garmin/Wakatipu-MidFiordland.kmz"
+                />
+                <DownloadLink title="South Fiordland" filename="garmin/SouthFiordland.kmz" />
+              </ul>
+              <p>
+                These files can be loaded directly onto commonly used Garmin GPS models, into the{' '}
+                <code>Garmin/CustomMaps</code> folder.
+              </p>
+            </div>
+            <div className="col-md-6">
+              <h3>Other formats</h3>
+              <ul className="nav flex-column mb-3">
+                <DownloadLink title="GPX" filename="grid_tiles.gpx" />
+                <DownloadLink title="GeoJSON" filename="grid_tiles.geojson" />
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
     </div>

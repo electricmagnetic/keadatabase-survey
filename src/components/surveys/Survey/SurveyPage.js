@@ -48,7 +48,7 @@ const SurveyPage = ({ survey }) => {
         <h2>Grid Tiles</h2>
         <div className="row my-n3">
           {gridTileIds.map(gridTileId => (
-            <div className="col-md-3" key={gridTileId}>
+            <div className="col-sm-6 col-md-3" key={gridTileId}>
               <Link to={`/grid/${gridTileId}`}>
                 <GridTile id={gridTileId} hideDetails type="card" />
               </Link>

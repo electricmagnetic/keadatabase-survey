@@ -24,11 +24,17 @@ const HomePage = props => {
             </Link>
           </div>
           <div className="home-buttons">
+            <a
+              href="https://geo.keadatabase.nz/survey/form_20190914.pdf"
+              className="btn btn-light mr-3 mb-3"
+            >
+              <i className="fa-fw fas fa-file-download mr-1"></i>Paper Form
+            </a>
             <Link to="/grid" className="btn btn-light mr-3 mb-3">
-              <i className="fa-fw far fa-map mr-1"></i>View Grid
+              <i className="fa-fw fas fa-map mr-1"></i>View Grid
             </Link>
             <Link to="/surveys" className="btn btn-light mr-3 mb-3">
-              <i className="fa-fw far fa-list-alt mr-1"></i>Browse Surveys
+              <i className="fa-fw fas fa-list-alt mr-1"></i>Browse Surveys
             </Link>
           </div>
         </Banner>

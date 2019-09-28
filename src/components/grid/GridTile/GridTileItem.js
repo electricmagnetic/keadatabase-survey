@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 /**
   Presents a nicely formatted list item for a given grid tile.
  */
-const GridTileItem = ({ gridTile }) => {
+const GridTileItem = ({ gridTile, ...others }) => {
   /* GeoJSON has tile data in properties, regular API endpoint does not */
   const tileData = gridTile.properties || gridTile;
+  const id = others.id || gridTile.id;
 
   return (
     <div className="GridTileItem card mb-1">
@@ -16,7 +17,7 @@ const GridTileItem = ({ gridTile }) => {
             <img src={tileData.get_large_image} alt="Map grid tile" className="img-fluid" />
           </div>
           <div className="col-md-9">
-            <h2 className="card-title">{gridTile.id}</h2>
+            <h2 className="card-title">{id}</h2>
             <div className="card-text">
               <dl>
                 <div className="row">
@@ -37,8 +38,6 @@ const GridTileItem = ({ gridTile }) => {
                     </dd>
                   </div>
                 </div>
-                <dt>Source</dt>
-                <dd>LINZ (CC BY 4.0)</dd>
               </dl>
             </div>
           </div>

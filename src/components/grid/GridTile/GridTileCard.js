@@ -7,9 +7,10 @@ import './GridTileCard.css';
 /**
   Presents a nicely formatted card for a given grid tile.
  */
-const GridTileCard = ({ gridTile, hideDetails, hideImage, addLink }) => {
+const GridTileCard = ({ gridTile, hideDetails, hideImage, addLink, ...others }) => {
   /* GeoJSON has tile data in properties, regular API endpoint does not */
   const tileData = gridTile.properties || gridTile;
+  const id = others.id || gridTile.id;
 
   const classNames = ['GridTileCard', 'card', 'my-3', hideDetails && 'hideDetails'];
 
@@ -21,7 +22,7 @@ const GridTileCard = ({ gridTile, hideDetails, hideImage, addLink }) => {
       <div className="card-body">
         <h2 className="card-title h3">
           <i className="fa-fw fas fa-map-marker-alt mr-1"></i>
-          {addLink ? <Link to={`/grid/${gridTile.id}`}>{gridTile.id}</Link> : gridTile.id}
+          {addLink ? <Link to={`/grid/${id}`}>{id}</Link> : id}
         </h2>
         {!hideDetails && (
           <div className="card-text">

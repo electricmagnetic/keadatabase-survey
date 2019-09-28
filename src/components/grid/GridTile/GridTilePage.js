@@ -6,9 +6,10 @@ import SurveyHours from '../../surveys/SurveyHours';
 /**
   Presents a nicely formatted page for a given grid tile.
  */
-const GridTilePage = ({ gridTile }) => {
+const GridTilePage = ({ gridTile, ...others }) => {
   /* GeoJSON has tile data in properties, regular API endpoint does not */
   const tileData = gridTile.properties || gridTile;
+  const id = others.id || gridTile.id;
 
   return (
     <div className="GridTilePage mb-1">

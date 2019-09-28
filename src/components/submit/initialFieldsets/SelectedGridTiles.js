@@ -14,9 +14,9 @@ const SelectedGridTiles = ({ values }) => {
       <div className="SelectedGridTiles card bg-faded mb-3">
         <div className="card-body my-n3">
           <div className="form-row">
-            {gridTiles.map(gridTile => (
-              <div className="col-6 col-md-4" key={gridTile}>
-                <GridTile id={gridTile} hideDetails type="card" />
+            {gridTiles.map(gridTileId => (
+              <div className="col-6 col-md-4" key={gridTileId}>
+                <GridTile id={gridTileId} hideDetails type="card" />
               </div>
             ))}
           </div>

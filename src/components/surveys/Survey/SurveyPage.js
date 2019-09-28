@@ -6,6 +6,7 @@ import SurveyHour from '../SurveyHour';
 import FormatDate from '../../helpers/FormatDate';
 import GridTile from '../../grid/GridTile';
 import getUniqueGridTiles from '../../helpers/getUniqueGridTiles';
+import SelectedGridTilesMap from '../../map/SelectedGridTilesMap';
 
 /**
   Presents a nicely formatted page for a given survey.
@@ -45,6 +46,16 @@ const SurveyPage = ({ survey }) => {
         </dl>
       </section>
       <section className="mb-5">
+        <h2>Hours</h2>
+        {survey.hours.map(surveyHour => (
+          <SurveyHour surveyHour={surveyHour} key={surveyHour.id} type="item" />
+        ))}
+      </section>
+      <section className="mb-5">
+        <h2>Map</h2>
+        <SelectedGridTilesMap gridTileIds={gridTileIds} />
+      </section>
+      <section className="mb-5">
         <h2>Grid Tiles</h2>
         <div className="row my-n3">
           {gridTileIds.map(gridTileId => (
@@ -55,12 +66,6 @@ const SurveyPage = ({ survey }) => {
             </div>
           ))}
         </div>
-      </section>
-      <section className="mb-5">
-        <h2>Hours</h2>
-        {survey.hours.map(surveyHour => (
-          <SurveyHour surveyHour={surveyHour} key={surveyHour.id} type="item" />
-        ))}
       </section>
     </div>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SurveyHours from '../../surveys/SurveyHours';
+import SelectedGridTilesMap from '../../map/SelectedGridTilesMap';
 
 /**
   Presents a nicely formatted page for a given grid tile.
@@ -15,8 +16,12 @@ const GridTilePage = ({ gridTile, ...others }) => {
     <div className="GridTilePage mb-1">
       <section className="mb-5">
         <div className="row">
-          <div className="col-md">
-            <h2>Details</h2>
+          <div className="col-md-3">
+            <img
+              src={tileData.get_large_image}
+              alt="Map grid tile"
+              className="img-fluid img-thumbnail mb-3"
+            />
             <dl>
               <dt>
                 Southwest <small>NZTM</small>
@@ -30,16 +35,10 @@ const GridTilePage = ({ gridTile, ...others }) => {
               <dd>
                 {tileData.max.coordinates[0]}, {tileData.max.coordinates[1]}
               </dd>
-              <dt>Source</dt>
-              <dd>LINZ (CC BY 4.0)</dd>
             </dl>
           </div>
-          <div className="col-md-3">
-            <img
-              src={tileData.get_large_image}
-              alt="Map grid tile"
-              className="img-fluid img-thumbnail"
-            />
+          <div className="col-md-9">
+            <SelectedGridTilesMap gridTileIds={[id]} />
           </div>
         </div>
       </section>

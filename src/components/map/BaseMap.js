@@ -4,7 +4,7 @@ import { Map as LeafletMap, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet';
 
-import { DEFAULT_ZOOM, DEFAULT_BOUNDS } from '../map/defaults';
+import { DEFAULT_ZOOM, DEFAULT_BOUNDS } from './defaults';
 
 import './BaseMap.css';
 

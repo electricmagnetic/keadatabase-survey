@@ -8,12 +8,12 @@ import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
 import getUniqueGridTiles from '../helpers/getUniqueGridTiles';
 
-const API_URL = `https://data.keadatabase.nz/surveys/hours/?page_size=45`;
+const API_URL = `https://data.keadatabase.nz/surveys/hours/?page_size=90`;
 
 /**
   Displays grid tiles condensed from survey hours.
  */
-const GridTilesFromSurveyHours = ({ surveyHoursFetch, limit, ...others }) => {
+const GridTilesFromSurveyHours = ({ surveyHoursFetch, limit, classes, ...others }) => {
   if (surveyHoursFetch.pending) {
     return <Loader />;
   } else if (surveyHoursFetch.rejected) {
@@ -25,7 +25,7 @@ const GridTilesFromSurveyHours = ({ surveyHoursFetch, limit, ...others }) => {
       <div className="RecentGridTiles">
         <div className="form-row my-n3">
           {gridTileIds.map(gridTileId => (
-            <div className="col-sm-6 col-md-4 col-lg-3" key={gridTileId}>
+            <div className={classes} key={gridTileId}>
               <Link to={`/grid/${gridTileId}`}>
                 <GridTile id={gridTileId} {...others} />
               </Link>
@@ -39,10 +39,12 @@ const GridTilesFromSurveyHours = ({ surveyHoursFetch, limit, ...others }) => {
 
 GridTilesFromSurveyHours.propTypes = {
   limit: PropTypes.number.isRequired,
+  classes: PropTypes.string.isRequired,
 };
 
 GridTilesFromSurveyHours.defaultProps = {
   limit: 4,
+  classes: 'col-6 col-md-4 col-lg-3',
 };
 
 export default connect(props => ({

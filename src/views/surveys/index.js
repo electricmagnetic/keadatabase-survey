@@ -17,15 +17,20 @@ const SurveyPage = props => {
       <section className="mb-5">
         <div className="container">
           <h2>
-            Recent Surveys <small>(last 25)</small>
+            Recent Surveys <small>(last 50)</small>
           </h2>
-          <Surveys type="item" queryString="?page_size=25" />
+          <Surveys type="item" queryString="?page_size=50" />
         </div>
       </section>
       <section className="mb-5">
         <div className="container">
           <h2>Recently Surveyed Tiles</h2>
-          <GridTilesFromSurveyHours type="card" hideDetails limit={4} />
+          <GridTilesFromSurveyHours
+            type="card"
+            hideDetails
+            limit={8}
+            classes="col-6 col-sm-4 col-md-3 col-lg-2"
+          />
         </div>
       </section>
     </div>

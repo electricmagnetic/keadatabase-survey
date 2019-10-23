@@ -52,7 +52,7 @@ To deploy to Amazon S3 (and hence make available online):
 
 **This will automatically build the SCSS and source code, and then invalidate the CloudFront cache.**
 
-## Bug Reports
+## Bug reports
 
 Should be filed on the Kea Database Trello board (not presently public)
 

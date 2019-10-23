@@ -47,10 +47,14 @@ Ensure you have the following:
 - The `awscli` Python package installed and configured with id and secret key.
 - `REACT_APP_MAPBOX_API_KEY`, `REACT_APP_LINZ_API_KEY`, defined in `.env.local`
 
-To deploy to Amazon S3 (and hence make available at https://keadatabase.nz/):  
+To deploy to Amazon S3 (and hence make available online):  
 `npm run deploy`
 
 **This will automatically build the SCSS and source code, and then invalidate the CloudFront cache.**
+
+## Bug Reports
+
+Should be filed on the Kea Database Trello board (not presently public)
 
 ## Licence
 

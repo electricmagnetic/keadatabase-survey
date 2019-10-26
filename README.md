@@ -31,6 +31,7 @@ Some basic documentation can be generated using:
 - `src/` Main source code
   - `assets/` Static assets, including SCSS, grid tiles JSON and logos/banners
   - `components/` View and form components
+    - `analysis/` Components for various analysis statistics
     - `form/` Form fields and helper components
     - `grid/` Grid components for fetching and displaying tiles and tile maps
     - `helpers/` Various helper components, including loading spinners, date formatting and field rendering

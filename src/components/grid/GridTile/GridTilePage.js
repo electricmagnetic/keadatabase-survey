@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import SurveyHours from '../../surveys/SurveyHours';
 import SelectedGridTilesMap from '../../map/SelectedGridTilesMap';
+import GridTileAnalysis from '../../analysis/GridTileAnalysis';
 
 /**
   Presents a nicely formatted page for a given grid tile.
@@ -41,6 +42,10 @@ const GridTilePage = ({ gridTile, ...others }) => {
             <SelectedGridTilesMap gridTileIds={[id]} />
           </div>
         </div>
+      </section>
+      <section className="mb-5">
+        <h2>Analysis</h2>
+        <GridTileAnalysis id={id} />
       </section>
       <section className="mb-5">
         <h2>

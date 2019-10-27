@@ -58,7 +58,7 @@ const SurveyHourItem = ({ surveyHour, swapGridTileSurvey }) => {
             </>
           )}
           {showSurvey && (
-            <div className="col-md-1 field-survey">
+            <div className="col-md-2 field-survey">
               <i className="fa-fw fas fa-clipboard-list mr-2"></i>
               <Link to={`/surveys/${surveyHour.survey}`}>#{surveyHour.survey}</Link>
             </div>

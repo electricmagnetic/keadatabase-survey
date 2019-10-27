@@ -58,7 +58,7 @@ class GridTileAnalysis extends Component {
 }
 
 GridTileAnalysis.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
 };
 
 export default connect(props => ({

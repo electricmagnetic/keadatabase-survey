@@ -20,7 +20,7 @@ const GridTileCard = ({ gridTile, hideDetails, hideImage, addLink, ...others }) 
         <img src={tileData.get_large_image} alt="Map grid tile" className="card-img-top" />
       )}
       <div className="card-body">
-        <h2 className="card-title h3">
+        <h2 className="card-title">
           <i className="fa-fw fas fa-map-marker-alt mr-1"></i>
           {addLink ? <Link to={`/grid/${id}`}>{id}</Link> : id}
         </h2>

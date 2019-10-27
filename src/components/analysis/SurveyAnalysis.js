@@ -58,7 +58,7 @@ class SurveyAnalysis extends Component {
 }
 
 SurveyAnalysis.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number.isRequired,
 };
 
 export default connect(props => ({

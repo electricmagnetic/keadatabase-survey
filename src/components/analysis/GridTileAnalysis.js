@@ -50,7 +50,7 @@ class GridTileAnalysis extends Component {
     if (gridTileAnalysisFetch.pending) {
       return <Loader />;
     } else if (gridTileAnalysisFetch.rejected) {
-      return <Error message="Grid tile analysis invalid" />;
+      return <Error message="No data found for this grid tile" info />;
     } else if (gridTileAnalysisFetch.fulfilled) {
       return <GridTileAnalysisItem gridTileAnalysis={gridTileAnalysisFetch.value} />;
     }

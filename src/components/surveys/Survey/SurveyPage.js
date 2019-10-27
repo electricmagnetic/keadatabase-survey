@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import SurveyHour from '../SurveyHour';
 import FormatDate from '../../helpers/FormatDate';
 import GridTile from '../../grid/GridTile';
+import SurveyAnalysis from '../../analysis/SurveyAnalysis';
 import getUniqueGridTiles from '../../helpers/getUniqueGridTiles';
 import SelectedGridTilesMap from '../../map/SelectedGridTilesMap';
 
@@ -44,6 +45,10 @@ const SurveyPage = ({ survey }) => {
             </>
           )}
         </dl>
+      </section>
+      <section className="mb-5">
+        <h2>Analysis</h2>
+        <SurveyAnalysis id={survey.id} />
       </section>
       <section className="mb-5">
         <h2>Hours</h2>

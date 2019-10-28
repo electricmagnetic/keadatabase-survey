@@ -21,11 +21,11 @@ const GridTileAnalysisItem = ({ gridTileAnalysis }) => {
         <div className="row">
           <div className="col-md-2">
             <dt>Hours with kea</dt>
-            <dd>{gridTileAnalysis.hours_with_kea}</dd>
+            <dd>{gridTileAnalysis.hours_total.with_kea}</dd>
           </div>
           <div className="col-md-2">
             <dt>Total hours</dt>
-            <dd>{gridTileAnalysis.hours_total}</dd>
+            <dd>{gridTileAnalysis.hours_total.total}</dd>
           </div>
           <div className="col-md-2">
             <dt>Encounter rate</dt>

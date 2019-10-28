@@ -21,11 +21,11 @@ const SurveyAnalysisItem = ({ surveyAnalysis }) => {
         <div className="row">
           <div className="col-md-2">
             <dt>Hours with kea</dt>
-            <dd>{surveyAnalysis.hours_with_kea}</dd>
+            <dd>{surveyAnalysis.hours_total.with_kea}</dd>
           </div>
           <div className="col-md-2">
             <dt>Hours surveyed</dt>
-            <dd>{surveyAnalysis.hours_surveyed}</dd>
+            <dd>{surveyAnalysis.hours_total.surveyed}</dd>
           </div>
           <div className="col-md-2">
             <dt>Encounter rate</dt>

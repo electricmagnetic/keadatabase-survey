@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar, Tooltip } from 'recharts';
+import { ResponsiveContainer, BarChart, XAxis, Bar, Tooltip } from 'recharts';
 
 import { calculateHoursWithoutKea } from '../calculations/gridTileCalculations';
 

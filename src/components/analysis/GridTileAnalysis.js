@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
+import HoursSurveyedPerQuarter from './graphs/HoursSurveyedPerQuarter';
 
 import { calculateEncounterRate } from './calculations/gridTileCalculations';
 
@@ -13,26 +14,28 @@ const API_URL = `https://data.keadatabase.nz/analysis/grid_tiles/`;
   Display analyses as an item
  */
 const GridTileAnalysisItem = ({ gridTileAnalysis }) => {
-  const encounterRate = calculateEncounterRate(gridTileAnalysis);
-
   return (
     <div className="GridTileAnalysisItem">
-      <dl>
-        <div className="row">
-          <div className="col-md-2">
+      <div className="row">
+        <div className="col-md-2">
+          <dl>
             <dt>Hours with kea</dt>
             <dd>{gridTileAnalysis.hours_total.with_kea}</dd>
-          </div>
-          <div className="col-md-2">
             <dt>Total hours</dt>
             <dd>{gridTileAnalysis.hours_total.total}</dd>
-          </div>
-          <div className="col-md-2">
             <dt>Encounter rate</dt>
-            <dd>{encounterRate}%</dd>
-          </div>
+            <dd>{calculateEncounterRate(gridTileAnalysis)}%</dd>
+          </dl>
         </div>
-      </dl>
+        <div className="col-sm-6 col-md-3">
+          <dl>
+            <dt>Hours surveyed per quarter</dt>
+            <dd>
+              <HoursSurveyedPerQuarter gridTileAnalysis={gridTileAnalysis} />
+            </dd>
+          </dl>
+        </div>
+      </div>
     </div>
   );
 };

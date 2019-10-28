@@ -9,7 +9,7 @@ const SurveyDetailPage = ({ match }) => {
 
   return (
     <div className="SurveyDetailPage">
-      <Helmet title="Grid Tile" />
+      <Helmet title={`#${slug} (Survey)`} />
       <section className="mb-5">
         <Banner size="small">
           <h1>Survey #{slug}</h1>

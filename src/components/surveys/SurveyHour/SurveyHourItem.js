@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import FormatDate from '../../helpers/FormatDate';
-import ActivityIcon from '../../helpers/ActivityIcon';
+import { ActivityIcon, KeaIcon } from '../../helpers/Icons';
 
 import './SurveyHour.css';
 
@@ -46,7 +46,7 @@ const SurveyHourItem = ({ surveyHour, swapGridTileSurvey }) => {
           {!notSurveying && (
             <>
               <div className="col-md-2 field-kea">
-                <i className="fa-fw fas fa-feather-alt mr-2"></i>
+                <KeaIcon hasKea={hasKea} />
                 {hasKea ? 'Kea' : 'No Kea'}
               </div>
               {showGridTile && (

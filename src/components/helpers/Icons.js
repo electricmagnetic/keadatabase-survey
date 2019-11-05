@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ActivityIcon = ({ activity }) => {
+export const ActivityIcon = ({ activity }) => {
   const icon = (function(activity) {
     switch (activity) {
       case 'W':
@@ -21,4 +21,8 @@ const ActivityIcon = ({ activity }) => {
   return <i className={`fa-fw fas fa-${icon} mr-2`}></i>;
 };
 
-export default ActivityIcon;
+export const KeaIcon = ({ hasKea }) => {
+  const icon = hasKea ? 'feather-alt' : 'times';
+
+  return <i className={`fa-fw fas fa-${icon} mr-2`}></i>;
+};

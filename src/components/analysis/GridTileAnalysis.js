@@ -29,7 +29,7 @@ const GridTileAnalysisItem = ({ gridTileAnalysis }) => {
         </div>
         <div className="col-sm-6 col-md-3">
           <dl>
-            <dt>Hours surveyed per quarter</dt>
+            <dt>Quarterly breakdown</dt>
             <dd>
               <HoursSurveyedPerQuarter gridTileAnalysis={gridTileAnalysis} />
             </dd>

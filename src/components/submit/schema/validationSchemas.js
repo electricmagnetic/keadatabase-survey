@@ -4,6 +4,8 @@ import { maximumGridTiles } from './surveyParameters';
 const requiredMessage = 'This field is required.';
 const notNumber = 'This field must be a number.';
 const emailInvalid = 'Invalid email address.';
+const dateInvalid = 'Date format invalid. Must be YYYY-MM-DD.';
+const maxDateInvalid = 'Date must be today or earlier.';
 const hourRequired = 'At least one survey hour is required.';
 const gridTileMinMessage = 'Please select at least one grid tile.';
 const gridTileMaxMessage = 'Too many grid tiles have been selected.';
@@ -52,7 +54,11 @@ export const initialValidationSchema = yup
 export const fullValidationSchema = yup
   .object({
     observer: observerValidationSchema.required(requiredMessage),
-    date: yup.string().required(requiredMessage),
+    date: yup
+      .date()
+      .max(new Date(), maxDateInvalid)
+      .required(requiredMessage)
+      .typeError(dateInvalid),
     hours: yup
       .array()
       .of(

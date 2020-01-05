@@ -1,7 +1,12 @@
 @import 'variables';
 
 .GridTileMap {
-  height: 640px;
+  height: 800px;
+
+  @include media-breakpoint-down(sm) {
+    height: 640px;
+  }
+
   width: 100%;
 
   .tile-tooltip {

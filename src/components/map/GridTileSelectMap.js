@@ -5,7 +5,7 @@ import { latLngBounds, GeoJSON as LeafletGeoJSON } from 'leaflet';
 import BaseMap from './BaseMap';
 import { DEFAULT_ZOOM, DEFAULT_BOUNDS, SELECT_ZOOM } from './defaults';
 
-import './GridTileSelectMap.css';
+import './GridTileMap.css';
 import tiles from '../../assets/geo/tiles.json';
 
 /**

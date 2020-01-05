@@ -2,7 +2,7 @@
 
 .GridTileCard {
   h2 {
-    font-size: $h3-font-size;
+    font-size: $h5-font-size;
   }
   &.hideDetails {
     h2 {
@@ -10,5 +10,8 @@
       font-family: $font-family-base;
       margin: 0;
     }
+  }
+  .card-text {
+    font-size: $font-size-sm;
   }
 }

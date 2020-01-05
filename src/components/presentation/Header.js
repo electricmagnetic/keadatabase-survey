@@ -27,22 +27,22 @@ const Header = props => {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <NavLink exact to="/" className="nav-link">
-                  Home
+                  <i className="fa-fw fas fa-home mr-1"></i>Home
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/surveys" className="nav-link">
-                  Browse Surveys
+                  <i className="fa-fw fas fa-list-alt mr-1"></i>Browse Surveys
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/grid" className="nav-link">
-                  View Grid
+                  <i className="fa-fw fas fa-map mr-1"></i>View Grid
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/submit" className="nav-link">
-                  Submit Survey
+                  <i className="fa-fw fas fa-clipboard-list mr-1"></i>Submit Survey
                 </NavLink>
               </li>
             </ul>

@@ -11,5 +11,12 @@ header {
         height: 64px;
       }
     }
+
+    .nav-item i {
+      @include media-breakpoint-only(md) {
+        // Keeps icons on one line at appropriate breakpoints
+        display: none;
+      }
+    }
   }
 }

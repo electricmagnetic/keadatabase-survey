@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import { maximumGridTiles } from './surveyParameters';
+import tiles from '../../../assets/geo/tiles.json';
 
 const requiredMessage = 'This field is required.';
 const notNumber = 'This field must be a number.';
@@ -10,6 +11,33 @@ const hourRequired = 'At least one survey hour is required.';
 const gridTileMinMessage = 'Please select at least one grid tile.';
 const gridTileMaxMessage = 'Too many grid tiles have been selected.';
 
+// /**
+//   Helper function for testing validity of a given array of gridTiles, return 'true' (valid) if no grid tiles given.
+//   */
+// const validateGridTiles = submittedTiles => submittedTiles ?
+//   submittedTiles.reduce((accumulator, current) =>
+//     accumulator || tiles.features.find(tile => tile.id === current), false
+//   ) : true;
+//
+// /**
+//   Specifies validation of nested object gridTiles in URL parameters.
+//  */
+// export const gridTileValidationSchema = yup
+//   .array()
+//   .of(yup.string().max(7))
+//   .min(1, gridTileMinMessage)
+//   .max(maximumGridTiles, gridTileMaxMessage)
+//   .test('valid-tiles', 'Invalid tile(s)', submittedTiles => validateGridTiles(submittedTiles))
+//   .required();
+
+/**
+  Helper function for testing validity of a given array of gridTiles, return 'true' (valid) if no grid tiles given.
+  */
+const verifiedGridTiles = submittedTiles =>
+  submittedTiles.map(submittedTile =>
+    tiles.features.find(tile => tile.id === submittedTile) ? submittedTile : null
+  );
+
 /**
   Specifies validation of nested object gridTiles in URL parameters.
  */
@@ -18,6 +46,7 @@ export const gridTileValidationSchema = yup
   .of(yup.string().max(7))
   .min(1, gridTileMinMessage)
   .max(maximumGridTiles, gridTileMaxMessage)
+  .transform(submittedGridTiles => verifiedGridTiles(submittedGridTiles))
   .required();
 
 /**
@@ -33,6 +62,17 @@ export const observerValidationSchema = yup
     purpose: yup.string(),
   })
   .required()
+  .strict()
+  .noUnknown();
+
+/**
+  Species validation of queryString passed to the submission view before the initial form is rendered
+  */
+export const queryStringValidationSchema = yup
+  .object({
+    observer: observerValidationSchema,
+    gridTiles: gridTileValidationSchema,
+  })
   .strict()
   .noUnknown();
 

@@ -25,13 +25,14 @@ const API_URL = `https://data.keadatabase.nz/report/survey/`;
   Loads permissible choices using react-refetch from an OPTIONS call to the API.
   Validates data using yup, reports errors back to user. Also reports API errors back to user using 'status' field.
 
-  On successful client-side validation, values are posted to server and user is redirected to success page.
+  On successful client-side validation, values are posted to server and user is redirected to success page, including
+  the parameters provided as a queryString for the next submission.
  */
 class FormComponent extends Component {
   componentDidUpdate(prevProps) {
     // Handle react-refetch response (either successful POST or error handling for fields)
     if (this.props.postSubmissionResponse) {
-      const { postSubmissionResponse } = this.props;
+      const { postSubmissionResponse, queryString } = this.props;
       const isSettled =
         postSubmissionResponse.settled &&
         prevProps.postSubmissionResponse.settled !== postSubmissionResponse.settled;
@@ -47,7 +48,7 @@ class FormComponent extends Component {
       if (postSubmissionResponse.rejected && isSettled)
         this.props.setStatus(postSubmissionResponse.reason.cause);
       else if (postSubmissionResponse.fulfilled && isSettled)
-        this.props.history.push(`/submit/success/${postSubmissionResponse.value.id}`);
+        this.props.history.push(`/submit/success/${postSubmissionResponse.value.id}${queryString}`);
     }
   }
 

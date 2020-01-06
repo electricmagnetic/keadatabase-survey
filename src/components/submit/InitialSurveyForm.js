@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, withFormik } from 'formik';
 import qs from 'qs';
+import PropTypes from 'prop-types';
 
 import ObserverFieldset from './initialFieldsets/ObserverFieldset';
 import GridTileFieldset from './initialFieldsets/GridTileFieldset';
@@ -42,13 +43,24 @@ class InitialSurveyFormComponent extends Component {
   }
 }
 
+/**
+  Computes initial values for the form, based on values provided via the queryString.
+ */
+const computeInitialValues = props => {
+  return Object.assign({}, initialInitialValues, props.queryString);
+};
+
 const InitialSurveyForm = withFormik({
-  mapPropsToValues: props => initialInitialValues,
+  mapPropsToValues: props => computeInitialValues(props),
   validationSchema: initialValidationSchema,
   handleSubmit: (values, actions) => {
     const queryString = `${qs.stringify(values, qsOptions)}`;
     actions.props.history.push(`${queryString}`);
   },
 })(InitialSurveyFormComponent);
+
+InitialSurveyForm.propTypes = {
+  queryString: PropTypes.object,
+};
 
 export default withRouter(InitialSurveyForm);

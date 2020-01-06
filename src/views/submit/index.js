@@ -7,6 +7,12 @@ import { qsOptions } from '../../components/submit/schema/surveyParameters';
 import Banner from '../../components/presentation/Banner';
 import InitialSurveyForm from '../../components/submit/InitialSurveyForm';
 import SubmissionForm from '../../components/submit/SubmissionForm';
+import Error from '../../components/helpers/Error';
+
+import {
+  queryStringValidationSchema,
+  initialValidationSchema,
+} from '../../components/submit/schema/validationSchemas';
 
 const InitialSurveyFormPage = props => {
   return (
@@ -23,7 +29,7 @@ const InitialSurveyFormPage = props => {
       </section>
       <section className="mb-5">
         <div className="container">
-          <InitialSurveyForm />
+          <InitialSurveyForm queryString={props.queryString} />
         </div>
       </section>
     </div>
@@ -67,7 +73,7 @@ class SubmissionPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      queryString: {},
+      queryString: qs.parse(this.props.location.search, qsOptions) || {},
     };
   }
 
@@ -78,22 +84,22 @@ class SubmissionPage extends Component {
     });
   }
 
-  componentDidMount() {
-    // Set state from and query string parameters passed on load
-    this.updateStateFromQueryString();
-  }
-
   componentDidUpdate(prevProps) {
     // If location changes, update state accordingly
     if (this.props.location !== prevProps.location) this.updateStateFromQueryString();
   }
 
   render() {
-    return this.state.queryString.gridTiles ? (
-      <SubmissionFormPage queryString={this.state.queryString} />
-    ) : (
-      <InitialSurveyFormPage />
-    );
+    const { queryString } = this.state;
+    console.log(queryStringValidationSchema.validateSync(queryString));
+
+    if (queryStringValidationSchema.isValidSync(queryString)) {
+      return <InitialSurveyFormPage queryString={queryString} />;
+    } else if (initialValidationSchema.isValidSync(queryString)) {
+      return <SubmissionFormPage queryString={queryString} />;
+    } else {
+      return <Error message="Invalid URL parameters provided" />;
+    }
   }
 }
 

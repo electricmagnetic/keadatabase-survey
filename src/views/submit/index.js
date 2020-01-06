@@ -11,10 +11,10 @@ import SubmissionForm from '../../components/submit/SubmissionForm';
 const InitialSurveyFormPage = props => {
   return (
     <div className="SubmissionPage">
-      <Helmet title="1. Details | Survey Submission" />
+      <Helmet title="1. Details | Submit Survey" />
       <section className="mb-5">
         <Banner size="small">
-          <h1>Survey Submission</h1>
+          <h1>Submit Survey</h1>
           <h2 className="mt-3 mb-1">Step 1</h2>
           <p className="lead mb-0">
             Please enter your details and the grid tiles you were in during the survey period.

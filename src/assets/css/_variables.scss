@@ -17,6 +17,8 @@ $brown-faded: #e6dfcc;
 $primary: $orange-dark;
 $secondary: $green-dark;
 $light: #e9ecef;
+$white: #fff;
+$black: #000;
 
 $card-spacer-x: 0.9rem;
 $card-spacer-y: 0.9rem;
@@ -24,5 +26,13 @@ $card-spacer-y: 0.9rem;
 $border-radius: 0;
 $border-radius-lg: 0;
 $border-radius-sm: 0;
+
+$navbar-dark-color: rgba($white, 0.75);
+$navbar-dark-hover-color: rgba($white, 0.6);
+
+$navbar-light-color: rgba($black, 0.75);
+$navbar-light-hover-color: rgba($black, 0.6);
+
+$navbar-nav-link-padding-x: 1rem;
 
 @import 'node_modules/bootstrap/scss/variables';

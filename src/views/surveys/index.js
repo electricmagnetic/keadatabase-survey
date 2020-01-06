@@ -8,10 +8,10 @@ import GridTilesFromSurveyHours from '../../components/grid/GridTilesFromSurveyH
 const SurveyPage = props => {
   return (
     <div className="SurveyPage">
-      <Helmet title="Surveys" />
+      <Helmet title="Browse Surveys" />
       <section className="mb-5">
         <Banner size="small">
-          <h1>Surveys</h1>
+          <h1>Browse Surveys</h1>
         </Banner>
       </section>
       <section className="mb-5">

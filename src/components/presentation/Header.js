@@ -4,13 +4,23 @@ import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
 import './Header.css';
 
-const Header = props => {
+const Header = ({ onHome }) => {
+  const headerClassNames = ['header', onHome ? 'on-home' : 'not-home'];
+
+  const navClassNames = [
+    'navbar',
+    'navbar-expand-lg',
+    onHome ? 'navbar-light' : 'navbar-dark',
+    onHome ? '' : 'bg-dark',
+  ];
+
   return (
-    <header>
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+    <header className={headerClassNames.join(' ')}>
+      <nav className={navClassNames.join(' ')}>
         <div className="container">
           <Link to="/" className="navbar-brand">
-            <img src={logo} alt="Kea Survey Tool" />
+            <img src={logo} alt="Kea Survey Tool" className="pr-3" />
+            Kea Survey Tool
           </Link>
           <button
             className="navbar-toggler"
@@ -27,22 +37,22 @@ const Header = props => {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <NavLink exact to="/" className="nav-link">
-                  <i className="fa-fw fas fa-home mr-1"></i>Home
+                  <i className="fa-fw fas fa-home mr-2"></i>Home
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/surveys" className="nav-link">
-                  <i className="fa-fw fas fa-list-alt mr-1"></i>Browse Surveys
+                  <i className="fa-fw fas fa-list-alt mr-2"></i>Browse Surveys
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/grid" className="nav-link">
-                  <i className="fa-fw fas fa-map mr-1"></i>View Grid
+                  <i className="fa-fw fas fa-map mr-2"></i>View Grid Map
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/submit" className="nav-link">
-                  <i className="fa-fw fas fa-clipboard-list mr-1"></i>Submit Survey
+                  <i className="fa-fw fas fa-clipboard-list mr-2"></i>Submit Survey
                 </NavLink>
               </li>
             </ul>
@@ -53,4 +63,12 @@ const Header = props => {
   );
 };
 
-export default Header;
+Header.defaultProps = {
+  onHome: false,
+};
+
+const HomePageHeader = ({ onHome }) => {
+  return <Header onHome />;
+};
+
+export { Header, HomePageHeader };

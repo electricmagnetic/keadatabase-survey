@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import { maximumGridTiles } from './surveyParameters';
+import tiles from '../../../assets/geo/tiles.json';
 
 const requiredMessage = 'This field is required.';
 const notNumber = 'This field must be a number.';
@@ -9,6 +10,17 @@ const maxDateInvalid = 'Date must be today or earlier.';
 const hourRequired = 'At least one survey hour is required.';
 const gridTileMinMessage = 'Please select at least one grid tile.';
 const gridTileMaxMessage = 'Too many grid tiles have been selected.';
+const gridTileInvalidMessage = 'One or more grid tiles are invalid.';
+
+/**
+  Checks to see if given gridTiles are valid. If any one of the gridTiles is invalid, returns false, otherwise true.
+  */
+const areValidGridTiles = submittedTiles =>
+  submittedTiles.reduce(
+    (accumulator, currentValue) =>
+      tiles.features.find(tile => tile.id === currentValue) && accumulator !== false ? true : false,
+    true
+  );
 
 /**
   Specifies validation of nested object gridTiles in URL parameters.
@@ -18,6 +30,10 @@ export const gridTileValidationSchema = yup
   .of(yup.string().max(7))
   .min(1, gridTileMinMessage)
   .max(maximumGridTiles, gridTileMaxMessage)
+  .test('are-valid-gridTiles', gridTileInvalidMessage, submittedTiles =>
+    areValidGridTiles(submittedTiles)
+  )
+  .strict()
   .required();
 
 /**

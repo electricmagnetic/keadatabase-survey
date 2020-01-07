@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'formik';
 
-import RenderField from '../../form/RenderField';
+import RenderField from '../../../form/RenderField';
 
-import { initialHourValues } from '../schema/initialValues';
-import { surveyHours } from '../schema/surveyParameters';
+import { initialHourValues } from '../../schema/initialValues';
+import { surveyHours } from '../../schema/surveyParameters';
 
 import './SurveyHourFieldset.css';
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Error from '../../helpers/Error';
-import GridTile from '../../grid/GridTile';
+import Error from '../../../helpers/Error';
+import GridTile from '../../../grid/GridTile';
 
 /**
   Displays a given set of gridTile IDs as a grid (without additional details).

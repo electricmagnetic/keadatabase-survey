@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'formik';
 
-import RenderField from '../../form/RenderField';
+import GridTile from '../../../grid/GridTile';
+import RenderField from '../../../form/RenderField';
 
 const TripFieldset = ({ fieldOptions, values, setFieldValue }) => (
   <fieldset className="mb-3">
@@ -37,6 +38,7 @@ const TripFieldset = ({ fieldOptions, values, setFieldValue }) => (
           name="date"
           type="date"
           placeholder="Date"
+          helpText="If a multi-day journey, start with earliest date"
           autoFocus
         />
       </div>
@@ -46,8 +48,20 @@ const TripFieldset = ({ fieldOptions, values, setFieldValue }) => (
           fieldOptions={fieldOptions.observer.children.purpose}
           name="observer.purpose"
           type="choice"
+          helpText="Optional"
         />
       </div>
+    </div>
+
+    <label className="control-label" htmlFor="gridTiles">
+      Where
+    </label>
+    <div id="gridTiles" className="form-row my-n3">
+      {values.gridTiles.map(gridTileId => (
+        <div className="col-4 col-md-3 col-lg-2" key={gridTileId}>
+          <GridTile id={gridTileId} type="card" hideDetails />
+        </div>
+      ))}
     </div>
   </fieldset>
 );

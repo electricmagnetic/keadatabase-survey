@@ -53,7 +53,7 @@ export const observerValidationSchema = yup
   .noUnknown();
 
 /**
-  Specifies validation of SubmissionForm URL parameters. Any unknown parameters will raise an error.
+  Specifies validation of SurveyDetailsForm URL parameters. Any unknown parameters will raise an error.
  */
 export const initialValidationSchema = yup
   .object({

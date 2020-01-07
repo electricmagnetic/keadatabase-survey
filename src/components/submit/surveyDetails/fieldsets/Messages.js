@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Error from '../../helpers/Error';
+import Error from '../../../helpers/Error';
 
 const Messages = ({ isValid, submitCount, errors, postSubmissionResponse }) => {
   const apiRejected = postSubmissionResponse && postSubmissionResponse.rejected;

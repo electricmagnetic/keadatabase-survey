@@ -38,6 +38,9 @@ Some basic documentation can be generated using:
     - `map/` Various map components using Leaflet
     - `presentation/` Presentational components, including WordPress fetching
     - `submit/` Survey entry form fieldsets and logic
+      - `initialDetails/` First form (trip and observer data) and fieldsets
+      - `schema/` Initial values, survey parameters and form validation schemas
+      - `surveyDetails/` Second form (survey hours) and fieldsets
     - `surveys/` Survey components for fetching and displaying surveys and survey hours
   - `views/` Layouts constructed from components
 
@@ -60,7 +63,7 @@ Should be filed on the Kea Database Trello board (not presently public)
 ## Licence
 
 Kea Survey Tool  
-Copyright (C) 2019 Greenstone Limited  
+Copyright (C) 2020 Greenstone Limited  
 hello@greenstone.org.nz
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.

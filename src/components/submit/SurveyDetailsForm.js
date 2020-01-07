@@ -125,7 +125,7 @@ const transformSurveyHours = values =>
 /**
   Primary submission form, using formik, yup and react-refetch
 */
-const SubmissionForm = withFormik({
+const SurveyDetailsForm = withFormik({
   mapPropsToValues: props => computeInitialValues(props),
   validationSchema: fullValidationSchema,
   handleSubmit: (values, actions) => {
@@ -135,7 +135,7 @@ const SubmissionForm = withFormik({
   },
 })(FormComponent);
 
-SubmissionForm.propTypes = {
+SurveyDetailsForm.propTypes = {
   queryString: PropTypes.shape({
     gridTiles: PropTypes.array.isRequired,
   }).isRequired,
@@ -154,5 +154,5 @@ export default withRouter(
         body: JSON.stringify(values),
       },
     }),
-  }))(SubmissionForm)
+  }))(SurveyDetailsForm)
 );

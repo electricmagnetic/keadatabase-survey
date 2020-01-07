@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 
 import { qsOptions } from '../../components/submit/schema/surveyParameters';
 import Banner from '../../components/presentation/Banner';
-import InitialSurveyForm from '../../components/submit/InitialSurveyForm';
-import SubmissionForm from '../../components/submit/SubmissionForm';
+import InitialDetailsForm from '../../components/submit/InitialDetailsForm';
+import SurveyDetailsForm from '../../components/submit/SurveyDetailsForm';
 
-const InitialSurveyFormPage = props => {
+const InitialDetailsFormPage = props => {
   return (
     <div className="SubmissionPage">
       <Helmet title="1. Observer and Trip Details | Submit Survey" />
@@ -19,13 +19,13 @@ const InitialSurveyFormPage = props => {
         </Banner>
       </section>
       <section className="mb-5">
-        <InitialSurveyForm />
+        <InitialDetailsForm />
       </section>
     </div>
   );
 };
 
-const SubmissionFormPage = props => {
+const SurveyDetailsFormPage = props => {
   return (
     <div className="SubmissionPage">
       <Helmet title="2. Survey Details | Submit Survey" />
@@ -36,13 +36,13 @@ const SubmissionFormPage = props => {
         </Banner>
       </section>
       <section className="mb-5">
-        <SubmissionForm queryString={props.queryString} />
+        <SurveyDetailsForm queryString={props.queryString} />
       </section>
     </div>
   );
 };
 
-SubmissionFormPage.propTypes = {
+SurveyDetailsFormPage.propTypes = {
   queryString: PropTypes.object,
 };
 
@@ -73,9 +73,9 @@ class SubmissionPage extends Component {
 
   render() {
     return this.state.queryString.gridTiles ? (
-      <SubmissionFormPage queryString={this.state.queryString} />
+      <SurveyDetailsFormPage queryString={this.state.queryString} />
     ) : (
-      <InitialSurveyFormPage />
+      <InitialDetailsFormPage />
     );
   }
 }

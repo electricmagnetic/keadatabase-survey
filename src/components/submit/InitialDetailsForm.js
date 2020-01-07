@@ -20,10 +20,10 @@ import './Form.css';
   Enables user to select a set of gridTiles as specified in `tiles.json`.
   Submission results in an appropriately formatted query string pushed to same URL.
  */
-class InitialSurveyFormComponent extends Component {
+class InitialDetailsFormComponent extends Component {
   render() {
     return (
-      <div className="InitialSurveyForm">
+      <div className="InitialDetailsForm">
         <Form className="form mb-3">
           <div className="container">
             <Messages {...this.props} />
@@ -58,13 +58,13 @@ class InitialSurveyFormComponent extends Component {
   }
 }
 
-const InitialSurveyForm = withFormik({
+const InitialDetailsForm = withFormik({
   mapPropsToValues: props => initialInitialValues,
   validationSchema: initialValidationSchema,
   handleSubmit: (values, actions) => {
     const queryString = `${qs.stringify(values, qsOptions)}`;
     actions.props.history.push(`${queryString}`);
   },
-})(InitialSurveyFormComponent);
+})(InitialDetailsFormComponent);
 
-export default withRouter(InitialSurveyForm);
+export default withRouter(InitialDetailsForm);

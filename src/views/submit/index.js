@@ -11,7 +11,7 @@ import SubmissionForm from '../../components/submit/SubmissionForm';
 const InitialSurveyFormPage = props => {
   return (
     <div className="SubmissionPage">
-      <Helmet title="1. Trip Details | Submit Survey" />
+      <Helmet title="1. Observer and Trip Details | Submit Survey" />
       <section className="mb-5">
         <Banner size="small">
           <h1>Submit Survey</h1>
@@ -28,7 +28,7 @@ const InitialSurveyFormPage = props => {
 const SubmissionFormPage = props => {
   return (
     <div className="SubmissionPage">
-      <Helmet title="2. Surveyed Hours | Submit Survey" />
+      <Helmet title="2. Survey Details | Submit Survey" />
       <section className="mb-5">
         <Banner size="small">
           <h1>Submit Survey</h1>

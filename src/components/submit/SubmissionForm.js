@@ -115,7 +115,7 @@ const computeInitialValues = props => {
 };
 
 /**
-  Transforms survey hour grid_tiles from an array of one (as provided by the typeahed) to a string
+  Transforms survey hour grid_tiles from an array of one (as provided by the typeahead) to a string
 */
 const transformSurveyHours = values =>
   values.hours.map(surveyHour =>

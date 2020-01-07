@@ -58,11 +58,16 @@ const RenderField = props => {
     }
   })(type);
 
+  // Only if help text provided, create appropriate aria attribute
+  const helpTextElementId = `${field.name}-helpText`;
+  const helpTextAttribute = helpText ? { 'aria-describedby': helpTextElementId } : null;
+
   // Creates input attributes to be applied
   const inputAttributes = {
     ...field,
     id: field.name,
     className: formControlClasses,
+    ...helpTextAttribute,
     ...others,
   };
 
@@ -101,7 +106,9 @@ const RenderField = props => {
 
   // Optional help text element (hence the presence of the conditional)
   const helpTextElement = helpText ? (
-    <small className="form-text text-muted">{helpText}</small>
+    <small id={helpTextElementId} className="form-text text-muted">
+      {helpText}
+    </small>
   ) : null;
 
   // Creates error element

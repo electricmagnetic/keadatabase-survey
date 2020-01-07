@@ -5,7 +5,6 @@ import { Form, withFormik } from 'formik';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Loader from '../../helpers/Loader';
 import Error from '../../helpers/Error';
 import Banner from '../../presentation/Banner';
 
@@ -55,53 +54,42 @@ class FormComponent extends Component {
   }
 
   render() {
-    const { submissionOptions } = this.props;
-
     // Validate parameters passed via queryString
     if (!initialValidationSchema.isValidSync(this.props.queryString))
       return <Error message="Invalid or missing URL parameters" />;
 
-    if (submissionOptions.pending) return <Loader />;
-    else if (submissionOptions.rejected)
-      return (
-        <Error message="Error">
-          {submissionOptions.reason.cause && `(${submissionOptions.reason.cause.detail})`}
-        </Error>
-      );
-    else if (submissionOptions.fulfilled) {
-      const fieldOptions = submissionOptions.value.actions.POST;
-      return (
-        <div className="SurveyDetailsForm">
-          <Helmet title="2. Survey Details | Submit Survey" />
-          <section className="mb-5">
-            <Banner size="small">
-              <h1>Submit Survey</h1>
-              <p className="lead mb-0">Step 2: Survey Details</p>
-            </Banner>
-          </section>
-          <section className="mb-5">
-            <Form>
-              <div className="container">
-                <Messages {...this.props} />
-                <TripFieldset {...this.props} fieldOptions={fieldOptions} />
-                <SurveyHourFieldset {...this.props} fieldOptions={fieldOptions} />
-                <FurtherInformationFieldset {...this.props} fieldOptions={fieldOptions} />
+    const fieldOptions = this.props.fieldOptions;
+    return (
+      <div className="SurveyDetailsForm">
+        <Helmet title="2. Survey Details | Submit Survey" />
+        <section className="mb-5">
+          <Banner size="small">
+            <h1>Submit Survey</h1>
+            <p className="lead mb-0">Step 2: Survey Details</p>
+          </Banner>
+        </section>
+        <section className="mb-5">
+          <Form>
+            <div className="container">
+              <Messages {...this.props} />
+              <TripFieldset {...this.props} fieldOptions={fieldOptions} />
+              <SurveyHourFieldset {...this.props} fieldOptions={fieldOptions} />
+              <FurtherInformationFieldset {...this.props} fieldOptions={fieldOptions} />
 
-                <div className="submit-bar fixed-bottom">
-                  <div className="container">
-                    <div className="row align-items-center">
-                      <div className="col">
-                        <SubmitFieldset {...this.props} />
-                      </div>
+              <div className="submit-bar fixed-bottom">
+                <div className="container">
+                  <div className="row align-items-center">
+                    <div className="col">
+                      <SubmitFieldset {...this.props} />
                     </div>
                   </div>
                 </div>
               </div>
-            </Form>
-          </section>
-        </div>
-      );
-    } else return null;
+            </div>
+          </Form>
+        </section>
+      </div>
+    );
   }
 }
 
@@ -147,6 +135,7 @@ const SurveyDetailsForm = withFormik({
 })(FormComponent);
 
 SurveyDetailsForm.propTypes = {
+  fieldOptions: PropTypes.object.isRequired,
   queryString: PropTypes.shape({
     gridTiles: PropTypes.array.isRequired,
   }).isRequired,
@@ -154,10 +143,6 @@ SurveyDetailsForm.propTypes = {
 
 export default withRouter(
   connect(props => ({
-    submissionOptions: {
-      url: API_URL,
-      method: 'OPTIONS',
-    },
     postSubmission: values => ({
       postSubmissionResponse: {
         url: API_URL,

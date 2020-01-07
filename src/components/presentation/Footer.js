@@ -3,9 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 import './Footer.css';
 
-const Footer = props => {
+/**
+  Main footer. Different CSS/functionality behaviour can be toggled by prop `onSubmitPage`.
+  */
+const Footer = ({ onSubmitPage }) => {
+  const footerClassNames = ['d-print-none', onSubmitPage && 'on-submit-page'];
+
   return (
-    <footer className="d-print-none">
+    <footer className={footerClassNames.join(' ')}>
       <div className="container py-3">
         <div className="row align-items-center">
           <div className="col-md-8">
@@ -41,4 +46,15 @@ const Footer = props => {
   );
 };
 
-export default Footer;
+Footer.defaultProps = {
+  onSubmitPage: false,
+};
+
+/**
+  Sets onSubmitPage property to true.
+  */
+const SubmitPageFooter = ({ onSubmitPage }) => {
+  return <Footer onSubmitPage />;
+};
+
+export { Footer, SubmitPageFooter };

@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Loader from '../../helpers/Loader';
-import Error from '../../helpers/Error';
 
-const SubmitFieldset = ({ submitCount, isValid, isSubmitting, postSubmissionResponse, errors }) => {
+const SubmitFieldset = ({ isValid, isSubmitting, postSubmissionResponse }) => {
   const isLoading =
     (postSubmissionResponse && postSubmissionResponse.pending) ||
     (postSubmissionResponse && postSubmissionResponse.refreshing) ||
@@ -13,34 +12,31 @@ const SubmitFieldset = ({ submitCount, isValid, isSubmitting, postSubmissionResp
   const isFulfilled = postSubmissionResponse && postSubmissionResponse.fulfilled;
 
   return (
-    <fieldset className="mb-3">
+    <fieldset>
       <legend className="sr-only">Submission</legend>
-      <p>
-        <button type="submit" className="btn btn-primary mr-3" disabled={isLoading || !isValid}>
-          Submit
-        </button>
-        {!isValid && (
-          <small>You cannot submit the form until all data has been entered correctly.</small>
-        )}
-      </p>
-      {isRejected && (
-        <Error message="Error">
-          <p>An error was encountered. Please double-check the form for errors.</p>
-          {postSubmissionResponse.reason.cause && `(${postSubmissionResponse.reason.cause.detail})`}
-          {postSubmissionResponse.reason.message && `(${postSubmissionResponse.reason.message})`}
-        </Error>
-      )}
-      {isLoading && <Loader />}
-      {isFulfilled && <h1>Worked</h1>}
+      <div className="row align-items-center">
+        <div className="col-8">
+          {!isValid && (
+            <small className="d-inline-block">Form can be submitted once data entered.</small>
+          )}
+          {isRejected && <span>Error</span>}
+          {isLoading && <Loader small />}
+          {isFulfilled && <span>Success</span>}
+        </div>
+        <div className="col-4 text-right">
+          <button type="submit" className="btn btn-primary mr-3" disabled={isLoading || !isValid}>
+            Submit
+          </button>
+        </div>
+      </div>
     </fieldset>
   );
 };
 
 SubmitFieldset.propTypes = {
-  submitCount: PropTypes.number.isRequired,
   isValid: PropTypes.bool.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  response: PropTypes.shape({
+  postSubmissionResponse: PropTypes.shape({
     fulfilled: PropTypes.bool.isRequired,
     pending: PropTypes.bool.isRequired,
     reason: PropTypes.object,
@@ -48,7 +44,6 @@ SubmitFieldset.propTypes = {
     rejected: PropTypes.bool.isRequired,
     settled: PropTypes.bool.isRequired,
   }),
-  errors: PropTypes.object,
 };
 
 export default SubmitFieldset;

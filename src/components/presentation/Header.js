@@ -4,6 +4,9 @@ import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
 import './Header.css';
 
+/**
+  Main header. Different CSS/functionality behaviour can be toggled by prop `onHome`.
+  */
 const Header = ({ onHome }) => {
   const headerClassNames = ['header', onHome ? 'on-home' : 'not-home'];
 
@@ -67,6 +70,9 @@ Header.defaultProps = {
   onHome: false,
 };
 
+/**
+  Sets onHome property to true.
+  */
 const HomePageHeader = ({ onHome }) => {
   return <Header onHome />;
 };

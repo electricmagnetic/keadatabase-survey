@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
 
+import Messages from './submissionFieldsets/Messages';
 import SurveyHourFieldset from './submissionFieldsets/SurveyHourFieldset';
 import TripFieldset from './submissionFieldsets/TripFieldset';
 import FurtherInformationFieldset from './submissionFieldsets/FurtherInformationFieldset';
@@ -15,6 +16,8 @@ import SubmitFieldset from './submissionFieldsets/SubmitFieldset';
 import { surveyHours } from './schema/surveyParameters';
 import { initialFullValues, initialHourValues } from './schema/initialValues';
 import { fullValidationSchema, initialValidationSchema } from './schema/validationSchemas';
+
+import './Form.css';
 
 const API_URL = `https://data.keadatabase.nz/report/survey/`;
 
@@ -68,14 +71,24 @@ class FormComponent extends Component {
     else if (submissionOptions.fulfilled) {
       const fieldOptions = submissionOptions.value.actions.POST;
       return (
-        <>
+        <div className="container">
           <Form>
+            <Messages {...this.props} />
             <TripFieldset {...this.props} fieldOptions={fieldOptions} />
             <SurveyHourFieldset {...this.props} fieldOptions={fieldOptions} />
             <FurtherInformationFieldset {...this.props} fieldOptions={fieldOptions} />
-            <SubmitFieldset {...this.props} />
+
+            <div className="submit-bar fixed-bottom">
+              <div className="container">
+                <div className="row align-items-center">
+                  <div className="col">
+                    <SubmitFieldset {...this.props} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </Form>
-        </>
+        </div>
       );
     } else return null;
   }

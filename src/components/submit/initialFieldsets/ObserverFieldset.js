@@ -8,7 +8,7 @@ import RenderField from '../../form/RenderField';
  */
 const ObserverFieldset = ({ values, setFieldValue }) => (
   <fieldset className="mb-3">
-    <legend>1. Your Details</legend>
+    <legend>1. Observer Details</legend>
     <div className="row">
       <div className="col-md-5">
         <Field
@@ -17,6 +17,7 @@ const ObserverFieldset = ({ values, setFieldValue }) => (
           type="text"
           placeholder="Name"
           label="Name"
+          autoFocus
         />
       </div>
       <div className="col-md-7">

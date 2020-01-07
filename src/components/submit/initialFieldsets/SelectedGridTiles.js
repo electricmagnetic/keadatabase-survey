@@ -11,11 +11,11 @@ const SelectedGridTiles = ({ values }) => {
   const { gridTiles } = values;
   if (gridTiles.length > 0) {
     return (
-      <div className="SelectedGridTiles card bg-faded mb-3">
+      <div className="SelectedGridTiles card bg-faded mx-3 mb-3">
         <div className="card-body my-n3">
           <div className="form-row">
             {gridTiles.map(gridTileId => (
-              <div className="col-6 col-md-4" key={gridTileId}>
+              <div className="col-6 col-xl-4" key={gridTileId}>
                 <GridTile id={gridTileId} hideDetails type="card" />
               </div>
             ))}
@@ -24,7 +24,7 @@ const SelectedGridTiles = ({ values }) => {
       </div>
     );
   } else {
-    return <Error message="No grid tile selected" info />;
+    return <Error message="No grid tile(s) selected" info />;
   }
 };
 

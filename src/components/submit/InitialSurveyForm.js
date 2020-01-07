@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Form, withFormik } from 'formik';
 import qs from 'qs';
 
+import Messages from './initialFieldsets/Messages';
 import ObserverFieldset from './initialFieldsets/ObserverFieldset';
 import GridTileFieldset from './initialFieldsets/GridTileFieldset';
 import SubmitFieldset from './initialFieldsets/SubmitFieldset';
@@ -13,6 +14,8 @@ import { qsOptions } from './schema/surveyParameters';
 import { initialInitialValues } from './schema/initialValues';
 import { initialValidationSchema } from './schema/validationSchemas';
 
+import './Form.css';
+
 /**
   Enables user to select a set of gridTiles as specified in `tiles.json`.
   Submission results in an appropriately formatted query string pushed to same URL.
@@ -22,18 +25,31 @@ class InitialSurveyFormComponent extends Component {
     return (
       <div className="InitialSurveyForm">
         <Form className="form mb-3">
-          <div className="row">
-            <div className="col-md-6">
-              <ObserverFieldset {...this.props} />
-              <GridTileFieldset {...this.props} />
-              <SubmitFieldset {...this.props} />
-              <SelectedGridTiles {...this.props} />
+          <div className="container">
+            <Messages {...this.props} />
+            <ObserverFieldset {...this.props} />
+            <GridTileFieldset {...this.props} />
+            <p>
+              <em>You can select grid tiles on the map below.</em>
+            </p>
+          </div>
+          <div className="submit-bar fixed-bottom">
+            <div className="container">
+              <div className="row align-items-center">
+                <div className="col">
+                  <SubmitFieldset {...this.props} />
+                </div>
+              </div>
             </div>
-            <div className="col-md-6">
-              <p>
-                <em>You can select grid tiles on the map below.</em>
-              </p>
-              <GridTileSelectMap {...this.props} />
+          </div>
+          <div className="container-fluid">
+            <div className="row no-gutters">
+              <div className="col-lg-9 mb-3">
+                <GridTileSelectMap {...this.props} />
+              </div>
+              <div className="col-lg-3 mb-3">
+                <SelectedGridTiles {...this.props} />
+              </div>
             </div>
           </div>
         </Form>

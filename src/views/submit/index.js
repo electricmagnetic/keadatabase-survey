@@ -11,20 +11,15 @@ import SubmissionForm from '../../components/submit/SubmissionForm';
 const InitialSurveyFormPage = props => {
   return (
     <div className="SubmissionPage">
-      <Helmet title="1. Details | Submit Survey" />
+      <Helmet title="1. Trip Details | Submit Survey" />
       <section className="mb-5">
         <Banner size="small">
           <h1>Submit Survey</h1>
-          <h2 className="mt-3 mb-1">Step 1</h2>
-          <p className="lead mb-0">
-            Please enter your details and the grid tiles you were in during the survey period.
-          </p>
+          <p className="lead mb-0">Step 1: Observer and Trip Details</p>
         </Banner>
       </section>
       <section className="mb-5">
-        <div className="container">
-          <InitialSurveyForm />
-        </div>
+        <InitialSurveyForm />
       </section>
     </div>
   );
@@ -33,27 +28,15 @@ const InitialSurveyFormPage = props => {
 const SubmissionFormPage = props => {
   return (
     <div className="SubmissionPage">
-      <Helmet title="2. Surveyed Hours | Survey Submission" />
+      <Helmet title="2. Surveyed Hours | Submit Survey" />
       <section className="mb-5">
         <Banner size="small">
-          <h1>Survey Submission</h1>
-          <h2 className="mt-3 mb-1">Step 2</h2>
-          <p className="lead mb-0">
-            Please enter the specific details of your trip and the hours observed. All fields are
-            required except where indicated.
-          </p>
-          <p>
-            <em>
-              If you expect to be entering data for these grid squares regularly, you can bookmark
-              this page to save time.
-            </em>
-          </p>
+          <h1>Submit Survey</h1>
+          <p className="lead mb-0">Step 2: Survey Details</p>
         </Banner>
       </section>
       <section className="mb-5">
-        <div className="container">
-          <SubmissionForm queryString={props.queryString} />
-        </div>
+        <SubmissionForm queryString={props.queryString} />
       </section>
     </div>
   );

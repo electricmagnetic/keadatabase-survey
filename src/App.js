@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { Header, HomePageHeader } from './components/presentation/Header';
-import Footer from './components/presentation/Footer';
+import { Footer, SubmitPageFooter } from './components/presentation/Footer';
 
 import HomePage from './views/index';
 import AboutPage from './views/about';
@@ -49,7 +49,10 @@ function App() {
             <Route component={NoMatchPage} />
           </Switch>
         </main>
-        <Footer />
+        <Switch>
+          <Route exact path="/submit" component={SubmitPageFooter} />
+          <Route component={Footer} />
+        </Switch>
       </div>
     </Router>
   );

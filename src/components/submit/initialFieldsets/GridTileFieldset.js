@@ -9,16 +9,15 @@ import RenderField from '../../form/RenderField';
  */
 const GridTileFieldset = ({ values }) => (
   <fieldset className="mb-3">
-    <legend>2. All Grid Tiles</legend>
-    <p>Please enter all surveyed grid tiles.</p>
+    <legend>2. Trip Details</legend>
+    <p>Please select all surveyed grid tiles from the duration of your trip.</p>
     <Field
       name="gridTiles"
       component={RenderField}
       values={values}
       type="gridTileSelect"
       multiple
-      hideLabel
-      label="Grid Tile Select"
+      label="Select grid tiles"
     />
   </fieldset>
 );

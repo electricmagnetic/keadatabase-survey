@@ -9,7 +9,7 @@ import Banner from '../presentation/Banner';
 import InitialDetailsForm from './initialDetails/InitialDetailsForm';
 import SurveyDetailsForm from './surveyDetails/SurveyDetailsForm';
 
-import './Form.css';
+import './SubmissionForm.css';
 
 const InitialDetailsFormPage = props => {
   return (

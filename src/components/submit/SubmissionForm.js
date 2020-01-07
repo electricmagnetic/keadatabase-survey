@@ -58,7 +58,7 @@ class SubmissionForm extends Component {
           {this.state.queryString.gridTiles ? (
             <SurveyDetailsForm queryString={this.state.queryString} fieldOptions={fieldOptions} />
           ) : (
-            <InitialDetailsForm />
+            <InitialDetailsForm fieldOptions={fieldOptions} />
           )}
         </div>
       );

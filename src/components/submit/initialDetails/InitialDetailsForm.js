@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { Form, withFormik } from 'formik';
 import qs from 'qs';
+import PropTypes from 'prop-types';
 
 import Messages from './fieldsets/Messages';
 import ObserverFieldset from './fieldsets/ObserverFieldset';
@@ -27,7 +28,7 @@ class InitialDetailsFormComponent extends Component {
         <section className="mb-5">
           <Form className="form mb-3">
             <div className="container">
-              <h2>Step 1: Observer and Trip Details</h2>
+              <h2 className="mt-0 mb-4">Step 1: Observer and Trip Details</h2>
               <Messages {...this.props} />
               <ObserverFieldset {...this.props} />
               <GridTileFieldset {...this.props} />
@@ -69,5 +70,9 @@ const InitialDetailsForm = withFormik({
     actions.props.history.push(`${queryString}`);
   },
 })(InitialDetailsFormComponent);
+
+InitialDetailsForm.propTypes = {
+  fieldOptions: PropTypes.object.isRequired,
+};
 
 export default withRouter(InitialDetailsForm);

@@ -1,24 +1,21 @@
 import React from 'react';
 
-import Error from '../../helpers/Error';
-
 /**
   Submission fieldset, modelled off the main form submission SubmitFieldset, except without API interaction.
  */
-const SubmitFieldset = ({ isValid, submitCount, errors }) => (
-  <fieldset className="mb-3">
+const SubmitFieldset = ({ isValid }) => (
+  <fieldset>
     <legend className="sr-only">Submission</legend>
-    <input type="submit" value="Next" className="btn btn-primary mr-3 mb-3" disabled={!isValid} />
-    {!isValid && (
-      <small className="d-inline-block">
-        You cannot submit the form until all data has been entered correctly.
-      </small>
-    )}
-    {submitCount > 0 && errors && !isValid && (
-      <Error message="Error">
-        <p>Please double-check the form for errors.</p>
-      </Error>
-    )}
+    <div className="row align-items-center">
+      <div className="col-8">
+        {!isValid && (
+          <small className="d-inline-block">Form can be submitted once data entered.</small>
+        )}
+      </div>
+      <div className="col-4 text-right">
+        <input type="submit" value="Next" className="btn btn-primary" disabled={!isValid} />
+      </div>
+    </div>
   </fieldset>
 );
 

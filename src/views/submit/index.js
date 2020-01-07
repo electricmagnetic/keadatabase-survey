@@ -19,9 +19,7 @@ const InitialSurveyFormPage = props => {
         </Banner>
       </section>
       <section className="mb-5">
-        <div className="container">
-          <InitialSurveyForm />
-        </div>
+        <InitialSurveyForm />
       </section>
     </div>
   );
@@ -38,9 +36,7 @@ const SubmissionFormPage = props => {
         </Banner>
       </section>
       <section className="mb-5">
-        <div className="container">
-          <SubmissionForm queryString={props.queryString} />
-        </div>
+        <SubmissionForm queryString={props.queryString} />
       </section>
     </div>
   );

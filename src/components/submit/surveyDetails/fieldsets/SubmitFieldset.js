@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Loader from '../../helpers/Loader';
+import Loader from '../../../helpers/Loader';
 
 const SubmitFieldset = ({ isValid, isSubmitting, postSubmissionResponse }) => {
   const isLoading =

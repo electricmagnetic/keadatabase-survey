@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Error from '../../helpers/Error';
+import Error from '../../../helpers/Error';
 
 /**
   Area for displaying error messages

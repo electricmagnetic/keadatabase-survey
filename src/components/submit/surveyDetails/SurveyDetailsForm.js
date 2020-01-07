@@ -4,20 +4,18 @@ import { Form, withFormik } from 'formik';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Loader from '../helpers/Loader';
-import Error from '../helpers/Error';
+import Loader from '../../helpers/Loader';
+import Error from '../../helpers/Error';
 
-import Messages from './submissionFieldsets/Messages';
-import SurveyHourFieldset from './submissionFieldsets/SurveyHourFieldset';
-import TripFieldset from './submissionFieldsets/TripFieldset';
-import FurtherInformationFieldset from './submissionFieldsets/FurtherInformationFieldset';
-import SubmitFieldset from './submissionFieldsets/SubmitFieldset';
+import Messages from './fieldsets/Messages';
+import SurveyHourFieldset from './fieldsets/SurveyHourFieldset';
+import TripFieldset from './fieldsets/TripFieldset';
+import FurtherInformationFieldset from './fieldsets/FurtherInformationFieldset';
+import SubmitFieldset from './fieldsets/SubmitFieldset';
 
-import { surveyHours } from './schema/surveyParameters';
-import { initialFullValues, initialHourValues } from './schema/initialValues';
-import { fullValidationSchema, initialValidationSchema } from './schema/validationSchemas';
-
-import './Form.css';
+import { surveyHours } from '../schema/surveyParameters';
+import { initialFullValues, initialHourValues } from '../schema/initialValues';
+import { fullValidationSchema, initialValidationSchema } from '../schema/validationSchemas';
 
 const API_URL = `https://data.keadatabase.nz/report/survey/`;
 

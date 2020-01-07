@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'formik';
 
-import RenderField from '../../form/RenderField';
+import RenderField from '../../../form/RenderField';
 
 const TripFieldset = ({ fieldOptions, values, setFieldValue }) => (
   <fieldset className="mb-3">

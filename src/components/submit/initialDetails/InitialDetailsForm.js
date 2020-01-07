@@ -3,18 +3,16 @@ import { withRouter } from 'react-router-dom';
 import { Form, withFormik } from 'formik';
 import qs from 'qs';
 
-import Messages from './initialFieldsets/Messages';
-import ObserverFieldset from './initialFieldsets/ObserverFieldset';
-import GridTileFieldset from './initialFieldsets/GridTileFieldset';
-import SubmitFieldset from './initialFieldsets/SubmitFieldset';
-import SelectedGridTiles from './initialFieldsets/SelectedGridTiles';
-import GridTileSelectMap from '../map/GridTileSelectMap';
+import Messages from './fieldsets/Messages';
+import ObserverFieldset from './fieldsets/ObserverFieldset';
+import GridTileFieldset from './fieldsets/GridTileFieldset';
+import SubmitFieldset from './fieldsets/SubmitFieldset';
+import SelectedGridTiles from './fieldsets/SelectedGridTiles';
+import GridTileSelectMap from '../../map/GridTileSelectMap';
 
-import { qsOptions } from './schema/surveyParameters';
-import { initialInitialValues } from './schema/initialValues';
-import { initialValidationSchema } from './schema/validationSchemas';
-
-import './Form.css';
+import { qsOptions } from '../schema/surveyParameters';
+import { initialInitialValues } from '../schema/initialValues';
+import { initialValidationSchema } from '../schema/validationSchemas';
 
 /**
   Enables user to select a set of gridTiles as specified in `tiles.json`.

@@ -17,6 +17,7 @@ const ObserverFieldset = ({ values, setFieldValue }) => (
           type="text"
           placeholder="Name"
           label="Name"
+          helpText="Your name will be publicly visible"
           autoFocus
         />
       </div>
@@ -27,6 +28,7 @@ const ObserverFieldset = ({ values, setFieldValue }) => (
           type="text"
           placeholder="Email"
           label="Email"
+          helpText="Your email is only visible to the project team"
         />
       </div>
     </div>

@@ -11,7 +11,7 @@ import GridTileSelectTypeahead from './GridTileSelectTypeahead';
   Also handles `error` messages (from yup) and `status` messages (from back-end).
 */
 const RenderField = props => {
-  const { field, form, fieldOptions, type, addBlank, hideLabel, ...others } = props;
+  const { field, form, fieldOptions, type, addBlank, hideLabel, helpText, ...others } = props;
 
   // Use label if provided, otherwise default on OPTIONS (fieldOptions) label
   const label = props.label || fieldOptions.label;
@@ -24,6 +24,7 @@ const RenderField = props => {
 
   const isInvalid = (touched && error) || status ? true : false;
 
+  // Adjusts classes on form control depending on type, validity and readOnly status
   const formControlClasses = (type => {
     const baseClasses = classnames({
       'is-invalid': isInvalid,
@@ -44,6 +45,7 @@ const RenderField = props => {
     }
   })(type);
 
+  // Adjusts classes on label depending on type and hideLabel status
   const formLabelClasses = (type => {
     const baseClasses = classnames({
       'sr-only': hideLabel,
@@ -56,6 +58,7 @@ const RenderField = props => {
     }
   })(type);
 
+  // Creates input attributes to be applied
   const inputAttributes = {
     ...field,
     id: field.name,
@@ -63,6 +66,7 @@ const RenderField = props => {
     ...others,
   };
 
+  // Creates field element based on field type
   const fieldElement = (type => {
     switch (type) {
       case 'choice':
@@ -88,12 +92,19 @@ const RenderField = props => {
     }
   })(type);
 
+  // Creates label element for given field
   const labelElement = (
     <label className={formLabelClasses} htmlFor={field.name}>
       {label}
     </label>
   );
 
+  // Optional help text element (hence the presence of the conditional)
+  const helpTextElement = helpText ? (
+    <small className="form-text text-muted">{helpText}</small>
+  ) : null;
+
+  // Creates error element
   const errorElement = (
     <>
       {/* `d-inline` is used to force visibility due to incompatibility of Typeahead with BS4 */}
@@ -102,6 +113,7 @@ const RenderField = props => {
     </>
   );
 
+  // Creates element grouping above elements, with special ordering for check boxes
   const groupElement = (type => {
     switch (type) {
       case 'checkbox':
@@ -109,6 +121,7 @@ const RenderField = props => {
           <div className="form-check">
             {fieldElement}
             {labelElement}
+            {helpTextElement}
             {errorElement}
           </div>
         );
@@ -117,6 +130,7 @@ const RenderField = props => {
           <div className="form-group">
             {labelElement}
             {fieldElement}
+            {helpTextElement}
             {errorElement}
           </div>
         );

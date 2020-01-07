@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Error from '../../helpers/Error';
-import Banner from '../../presentation/Banner';
 
 import Messages from './fieldsets/Messages';
 import SurveyHourFieldset from './fieldsets/SurveyHourFieldset';
@@ -63,14 +62,9 @@ class FormComponent extends Component {
       <div className="SurveyDetailsForm">
         <Helmet title="2. Survey Details | Submit Survey" />
         <section className="mb-5">
-          <Banner size="small">
-            <h1>Submit Survey</h1>
-            <p className="lead mb-0">Step 2: Survey Details</p>
-          </Banner>
-        </section>
-        <section className="mb-5">
           <Form>
             <div className="container">
+              <h2>Step 2: Survey Details</h2>
               <Messages {...this.props} />
               <TripFieldset {...this.props} fieldOptions={fieldOptions} />
               <SurveyHourFieldset {...this.props} fieldOptions={fieldOptions} />

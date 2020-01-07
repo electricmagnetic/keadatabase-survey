@@ -4,8 +4,6 @@ import Helmet from 'react-helmet';
 import { Form, withFormik } from 'formik';
 import qs from 'qs';
 
-import Banner from '../../presentation/Banner';
-
 import Messages from './fieldsets/Messages';
 import ObserverFieldset from './fieldsets/ObserverFieldset';
 import GridTileFieldset from './fieldsets/GridTileFieldset';
@@ -27,14 +25,9 @@ class InitialDetailsFormComponent extends Component {
       <div className="InitialDetailsForm">
         <Helmet title="1. Observer and Trip Details | Submit Survey" />
         <section className="mb-5">
-          <Banner size="small">
-            <h1>Submit Survey</h1>
-            <p className="lead mb-0">Step 1: Observer and Trip Details</p>
-          </Banner>
-        </section>
-        <section className="mb-5">
           <Form className="form mb-3">
             <div className="container">
+              <h2>Step 1: Observer and Trip Details</h2>
               <Messages {...this.props} />
               <ObserverFieldset {...this.props} />
               <GridTileFieldset {...this.props} />

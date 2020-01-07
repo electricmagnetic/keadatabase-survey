@@ -13,7 +13,7 @@ const HomePage = props => {
     <div className="HomePage">
       <Helmet title="Kea Survey Tool" />
       <section className="mb-5">
-        <Banner backgroundImage={banner}>
+        <Banner backgroundImage={banner} size="home">
           <h1 className="mb-4 banner-title">Kea Survey Tool</h1>
           <div className="home-buttons">
             <Link to="/submit" className="btn btn-lg btn-primary mr-2 mb-2">

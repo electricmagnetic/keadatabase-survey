@@ -64,7 +64,7 @@ class FormComponent extends Component {
         <section className="mb-5">
           <Form>
             <div className="container">
-              <h2>Step 2: Survey Details</h2>
+              <h2 className="mt-0 mb-4">Step 2: Survey Details</h2>
               <Messages {...this.props} />
               <TripFieldset {...this.props} fieldOptions={fieldOptions} />
               <SurveyHourFieldset {...this.props} fieldOptions={fieldOptions} />

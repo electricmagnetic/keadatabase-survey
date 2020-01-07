@@ -32,9 +32,6 @@ class InitialDetailsFormComponent extends Component {
               <Messages {...this.props} />
               <ObserverFieldset {...this.props} />
               <GridTileFieldset {...this.props} />
-              <p>
-                <em>You can select grid tiles on the map below.</em>
-              </p>
             </div>
             <div className="submit-bar fixed-bottom">
               <div className="container">

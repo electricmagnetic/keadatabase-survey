@@ -43,12 +43,19 @@ class SubmissionForm extends Component {
   render() {
     const { submissionOptions } = this.props;
 
-    if (submissionOptions.pending) return <Loader />;
+    if (submissionOptions.pending)
+      return (
+        <div className="container mb-5">
+          <Loader />
+        </div>
+      );
     else if (submissionOptions.rejected)
       return (
-        <Error message="Error">
-          {submissionOptions.reason.cause && `(${submissionOptions.reason.cause.detail})`}
-        </Error>
+        <div className="container mb-5">
+          <Error message="Error">
+            {submissionOptions.reason.cause && `(${submissionOptions.reason.cause.detail})`}
+          </Error>
+        </div>
       );
     else if (submissionOptions.fulfilled) {
       const fieldOptions = submissionOptions.value.actions.POST;

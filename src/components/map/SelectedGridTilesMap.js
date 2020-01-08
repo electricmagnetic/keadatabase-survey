@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { latLngBounds, GeoJSON as LeafletGeoJSON } from 'leaflet';
+import { GeoJSON as LeafletGeoJSON } from 'leaflet';
 import { FeatureGroup, ScaleControl, Polygon, Tooltip } from 'react-leaflet';
 
 import BaseMap from './BaseMap';
@@ -11,28 +11,17 @@ import tiles from '../../assets/geo/tiles.json';
 
 /**
   Non-interactive map component for displaying a given set of grid tiles.
+  Sets bounds of BaseMap component to whatever given by FeatureGroup (via updateGridBounds)
  */
 class SelectedGridTilesMap extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      gridBounds: latLngBounds,
-      viewport: {
-        center: DEFAULT_BOUNDS.getCenter(),
-        zoom: DEFAULT_ZOOM,
-      },
+      gridBounds: DEFAULT_BOUNDS,
     };
 
     this.updateGridBounds = this.updateGridBounds.bind(this);
-    this.onViewportChanged = this.onViewportChanged.bind(this);
-  }
-
-  /**
-    On viewport changed
-  */
-  onViewportChanged(viewport) {
-    this.setState({ viewport: viewport });
   }
 
   /**
@@ -40,20 +29,6 @@ class SelectedGridTilesMap extends Component {
   */
   updateGridBounds(event) {
     this.setState({ gridBounds: event.target.getBounds() });
-  }
-
-  /**
-    Changes viewport on selection of object if viewport is at defaults.
-  */
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.gridBounds !== prevState.gridBounds) {
-      const isValid = this.state.gridBounds.isValid();
-      const zoom =
-        this.state.viewport.zoom === DEFAULT_ZOOM ? SURVEY_ZOOM : this.state.viewport.zoom;
-      const center = isValid ? this.state.gridBounds.getCenter() : this.state.viewport.center;
-
-      this.setState({ viewport: { center: center, zoom: zoom } });
-    }
   }
 
   /**
@@ -67,6 +42,7 @@ class SelectedGridTilesMap extends Component {
       key={gridTileId}
       color="black"
       id={gridTileId}
+      interactive={false}
     >
       <Tooltip permanent direction="center">
         {gridTileId}
@@ -77,9 +53,25 @@ class SelectedGridTilesMap extends Component {
   render() {
     const { gridTileIds } = this.props;
 
+    const disableInteractivity = {
+      zoomControl: false,
+      dragging: false,
+      doubleClickZoom: false,
+      touchZoom: false,
+      scrollWheelZoom: false,
+      boxZoom: false,
+    };
+    const boundsOptions = {
+      maxZoom: 12,
+    };
+
     return (
       <div className="SelectedGridTilesMap">
-        <BaseMap viewport={this.state.viewport} onViewportChanged={this.onViewportChanged}>
+        <BaseMap
+          boundsOptions={boundsOptions}
+          bounds={this.state.gridBounds}
+          {...disableInteractivity}
+        >
           <FeatureGroup onAdd={event => this.updateGridBounds(event)}>
             {gridTileIds.map(gridTileId => this.createSelectedGridTile(gridTileId))}
           </FeatureGroup>

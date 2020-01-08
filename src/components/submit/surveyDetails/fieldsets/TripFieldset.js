@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'formik';
 
-import GridTile from '../../../grid/GridTile';
 import RenderField from '../../../form/RenderField';
+import SelectedGridTilesMap from '../../../map/SelectedGridTilesMap';
 
 const TripFieldset = ({ fieldOptions, values, setFieldValue }) => (
   <fieldset className="mb-3">
     <legend>1. Trip Details</legend>
+
     <div className="row">
       <div className="col-md-4">
         <Field
@@ -30,6 +31,7 @@ const TripFieldset = ({ fieldOptions, values, setFieldValue }) => (
         />
       </div>
     </div>
+
     <div className="row">
       <div className="col-md-4">
         <Field
@@ -53,15 +55,11 @@ const TripFieldset = ({ fieldOptions, values, setFieldValue }) => (
       </div>
     </div>
 
-    <label className="control-label" htmlFor="gridTiles">
+    <label className="control-label" htmlFor="selectedGridTiles">
       Where
     </label>
-    <div id="gridTiles" className="form-row my-n3">
-      {values.gridTiles.map(gridTileId => (
-        <div className="col-4 col-md-3 col-lg-2" key={gridTileId}>
-          <GridTile id={gridTileId} type="card" hideDetails />
-        </div>
-      ))}
+    <div id="selectedGridTiles">
+      <SelectedGridTilesMap gridTileIds={values.gridTiles} />
     </div>
   </fieldset>
 );

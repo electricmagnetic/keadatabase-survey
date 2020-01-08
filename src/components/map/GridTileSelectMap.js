@@ -4,6 +4,7 @@ import { latLngBounds, GeoJSON as LeafletGeoJSON } from 'leaflet';
 
 import BaseMap from './BaseMap';
 import { DEFAULT_ZOOM, DEFAULT_BOUNDS, SELECT_ZOOM } from './defaults';
+import { gridTileStyle } from './style';
 
 import './GridTileMap.css';
 import tiles from '../../assets/geo/tiles.json';
@@ -110,12 +111,7 @@ class GridTileSelectMap extends Component {
           <GeoJSON
             data={tiles}
             onEachFeature={this.baseGridTileOnEachFeature}
-            style={{
-              color: '#222222',
-              weight: 2,
-              opacity: 0.6,
-              fillOpacity: 0,
-            }}
+            style={gridTileStyle}
           />
           {this.props.values.gridTiles && (
             <FeatureGroup

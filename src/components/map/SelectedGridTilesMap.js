@@ -4,7 +4,7 @@ import { GeoJSON as LeafletGeoJSON } from 'leaflet';
 import { FeatureGroup, ScaleControl, Polygon, Tooltip } from 'react-leaflet';
 
 import BaseMap from './BaseMap';
-import { DEFAULT_ZOOM, DEFAULT_BOUNDS, SURVEY_ZOOM } from '../map/defaults';
+import { DEFAULT_BOUNDS } from '../map/defaults';
 
 import './SelectedGridTilesMap.css';
 import tiles from '../../assets/geo/tiles.json';

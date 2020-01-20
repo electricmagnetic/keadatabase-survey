@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Error.css';
-
 const Error = ({ message, children, info }) => {
   const classNames = ['Error', 'alert', info ? 'alert-faded' : 'alert-primary'];
   return (

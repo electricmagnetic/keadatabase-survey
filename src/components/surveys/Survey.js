@@ -57,7 +57,7 @@ Survey.propTypes = {
 };
 
 Survey.defaultProps = {
-  type: 'item',
+  type: 'page',
 };
 
 export default connect(props => ({

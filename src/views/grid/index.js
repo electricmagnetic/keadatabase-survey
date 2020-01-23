@@ -33,7 +33,7 @@ const GridPage = props => {
         <div className="container">
           <h2>Download Grid</h2>
           <p>
-            The kea survey grid is a subset of the{' '}
+            The kea survey grid is based on the{' '}
             <a href="https://birdatlas.co.nz/" target="_blank" rel="noopener noreferrer">
               New Zealand Bird Atlas
             </a>{' '}

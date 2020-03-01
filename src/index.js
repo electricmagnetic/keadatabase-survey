@@ -9,6 +9,9 @@ import * as serviceWorker from './serviceWorker';
 
 import 'moment/locale/en-nz';
 
+import 'jquery/dist/jquery.slim';
+import 'bootstrap/dist/js/bootstrap.bundle';
+
 import './assets/css/custom.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 

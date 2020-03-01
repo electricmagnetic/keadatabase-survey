@@ -4,7 +4,7 @@ import { GeoJSON, LayersControl, ScaleControl } from 'react-leaflet';
 import BaseMap from './BaseMap';
 import { gridTileStyle } from './style';
 
-import './GridTileMap.css';
+import './GridTileMap.scss';
 import tiles from '../../assets/geo/tiles.json';
 
 /**

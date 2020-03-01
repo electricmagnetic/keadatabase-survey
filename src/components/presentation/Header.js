@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import logo from '../../assets/img/logo.svg';
-import './Header.css';
+import './Header.scss';
 
 /**
   Main header. Different CSS/functionality behaviour can be toggled by prop `onHome`.

@@ -7,7 +7,7 @@ import RenderField from '../../../form/RenderField';
 import { initialHourValues } from '../../schema/initialValues';
 import { surveyHours } from '../../schema/surveyParameters';
 
-import './SurveyHourFieldset.css';
+import './SurveyHourFieldset.scss';
 
 const isWinter = hour => surveyHours.winter.includes(hour);
 const hasSingleGridTile = values => values.gridTiles && values.gridTiles.length === 1;

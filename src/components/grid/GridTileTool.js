@@ -6,7 +6,7 @@ import GridTileSelectMap from '../map/GridTileSelectMap';
 import GridTile from './GridTile';
 import Error from '../helpers/Error';
 
-import './GridTileTool.css';
+import './GridTileTool.scss';
 
 /**
   Provides a typeahead interface, returning a single GridTile.

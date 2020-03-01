@@ -6,7 +6,7 @@ import BaseMap from './BaseMap';
 import { DEFAULT_ZOOM, DEFAULT_BOUNDS, SELECT_ZOOM } from './defaults';
 import { gridTileStyle } from './style';
 
-import './GridTileMap.css';
+import './GridTileMap.scss';
 import tiles from '../../assets/geo/tiles.json';
 
 /**

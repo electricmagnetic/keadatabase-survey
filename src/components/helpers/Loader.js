@@ -1,14 +1,11 @@
 import React from 'react';
 
-import './Loader.css';
-
-const Loader = ({ small }) => {
-  const loaderClasses = ['Loader', small && 'small'];
-  return <div className={loaderClasses.join(' ')} />;
-};
-
-Loader.defaultProps = {
-  small: false,
-};
+const Loader = () => (
+  <div className="d-flex justify-content-center m-3 text-primary">
+    <div className="spinner-border" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+  </div>
+);
 
 export default Loader;

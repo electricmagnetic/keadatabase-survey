@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import './Footer.css';
+import './Footer.scss';
 
 /**
   Main footer. Different CSS/functionality behaviour can be toggled by prop `onSubmitPage`.

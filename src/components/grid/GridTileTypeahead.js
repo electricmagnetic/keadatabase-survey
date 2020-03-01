@@ -4,7 +4,7 @@ import { Typeahead, MenuItem, Menu } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 
-import './GridTileTypeahead.css';
+import './GridTileTypeahead.scss';
 import tiles from '../../assets/geo/tiles.json';
 
 /**

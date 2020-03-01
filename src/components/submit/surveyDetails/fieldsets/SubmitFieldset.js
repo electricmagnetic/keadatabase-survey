@@ -20,7 +20,7 @@ const SubmitFieldset = ({ isValid, isSubmitting, postSubmissionResponse }) => {
             <small className="d-inline-block">Form can be submitted once data entered.</small>
           )}
           {isRejected && <span>Error</span>}
-          {isLoading && <Loader small />}
+          {isLoading && <Loader />}
           {isFulfilled && <span>Success</span>}
         </div>
         <div className="col-4 text-right">

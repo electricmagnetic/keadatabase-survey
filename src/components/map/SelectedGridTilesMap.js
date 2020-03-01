@@ -6,7 +6,7 @@ import { FeatureGroup, ScaleControl, Polygon, Tooltip } from 'react-leaflet';
 import BaseMap from './BaseMap';
 import { DEFAULT_BOUNDS } from '../map/defaults';
 
-import './SelectedGridTilesMap.css';
+import './SelectedGridTilesMap.scss';
 import tiles from '../../assets/geo/tiles.json';
 
 /**

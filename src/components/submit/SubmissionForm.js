@@ -11,7 +11,7 @@ import { qsOptions } from './schema/surveyParameters';
 import InitialDetailsForm from './initialDetails/InitialDetailsForm';
 import SurveyDetailsForm from './surveyDetails/SurveyDetailsForm';
 
-import './SubmissionForm.css';
+import './SubmissionForm.scss';
 
 const API_URL = `https://data.keadatabase.nz/report/survey/`;
 

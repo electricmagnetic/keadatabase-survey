@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet';
 
 import { DEFAULT_ZOOM, DEFAULT_BOUNDS } from './defaults';
 
-import './BaseMap.css';
+import './BaseMap.scss';
 
 class BaseMap extends Component {
   constructor(props) {

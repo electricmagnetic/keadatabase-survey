@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import './GridTileCard.css';
+import './GridTileCard.scss';
 
 /**
   Presents a nicely formatted card for a given grid tile.

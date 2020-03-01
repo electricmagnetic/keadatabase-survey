@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import FormatDate from '../../helpers/FormatDate';
 import { ActivityIcon, KeaIcon } from '../../helpers/Icons';
 
-import './SurveyHour.css';
+import './SurveyHour.scss';
 
 /**
   Presents a nicely formatted list item for a given survey hour.

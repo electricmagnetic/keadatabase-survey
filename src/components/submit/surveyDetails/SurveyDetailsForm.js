@@ -17,7 +17,7 @@ import { surveyHours } from '../schema/surveyParameters';
 import { initialFullValues, initialHourValues } from '../schema/initialValues';
 import { fullValidationSchema, initialValidationSchema } from '../schema/validationSchemas';
 
-const API_URL = `https://data.keadatabase.nz/report/survey/`;
+const API_URL = `${process.env.REACT_APP_API_BASE}/report/survey/`;
 
 /**
   Master form layout for survey submission.

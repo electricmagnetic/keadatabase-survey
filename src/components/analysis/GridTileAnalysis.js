@@ -8,7 +8,7 @@ import HoursSurveyedPerQuarter from './graphs/HoursSurveyedPerQuarter';
 
 import { calculateEncounterRate } from './calculations/gridTileCalculations';
 
-const API_URL = `https://data.keadatabase.nz/analysis/grid_tiles/`;
+const API_URL = `${process.env.REACT_APP_API_BASE}/analysis/grid_tiles/`;
 
 /**
   Display analyses as an item

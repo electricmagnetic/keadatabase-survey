@@ -8,7 +8,7 @@ import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
 import getUniqueGridTiles from '../helpers/getUniqueGridTiles';
 
-const API_URL = `https://data.keadatabase.nz/surveys/hours/?page_size=90`;
+const API_URL = `${process.env.REACT_APP_API_BASE}/surveys/hours/?page_size=90`;
 
 /**
   Displays grid tiles condensed from survey hours.

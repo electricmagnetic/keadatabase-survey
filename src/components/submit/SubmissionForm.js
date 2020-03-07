@@ -13,7 +13,7 @@ import SurveyDetailsForm from './surveyDetails/SurveyDetailsForm';
 
 import './SubmissionForm.scss';
 
-const API_URL = `https://data.keadatabase.nz/report/survey/`;
+const API_URL = `${process.env.REACT_APP_API_BASE}/report/survey/`;
 
 class SubmissionForm extends Component {
   constructor(props) {

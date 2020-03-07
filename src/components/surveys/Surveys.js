@@ -7,7 +7,7 @@ import Survey from './Survey';
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
 
-const API_URL = `https://data.keadatabase.nz/surveys/surveys/`;
+const API_URL = `${process.env.REACT_APP_API_BASE}/surveys/surveys/`;
 
 class Surveys extends Component {
   render() {

@@ -7,7 +7,7 @@ import Error from '../helpers/Error';
 
 import { calculateEncounterRate } from './calculations/surveyCalculations';
 
-const API_URL = `https://data.keadatabase.nz/analysis/surveys/`;
+const API_URL = `${process.env.REACT_APP_API_BASE}/analysis/surveys/`;
 
 /**
   Display analyses as an item

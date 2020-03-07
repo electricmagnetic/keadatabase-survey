@@ -11,7 +11,7 @@ import Error from '../helpers/Error';
 
 import tiles from '../../assets/geo/tiles.json';
 
-const API_URL = `https://data.keadatabase.nz/surveys/grid_tiles/`;
+const API_URL = `${process.env.REACT_APP_API_BASE}/surveys/grid_tiles/`;
 
 /**
   Displays a grid tile using a local source, a fetch or a provided object.

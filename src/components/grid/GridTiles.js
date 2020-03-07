@@ -7,7 +7,7 @@ import GridTile from './GridTile';
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
 
-const API_URL = `https://data.keadatabase.nz/surveys/grid_tiles/`;
+const API_URL = `${process.env.REACT_APP_API_BASE}/surveys/grid_tiles/`;
 
 class GridTiles extends Component {
   render() {

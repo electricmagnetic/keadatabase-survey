@@ -47,7 +47,7 @@ const HomePage = props => {
             </div>
             <div className="col-md-6">
               <h2>Recent Grid Tiles</h2>
-              <GridTilesFromSurveyHours type="card" hideDetails />
+              <GridTilesFromSurveyHours type="card" hideDetails limit={8} />
             </div>
           </div>
         </div>

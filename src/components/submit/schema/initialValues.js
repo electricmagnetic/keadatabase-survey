@@ -7,7 +7,6 @@ import moment from 'moment';
 export const initialObserverValues = {
   name: '',
   email: '',
-  purpose: '',
 };
 
 /**
@@ -40,5 +39,6 @@ export const initialFullValues = {
   hours: [],
   max_flock_size: '',
   comments: '',
+  purpose: '',
   challenge: 'kea',
 };

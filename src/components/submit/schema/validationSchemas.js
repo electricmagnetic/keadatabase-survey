@@ -46,7 +46,6 @@ export const observerValidationSchema = yup
       .string()
       .email(emailInvalid)
       .required(requiredMessage),
-    purpose: yup.string(),
   })
   .required()
   .strict()
@@ -101,6 +100,7 @@ export const fullValidationSchema = yup
       .number()
       .min(0)
       .typeError(notNumber),
+    purpose: yup.string(),
     comments: yup.string(),
     challenge: yup.string().required(),
   })

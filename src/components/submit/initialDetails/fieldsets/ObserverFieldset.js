@@ -4,7 +4,7 @@ import { Field } from 'formik';
 import RenderField from '../../../form/RenderField';
 
 /**
-  Fieldset for two of three observer fields (observer.purpose is part of submissionFieldsets)
+  Fieldset for the two observer fields.
  */
 const ObserverFieldset = ({ values, setFieldValue }) => (
   <fieldset className="mb-3">

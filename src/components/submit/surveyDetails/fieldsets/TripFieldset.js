@@ -47,8 +47,8 @@ const TripFieldset = ({ fieldOptions, values, setFieldValue }) => (
       <div className="col-md-5">
         <Field
           component={RenderField}
-          fieldOptions={fieldOptions.observer.children.purpose}
-          name="observer.purpose"
+          fieldOptions={fieldOptions.purpose}
+          name="purpose"
           type="choice"
           helpText="Optional"
         />

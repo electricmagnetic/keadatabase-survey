@@ -15,6 +15,8 @@ import SubmissionSuccessPage from './views/submit/success';
 import GridPage from './views/grid/index';
 import GridDetailPage from './views/grid/detail';
 
+import AnalysisPage from './views/analysis/index';
+
 import SurveyPage from './views/surveys/index';
 import SurveyDetailPage from './views/surveys/detail';
 
@@ -42,6 +44,8 @@ function App() {
 
             <Route exact path="/grid" component={GridPage} />
             <Route exact path="/grid/:slug" component={GridDetailPage} />
+
+            <Route exact path="/analysis" component={AnalysisPage} />
 
             <Route exact path="/surveys" component={SurveyPage} />
             <Route exact path="/surveys/:slug" component={SurveyDetailPage} />

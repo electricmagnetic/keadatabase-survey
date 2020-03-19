@@ -17,7 +17,7 @@ const DownloadLink = ({ title, filename }) => {
 const GridPage = props => {
   return (
     <div className="GridPage">
-      <Helmet title="View Grid" />
+      <Helmet title="View Grid Map" />
       <section className="d-print-none">
         <Banner size="small">
           <h1>View Grid Map</h1>

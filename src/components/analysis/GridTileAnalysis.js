@@ -4,45 +4,10 @@ import PropTypes from 'prop-types';
 
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
-import HoursSurveyedPerQuarter from './graphs/HoursSurveyedPerQuarter';
 
-import { calculateEncounterRate } from './calculations/gridTileCalculations';
+import GridTileAnalysisItem from './GridTileAnalysis/GridTileAnalysisItem';
 
 const API_URL = `${process.env.REACT_APP_API_BASE}/analysis/grid_tiles/`;
-
-/**
-  Display analyses as an item
- */
-const GridTileAnalysisItem = ({ gridTileAnalysis }) => {
-  return (
-    <div className="GridTileAnalysisItem">
-      <div className="row">
-        <div className="col-md-2">
-          <dl>
-            <dt>Hours with kea</dt>
-            <dd>{gridTileAnalysis.hours_total.with_kea}</dd>
-            <dt>Total hours</dt>
-            <dd>{gridTileAnalysis.hours_total.total}</dd>
-            <dt>Encounter rate</dt>
-            <dd>{calculateEncounterRate(gridTileAnalysis)}%</dd>
-          </dl>
-        </div>
-        <div className="col-sm-6 col-md-3">
-          <dl>
-            <dt>Quarterly breakdown</dt>
-            <dd>
-              <HoursSurveyedPerQuarter gridTileAnalysis={gridTileAnalysis} />
-            </dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-GridTileAnalysisItem.propTypes = {
-  gridTileAnalysis: PropTypes.object.isRequired,
-};
 
 /**
   Obtain analyses for a given grid tile

@@ -52,13 +52,13 @@ const Header = ({ onHome }) => {
               <li className="nav-item">
                 <NavLink to="/grid" className="nav-link">
                   <i className="fa-fw fas fa-map mr-2"></i>
-                  <span className="d-lg-none d-xl-inline">View </span>Grid Map
+                  Grid Map
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/analysis" className="nav-link">
                   <i className="fa-fw fas fa-chart-bar mr-2"></i>
-                  <span className="d-lg-none d-xl-inline">Survey </span>Analysis
+                  Analysis
                 </NavLink>
               </li>
               <li className="nav-item">

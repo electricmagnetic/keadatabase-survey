@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { ResponsiveContainer, BarChart, XAxis, Bar, Tooltip } from 'recharts';
 
@@ -7,7 +8,7 @@ import { calculateHoursWithoutKea } from '../calculations/gridTileCalculations';
 /**
   Displays a bar chart showing hours with/without kea per quarter
 */
-const HoursSurveyedPerQuarter = ({ gridTileAnalysis }) => {
+const HoursPerQuarterGraph = ({ gridTileAnalysis }) => {
   const hoursSurveyedPerQuarter = gridTileAnalysis.hours_per_quarter.map(hourSet =>
     Object.assign({}, hourSet, { without_kea: calculateHoursWithoutKea(hourSet) })
   );
@@ -33,4 +34,8 @@ const HoursSurveyedPerQuarter = ({ gridTileAnalysis }) => {
   );
 };
 
-export default HoursSurveyedPerQuarter;
+HoursPerQuarterGraph.propTypes = {
+  gridTileAnalysis: PropTypes.object.isRequired,
+};
+
+export default HoursPerQuarterGraph;

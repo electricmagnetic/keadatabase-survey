@@ -17,10 +17,10 @@ const DownloadLink = ({ title, filename }) => {
 const GridPage = props => {
   return (
     <div className="GridPage">
-      <Helmet title="View Grid" />
+      <Helmet title="Grid Map" />
       <section className="d-print-none">
         <Banner size="small">
-          <h1>View Grid Map</h1>
+          <h1>Grid Map</h1>
           <p className="lead">
             Grid tiles are 5km by 5km and are at regular intervals on the standard Topo50 map grid.
           </p>

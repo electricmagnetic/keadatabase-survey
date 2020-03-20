@@ -45,17 +45,26 @@ const Header = ({ onHome }) => {
               </li>
               <li className="nav-item">
                 <NavLink to="/surveys" className="nav-link">
-                  <i className="fa-fw fas fa-list-alt mr-2"></i>Browse Surveys
+                  <i className="fa-fw fas fa-list-alt mr-2"></i>
+                  <span className="d-lg-none d-xl-inline">Browse </span>Surveys
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/grid" className="nav-link">
-                  <i className="fa-fw fas fa-map mr-2"></i>View Grid Map
+                  <i className="fa-fw fas fa-map mr-2"></i>
+                  Grid Map
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/analysis" className="nav-link">
+                  <i className="fa-fw fas fa-chart-bar mr-2"></i>
+                  Analysis
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/submit" className="nav-link">
-                  <i className="fa-fw fas fa-clipboard-list mr-2"></i>Submit Survey
+                  <i className="fa-fw fas fa-clipboard-list mr-2"></i>Submit
+                  <span className="d-lg-none d-xl-inline"> Survey</span>
                 </NavLink>
               </li>
             </ul>

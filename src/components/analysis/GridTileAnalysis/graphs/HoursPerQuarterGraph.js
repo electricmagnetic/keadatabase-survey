@@ -27,7 +27,7 @@ const HoursPerQuarterGraph = ({ gridTileAnalysis }) => {
           labelFormatter={quarter => moment(quarter).format('MMMM YYYY')}
           formatter={value => `${value} h`}
         />
-        <Bar dataKey="without_kea" name="No Kea" fill="#dfd4ba" {...commonBarAttributes} />
+        <Bar dataKey="without_kea" name="No kea" fill="#dfd4ba" {...commonBarAttributes} />
         <Bar dataKey="with_kea" name="Kea" fill="#df5206" {...commonBarAttributes} />
       </BarChart>
     </ResponsiveContainer>

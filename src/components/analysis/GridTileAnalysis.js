@@ -13,22 +13,55 @@ const API_URL = `${process.env.REACT_APP_API_BASE}/analysis/grid_tiles/`;
   Obtain analyses for a given grid tile
  */
 class GridTileAnalysis extends Component {
-  render() {
-    const { gridTileAnalysisFetch } = this.props;
-    if (gridTileAnalysisFetch.pending) {
-      return <Loader />;
-    } else if (gridTileAnalysisFetch.rejected) {
-      return <Error message="No data found for this grid tile" info />;
-    } else if (gridTileAnalysisFetch.fulfilled) {
-      return <GridTileAnalysisItem gridTileAnalysis={gridTileAnalysisFetch.value} />;
+  constructor(props) {
+    super(props);
+    this.renderGridTileAnalysis = this.renderGridTileAnalysis.bind(this);
+  }
+
+  renderGridTileAnalysis(gridTileAnalysis) {
+    const { type, ...others } = this.props;
+    switch (type) {
+      default:
+        return <GridTileAnalysisItem gridTileAnalysis={gridTileAnalysis} {...others} />;
     }
+  }
+
+  componentDidMount() {
+    if (this.props.id) this.props.lazyFetchGridTileAnalysis(this.props.id);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) this.props.lazyFetchGridTileAnalysis(this.props.id);
+  }
+
+  render() {
+    if (this.props.gridTileAnalysisFetch) {
+      const { gridTileAnalysisFetch } = this.props;
+      if (gridTileAnalysisFetch.pending) {
+        return <Loader />;
+      } else if (gridTileAnalysisFetch.rejected) {
+        return <Error message="GridTileAnalysis invalid" />;
+      } else if (gridTileAnalysisFetch.fulfilled) {
+        return this.renderGridTileAnalysis(gridTileAnalysisFetch.value);
+      }
+    } else if (this.props.gridTileAnalysis) {
+      return this.renderGridTileAnalysis(this.props.gridTileAnalysis);
+    } else return null;
   }
 }
 
 GridTileAnalysis.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  gridTileAnalysis: PropTypes.object,
+};
+
+GridTileAnalysis.defaultProps = {
+  type: 'item',
 };
 
 export default connect(props => ({
-  gridTileAnalysisFetch: `${API_URL}${props.id}/`,
+  lazyFetchGridTileAnalysis: id => ({
+    gridTileAnalysisFetch: `${API_URL}${props.id}/`,
+  }),
 }))(GridTileAnalysis);

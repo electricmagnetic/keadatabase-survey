@@ -47,7 +47,7 @@ const SurveyHourItem = ({ surveyHour, swapGridTileSurvey }) => {
             <>
               <div className="col-md-2 field-kea">
                 <KeaIcon hasKea={hasKea} />
-                {hasKea ? 'Kea' : 'No Kea'}
+                {hasKea ? 'Kea' : 'No kea'}
               </div>
               {showGridTile && (
                 <div className="col-md-4 field-gridTile">

@@ -9,14 +9,22 @@
 
   width: 100%;
 
-  .tile-tooltip {
+  .tile-tooltip,
+  .tile-popup {
     h2 {
-      font-size: $font-size-lg;
+      font-size: $font-size-base;
     }
     dl,
     dt,
     dd {
       margin-bottom: 0;
+    }
+  }
+  .tile-popup {
+    min-width: 96px;
+
+    .leaflet-popup-content {
+      margin: $spacer/2;
     }
   }
 }

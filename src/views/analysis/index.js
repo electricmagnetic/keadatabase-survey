@@ -12,9 +12,11 @@ const AnalysisPage = props => {
         <Banner size="small">
           <h1>Analysis</h1>
           <p>
-            Orange tiles: surveyed, kea present. Grey tiles: surveyed, kea not present.
-            <br />
+            Orange tiles: surveyed, kea observed.{' '}
             <small>Darker orange denotes higher proportion of kea to hours surveyed.</small>
+            <br />
+            Grey tiles: surveyed, kea not observed.{' '}
+            <small>Darker grey denotes greater than ten hours surveyed.</small>
           </p>
         </Banner>
       </section>

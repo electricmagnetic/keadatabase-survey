@@ -11,11 +11,19 @@ import '../../map/GridTileMap.scss';
   Generate colouring based on hours with/without kea.
  */
 const analysisTileStyle = feature => {
-  const color = feature.hours_total.with_kea > 0 ? '#df5206' : '#222222';
-  const fillOpacity = 0.3 + (feature.hours_total.with_kea / feature.hours_total.total) * 0.4;
+  const hasKea = feature.hours_total.with_kea > 0;
+  const manyHours = feature.hours_total.total > 10;
+
+  const colour = hasKea ? '#df5206' : '#111111';
+
+  const fillOpacity = hasKea
+    ? 0.3 + (feature.hours_total.with_kea / feature.hours_total.total) * 0.4
+    : manyHours
+    ? 0.7
+    : 0.3;
 
   return {
-    color: color,
+    color: colour,
     weight: 1,
     opacity: 0.6,
     fillOpacity: fillOpacity,

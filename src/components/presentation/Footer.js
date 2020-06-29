@@ -13,7 +13,7 @@ const Footer = ({ onSubmitPage }) => {
     <footer className={footerClassNames.join(' ')}>
       <div className="container py-3">
         <div className="row align-items-center">
-          <div className="col-md-8">
+          <div className="col-md-7">
             <nav>
               <ul className="footer-links my-4">
                 <li>
@@ -33,11 +33,19 @@ const Footer = ({ onSubmitPage }) => {
               </ul>
             </nav>
           </div>
-          <div className="col-md-4 text-white">
+          <div className="col-md-5 footer-attribution">
+            <p>Map data from LINZ (CC BY 4.0).</p>
             <p>
-              <small>
-                <em>Map data from Land Information New Zealand (CC BY 4.0)</em>
-              </small>
+              Kea Survey Tool data hosted in New Zealand on{' '}
+              <a
+                href="https://www.catalyst.net.nz/products/gis-core"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="catalyst"
+              >
+                Catalyst GIS Core
+              </a>
+              .
             </p>
           </div>
         </div>

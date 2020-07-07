@@ -40,7 +40,9 @@ class GridTileAnalysis extends Component {
       if (gridTileAnalysisFetch.pending) {
         return <Loader />;
       } else if (gridTileAnalysisFetch.rejected) {
-        return <Error message="GridTileAnalysis invalid" />;
+        if (gridTileAnalysisFetch.meta.response.status === 404)
+          return <Error message="No analyses found" info />;
+        else return <Error message="Error fetching analyses" />;
       } else if (gridTileAnalysisFetch.fulfilled) {
         return this.renderGridTileAnalysis(gridTileAnalysisFetch.value);
       }

@@ -18,7 +18,9 @@ class SurveyAnalysis extends Component {
     if (surveyAnalysisFetch.pending) {
       return <Loader />;
     } else if (surveyAnalysisFetch.rejected) {
-      return <Error message="No data found for this survey" info />;
+      if (surveyAnalysisFetch.meta.response.status === 404)
+        return <Error message="No analyses found" info />;
+      else return <Error message="Error fetching analyses" />;
     } else if (surveyAnalysisFetch.fulfilled) {
       return <SurveyAnalysisItem surveyAnalysis={surveyAnalysisFetch.value} />;
     }

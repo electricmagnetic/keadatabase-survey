@@ -11,7 +11,7 @@ const GridTileAnalysisItem = ({ gridTileAnalysis }) => {
   return (
     <div className="GridTileAnalysisItem">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-sm-6 col-md-4">
           <dl>
             <dt>Hours with kea</dt>
             <dd>{gridTileAnalysis.hours_total.with_kea}</dd>
@@ -21,7 +21,7 @@ const GridTileAnalysisItem = ({ gridTileAnalysis }) => {
             <dd>{calculateEncounterRate(gridTileAnalysis)}%</dd>
           </dl>
         </div>
-        <div className="col-sm-6 col-md-3">
+        <div className="col-sm-6 col-md-8">
           <dl>
             <dt>Quarterly breakdown</dt>
             <dd>

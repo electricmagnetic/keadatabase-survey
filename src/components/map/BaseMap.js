@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Map as LeafletMap, TileLayer } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, GeoJSON } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet';
 
 import { DEFAULT_ZOOM, DEFAULT_BOUNDS } from './defaults';
 
+import { outlineStyle } from './style';
 import './BaseMap.scss';
+
+import tilesOutline from '../../assets/geo/tilesOutline';
 
 class BaseMap extends Component {
   constructor(props) {
@@ -45,6 +48,7 @@ class BaseMap extends Component {
           minZoom={12}
           subdomains={'abcd'}
         />
+        <GeoJSON data={tilesOutline} style={outlineStyle} />
         {children}
       </LeafletMap>
     );

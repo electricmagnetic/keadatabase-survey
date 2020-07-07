@@ -7,3 +7,13 @@ export const gridTileStyle = {
   opacity: 0.6,
   fillOpacity: 0,
 };
+
+/**
+  Outline
+ */
+export const outlineStyle = {
+  fill: false,
+  color: '#000000',
+  weight: 1,
+  dashArray: 3,
+};

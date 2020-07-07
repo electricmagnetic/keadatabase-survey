@@ -9,7 +9,7 @@ export const gridTileStyle = {
 };
 
 /**
-  Outline
+  Grid tiles outline
  */
 export const outlineStyle = {
   fill: false,

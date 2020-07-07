@@ -16,6 +16,7 @@ const GridTilePage = ({ gridTile, ...others }) => {
   return (
     <div className="GridTilePage mb-1">
       <section className="mb-5">
+        <h2>Details</h2>
         <div className="row">
           <div className="col-md-3">
             <img
@@ -23,6 +24,8 @@ const GridTilePage = ({ gridTile, ...others }) => {
               alt="Map grid tile"
               className="img-fluid img-thumbnail mb-3"
             />
+          </div>
+          <div className="col-md-2">
             <dl>
               <dt>
                 Southwest <small>NZTM</small>
@@ -38,14 +41,14 @@ const GridTilePage = ({ gridTile, ...others }) => {
               </dd>
             </dl>
           </div>
-          <div className="col-md-9">
-            <SelectedGridTilesMap gridTileIds={[id]} />
+          <div className="col-md-7">
+            <GridTileAnalysis id={id} />
           </div>
         </div>
       </section>
       <section className="mb-5">
-        <h2>Analysis</h2>
-        <GridTileAnalysis id={id} />
+        <h2>Map</h2>
+        <SelectedGridTilesMap gridTileIds={[id]} showNeighbours />
       </section>
       <section className="mb-5">
         <h2>

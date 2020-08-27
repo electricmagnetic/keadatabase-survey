@@ -4,13 +4,13 @@
   "private": true,
   "homepage": "https://survey.keadatabase.nz",
   "dependencies": {
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
     "core-js": "^3.6.5",
     "formik": "^1.5.8",
     "jquery": "^3.5.1",
     "leaflet": "^1.6.0",
-    "moment": "^2.26.0",
+    "moment": "^2.27.0",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "qs": "^6.9.4",
@@ -23,7 +23,7 @@
     "react-moment": "^0.9.7",
     "react-refetch": "^3.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.1",
+    "react-scripts": "^3.4.3",
     "react-typeahead": "^2.0.0-alpha.8",
     "recharts": "^1.8.5",
     "yup": "^0.27.0"
@@ -55,12 +55,12 @@
     ]
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@fortawesome/fontawesome-free": "^5.14.0",
     "husky": "^2.7.0",
     "prettier": "^1.19.1",
     "pretty-quick": "^1.11.1",
     "s3-deploy": "^1.4.0",
-    "source-map-explorer": "^2.4.2"
+    "source-map-explorer": "^2.5.0"
   },
   "husky": {
     "hooks": {

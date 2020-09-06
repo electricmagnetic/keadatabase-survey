@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://survey.keadatabase.nz",
   "dependencies": {
+    "@tmcw/togeojson": "^4.2.0",
+    "@turf/turf": "^5.1.6",
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
     "core-js": "^3.6.5",

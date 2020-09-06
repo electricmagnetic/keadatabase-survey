@@ -20,6 +20,8 @@ import AnalysisPage from './views/analysis/index';
 import SurveyPage from './views/surveys/index';
 import SurveyDetailPage from './views/surveys/detail';
 
+import GPXPage from './views/gpx';
+
 import NoMatchPage from './views/nomatch';
 
 function App() {
@@ -49,6 +51,8 @@ function App() {
 
             <Route exact path="/surveys" component={SurveyPage} />
             <Route exact path="/surveys/:slug" component={SurveyDetailPage} />
+
+            <Route exact path="/gpx" component={GPXPage} />
 
             <Route component={NoMatchPage} />
           </Switch>

@@ -14,6 +14,13 @@ import './GPXConvert.scss';
   GPX conversion tool.
   */
 const GPXConvert = () => {
+  // TODO: auto-zoom map to correct location
+  // TODO: verify effects to ensure no race conditions
+  // TODO: enable processing of multilinestring GPXs
+  // TODO: feature: check start time and end time, discard if not 55 mins of whole hour
+  // TODO: feature: approximate duration spent in each grid tile (step through points?)
+  // TODO: tests: (1) invalid GPX (2) multi-part GPX (3) GPX greater than a day (4) less than an hour (5) less than a whole hour (e.g. 15:30 to 16:30)
+
   const [gpxInput, setGpxInput] = useState('');
   const [geoJSONOutput, setGeoJSONOutput] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);

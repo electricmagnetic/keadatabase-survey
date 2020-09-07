@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { gpx } from '@tmcw/togeojson';
-import { point, polygon, booleanPointInPolygon } from '@turf/turf';
+import { point, polygon, booleanPointInPolygon, tag, featureCollection } from '@turf/turf';
 import moment from 'moment';
 
 import GridTile from '../grid/GridTile';
@@ -17,33 +17,32 @@ const GPXConvert = () => {
   const [gridTilesByHour, setGridTilesByHour] = useState([]);
 
   useEffect(() => {
-    if (geoJSONOutput.features && !isProcessing) {
+    if (geoJSONOutput.features && geoJSONOutput.features[0] && !isProcessing) {
       setIsProcessing(true);
 
       const feature = geoJSONOutput.features[0];
 
-      const parsedCoordinates = feature.geometry.coordinates.map((coordinates, index) => {
-        const time = moment(feature.properties.coordTimes[index]);
-        const gridTile = tiles.features.reduce(
-          (accumulator, tile) =>
-            booleanPointInPolygon(point(coordinates), polygon(tile.geometry.coordinates))
-              ? tile
-              : accumulator,
-          null
-        );
+      const parsedTrackPoints = featureCollection(
+        feature.geometry.coordinates.map((coordinates, index) => {
+          const time = moment(feature.properties.coordTimes[index]);
+          return point(coordinates, { time: time, hour: parseInt(time.format('HH')) });
+        })
+      );
 
-        return Object.assign(
-          {},
-          { coordinates: coordinates },
-          { time: time },
-          { hour: parseInt(time.format('HH')) },
-          { gridTile: gridTile }
-        );
-      });
+      const parsedTilePolygons = featureCollection(
+        tiles.features.map(tile => polygon(tile.geometry.coordinates, { id: tile.id }))
+      );
 
-      const hours = parsedCoordinates.reduce((acc, obj) => {
-        if (!acc.includes(obj.hour)) {
-          acc.push(obj.hour);
+      const trackPointsWithGridTileIds = tag(
+        parsedTrackPoints,
+        parsedTilePolygons,
+        'id',
+        'gridTileId'
+      );
+
+      const hours = trackPointsWithGridTileIds.features.reduce((acc, obj) => {
+        if (!acc.includes(obj.properties.hour)) {
+          acc.push(obj.properties.hour);
         }
         return acc;
       }, []);
@@ -52,11 +51,13 @@ const GPXConvert = () => {
         hours.map(hour => {
           return Object.assign({
             hour: hour,
-            gridTiles: [
+            gridTileIds: [
               ...new Set(
-                parsedCoordinates
-                  .filter(coordinates => coordinates.hour === hour)
-                  .map(coordinates => coordinates.gridTile)
+                trackPointsWithGridTileIds.features
+                  .filter(
+                    trackPointWithGridTileId => trackPointWithGridTileId.properties.hour === hour
+                  )
+                  .map(trackPointWithGridTileId => trackPointWithGridTileId.properties.gridTileId)
               ),
             ],
           });
@@ -96,18 +97,12 @@ const GPXConvert = () => {
           {gridTilesByHour.map(gridTileByHour => (
             <div key={gridTileByHour.hour} className="card mb-2">
               <div className="card-body">
-                <h3 class="card-title">{`${gridTileByHour.hour}:00`}</h3>
+                <h3 className="card-title">{`${gridTileByHour.hour}:00`}</h3>
 
                 <div className="form-row my-n3">
-                  {gridTileByHour.gridTiles.map(gridTile => (
-                    <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-                      <GridTile
-                        key={gridTile.id}
-                        gridTile={gridTile}
-                        type="card"
-                        hideDetails
-                        addLink
-                      />
+                  {gridTileByHour.gridTileIds.map(gridTileId => (
+                    <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={gridTileId}>
+                      <GridTile key={gridTileId} id={gridTileId} type="card" hideDetails addLink />
                     </div>
                   ))}
                 </div>

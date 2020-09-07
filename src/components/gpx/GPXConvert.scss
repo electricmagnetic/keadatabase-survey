@@ -1,0 +1,11 @@
+@import 'assets/css/_variables';
+
+.TrackMap {
+  height: 800px;
+
+  @include media-breakpoint-down(sm) {
+    height: 640px;
+  }
+
+  width: 100%;
+}

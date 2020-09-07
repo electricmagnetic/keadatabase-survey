@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { gpx } from '@tmcw/togeojson';
-import { point, polygon, booleanPointInPolygon, tag, featureCollection } from '@turf/turf';
+import { point, polygon, tag, featureCollection } from '@turf/turf';
+import { GeoJSON } from 'react-leaflet';
 import moment from 'moment';
 
 import GridTile from '../grid/GridTile';
-import Loader from '../helpers/Loader';
+import BaseMap from '../map/BaseMap';
 import tiles from '../../assets/geo/tiles.json';
+
+import './GPXConvert.scss';
 
 /**
   GPX conversion tool.
@@ -14,6 +17,9 @@ const GPXConvert = () => {
   const [gpxInput, setGpxInput] = useState('');
   const [geoJSONOutput, setGeoJSONOutput] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);
+  const [hours, setHours] = useState([]);
+  const [gridTileIds, setGridTileIds] = useState([]);
+  const [trackPoints, setTrackPoints] = useState({});
   const [gridTilesByHour, setGridTilesByHour] = useState([]);
 
   useEffect(() => {
@@ -22,51 +28,49 @@ const GPXConvert = () => {
 
       const feature = geoJSONOutput.features[0];
 
-      const parsedTrackPoints = featureCollection(
+      const initialTrackPoints = featureCollection(
         feature.geometry.coordinates.map((coordinates, index) => {
           const time = moment(feature.properties.coordTimes[index]);
           return point(coordinates, { time: time, hour: parseInt(time.format('HH')) });
         })
       );
 
-      const parsedTilePolygons = featureCollection(
+      const initialTilePolygons = featureCollection(
         tiles.features.map(tile => polygon(tile.geometry.coordinates, { id: tile.id }))
       );
 
-      const trackPointsWithGridTileIds = tag(
-        parsedTrackPoints,
-        parsedTilePolygons,
-        'id',
-        'gridTileId'
-      );
+      setTrackPoints(tag(initialTrackPoints, initialTilePolygons, 'id', 'gridTileId'));
+      setIsProcessing(false);
+    }
+  }, [geoJSONOutput, isProcessing]);
 
-      const hours = trackPointsWithGridTileIds.features.reduce((acc, obj) => {
-        if (!acc.includes(obj.properties.hour)) {
-          acc.push(obj.properties.hour);
-        }
-        return acc;
-      }, []);
+  useEffect(() => {
+    if (trackPoints && trackPoints.features) {
+      setHours([...new Set(trackPoints.features.map(feature => feature.properties.hour))]);
+      setGridTileIds([
+        ...new Set(trackPoints.features.map(feature => feature.properties.gridTileId)),
+      ]);
+    }
+  }, [trackPoints]);
 
+  useEffect(() => {
+    if (trackPoints && trackPoints.features) {
       setGridTilesByHour(
         hours.map(hour => {
           return Object.assign({
             hour: hour,
             gridTileIds: [
               ...new Set(
-                trackPointsWithGridTileIds.features
-                  .filter(
-                    trackPointWithGridTileId => trackPointWithGridTileId.properties.hour === hour
-                  )
-                  .map(trackPointWithGridTileId => trackPointWithGridTileId.properties.gridTileId)
+                trackPoints.features
+                  .filter(feature => feature.properties.hour === hour)
+                  .map(feature => feature.properties.gridTileId)
               ),
             ],
           });
         })
       );
-
-      setIsProcessing(false);
     }
-  }, [geoJSONOutput, isProcessing]);
+  }, [hours, trackPoints]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -109,6 +113,12 @@ const GPXConvert = () => {
               </div>
             </div>
           ))}
+          <div className="TrackMap">
+            <BaseMap>
+              <GeoJSON data={geoJSONOutput} />
+              <GeoJSON data={tiles.features.filter(feature => gridTileIds.includes(feature.id))} />
+            </BaseMap>
+          </div>
         </>
       )}
     </div>

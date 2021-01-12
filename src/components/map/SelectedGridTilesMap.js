@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { GeoJSON as LeafletGeoJSON } from 'leaflet';
 import { FeatureGroup, ScaleControl, Polygon, Tooltip } from 'react-leaflet';
 
+import Error from '../helpers/Error';
 import BaseMap from './BaseMap';
 import { DEFAULT_BOUNDS } from '../map/defaults';
 
@@ -109,25 +110,29 @@ class SelectedGridTilesMap extends Component {
 
     return (
       <div className="SelectedGridTilesMap">
-        <BaseMap
-          boundsOptions={boundsOptions}
-          bounds={this.state.gridBounds}
-          {...disableInteractivity}
-          ref="map"
-        >
-          <FeatureGroup
-            onAdd={event => this.updateGridBounds(event)}
-            onRemove={event => this.updateGridBounds(event)}
-            ref="featureGroup"
+        {gridTileIds > 0 ? (
+          <BaseMap
+            boundsOptions={boundsOptions}
+            bounds={this.state.gridBounds}
+            {...disableInteractivity}
+            ref="map"
           >
-            {gridTileIds.map(gridTileId => this.createSelectedGridTile(gridTileId))}
-            {showNeighbours &&
-              this.getNeighbours(gridTileIds).map(neighbourId =>
-                this.createSelectedGridTile(neighbourId, true)
-              )}
-          </FeatureGroup>
-          <ScaleControl />
-        </BaseMap>
+            <FeatureGroup
+              onAdd={event => this.updateGridBounds(event)}
+              onRemove={event => this.updateGridBounds(event)}
+              ref="featureGroup"
+            >
+              {gridTileIds.map(gridTileId => this.createSelectedGridTile(gridTileId))}
+              {showNeighbours &&
+                this.getNeighbours(gridTileIds).map(neighbourId =>
+                  this.createSelectedGridTile(neighbourId, true)
+                )}
+            </FeatureGroup>
+            <ScaleControl />
+          </BaseMap>
+        ) : (
+          <Error message="No grid tiles found." />
+        )}
       </div>
     );
   }

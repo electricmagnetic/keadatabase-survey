@@ -110,7 +110,7 @@ class SelectedGridTilesMap extends Component {
 
     return (
       <div className="SelectedGridTilesMap">
-        {gridTileIds > 0 ? (
+        {gridTileIds.length > 0 ? (
           <BaseMap
             boundsOptions={boundsOptions}
             bounds={this.state.gridBounds}

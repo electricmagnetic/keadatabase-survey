@@ -16,32 +16,37 @@ const GridTilePage = ({ gridTile, ...others }) => {
   return (
     <div className="GridTilePage mb-1">
       <section className="mb-5">
-        <h2>Details</h2>
         <div className="row">
-          <div className="col-md-3">
-            <img
-              src={tileData.get_large_image}
-              alt="Map grid tile"
-              className="img-fluid img-thumbnail mb-3"
-            />
-          </div>
-          <div className="col-md-2">
-            <dl>
-              <dt>
-                Southwest <small>NZTM</small>
-              </dt>
-              <dd>
-                {tileData.min.coordinates[0]}, {tileData.min.coordinates[1]}
-              </dd>
-              <dt>
-                Northeast <small>NZTM</small>
-              </dt>
-              <dd>
-                {tileData.max.coordinates[0]}, {tileData.max.coordinates[1]}
-              </dd>
-            </dl>
+          <div className="col-md-5">
+            <h2>Details</h2>
+            <div className="row">
+              <div className="col-md-7">
+                <img
+                  src={tileData.get_large_image}
+                  alt="Map grid tile"
+                  className="img-fluid img-thumbnail mb-3"
+                />
+              </div>
+              <div className="col-md-5">
+                <dl>
+                  <dt>
+                    Southwest <small>NZTM</small>
+                  </dt>
+                  <dd>
+                    {tileData.min.coordinates[0]}, {tileData.min.coordinates[1]}
+                  </dd>
+                  <dt>
+                    Northeast <small>NZTM</small>
+                  </dt>
+                  <dd>
+                    {tileData.max.coordinates[0]}, {tileData.max.coordinates[1]}
+                  </dd>
+                </dl>
+              </div>
+            </div>
           </div>
           <div className="col-md-7">
+            <h2>Analysis</h2>
             <GridTileAnalysis id={id} />
           </div>
         </div>

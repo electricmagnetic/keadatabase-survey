@@ -1,29 +1,29 @@
 {
   "name": "keadatabase-survey",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "homepage": "https://survey.keadatabase.nz",
   "dependencies": {
-    "bootstrap": "^4.5.2",
+    "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",
-    "core-js": "^3.6.5",
+    "core-js": "^3.8.2",
     "formik": "^1.5.8",
     "jquery": "^3.5.1",
     "leaflet": "^1.6.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "qs": "^6.9.4",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-app-polyfill": "^1.0.6",
     "react-bootstrap-typeahead": "^3.4.7",
-    "react-dom": "^16.13.1",
+    "react-dom": "^16.14.0",
     "react-helmet": "^5.2.1",
-    "react-leaflet": "^2.7.0",
+    "react-leaflet": "^2.8.0",
     "react-moment": "^0.9.7",
     "react-refetch": "^3.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.3",
+    "react-scripts": "^3.4.4",
     "react-typeahead": "^2.0.0-alpha.8",
     "recharts": "^1.8.5",
     "yup": "^0.27.0"
@@ -55,12 +55,12 @@
     ]
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.14.0",
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "husky": "^2.7.0",
     "prettier": "^1.19.1",
     "pretty-quick": "^1.11.1",
     "s3-deploy": "^1.4.0",
-    "source-map-explorer": "^2.5.0"
+    "source-map-explorer": "^2.5.2"
   },
   "husky": {
     "hooks": {

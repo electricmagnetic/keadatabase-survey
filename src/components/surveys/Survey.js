@@ -1,54 +1,46 @@
-import React, { Component } from 'react';
-import { connect } from 'react-refetch';
+import React from 'react';
+import useSWR from 'swr';
 import PropTypes from 'prop-types';
-
-import SurveyPage from './Survey/SurveyPage';
-import SurveyItem from './Survey/SurveyItem';
 
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
 
+import SurveyPage from './Survey/SurveyPage';
+import SurveyItem from './Survey/SurveyItem';
+
 const API_URL = `${process.env.REACT_APP_API_BASE}/surveys/surveys/`;
 
-class Survey extends Component {
-  constructor(props) {
-    super(props);
-    this.renderSurvey = this.renderSurvey.bind(this);
-  }
+/**
+  FOO
+*/
+const RenderSurvey = ({ survey, type, ...others }) => {
+  if (!survey) return <Error message="Invalid survey" />;
 
-  renderSurvey(survey) {
-    const { type, ...others } = this.props;
-    switch (type) {
-      case 'item':
-        return <SurveyItem survey={survey} {...others} />;
-      default:
-        return <SurveyPage survey={survey} {...others} />;
-    }
+  switch (type) {
+    case 'item':
+      return <SurveyItem survey={survey} {...others} />;
+    default:
+      return <SurveyPage survey={survey} {...others} />;
   }
+};
 
-  componentDidMount() {
-    if (this.props.id) this.props.lazyFetchSurvey(this.props.id);
-  }
+const Survey = ({ id, survey, ...others }) => {
+  const { data, error, isValidating } = useSWR(id ? `${API_URL}${id}/` : null, {
+    dedupingInterval: 0,
+  });
 
-  componentDidUpdate(prevProps) {
-    if (this.props.id !== prevProps.id) this.props.lazyFetchSurvey(this.props.id);
-  }
-
-  render() {
-    if (this.props.surveyFetch) {
-      const { surveyFetch } = this.props;
-      if (surveyFetch.pending) {
-        return <Loader />;
-      } else if (surveyFetch.rejected) {
-        return <Error message="Survey invalid" />;
-      } else if (surveyFetch.fulfilled) {
-        return this.renderSurvey(surveyFetch.value);
-      }
-    } else if (this.props.survey) {
-      return this.renderSurvey(this.props.survey);
+  if (id) {
+    if (isValidating) {
+      return <Loader />;
+    } else if (error) {
+      return <Error message="Error fetching survey" />;
+    } else if (data) {
+      return <RenderSurvey survey={data} {...others} />;
     } else return null;
-  }
-}
+  } else if (survey) {
+    return <RenderSurvey survey={survey} {...others} />;
+  } else return null;
+};
 
 Survey.propTypes = {
   id: PropTypes.string,
@@ -60,8 +52,4 @@ Survey.defaultProps = {
   type: 'page',
 };
 
-export default connect(props => ({
-  lazyFetchSurvey: id => ({
-    surveyFetch: `${API_URL}${props.id}/`,
-  }),
-}))(Survey);
+export default Survey;

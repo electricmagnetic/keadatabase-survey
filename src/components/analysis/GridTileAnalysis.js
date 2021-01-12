@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-refetch';
+import React from 'react';
+import useSWR from 'swr';
 import PropTypes from 'prop-types';
 
 import Loader from '../helpers/Loader';
@@ -10,47 +10,41 @@ import GridTileAnalysisItem from './GridTileAnalysis/GridTileAnalysisItem';
 const API_URL = `${process.env.REACT_APP_API_BASE}/analysis/grid_tiles/`;
 
 /**
-  Obtain analyses for a given grid tile
+  FOO
+*/
+const RenderGridTileAnalysis = ({ gridTileAnalysis, type, ...others }) => {
+  if (!gridTileAnalysis) return <Error message="Invalid grid tile analysis" />;
+
+  switch (type) {
+    default:
+      return <GridTileAnalysisItem gridTileAnalysis={gridTileAnalysis} {...others} />;
+  }
+};
+
+/**
+  Obtain analyses for a given grid tile (object) or ID (via API)
  */
-class GridTileAnalysis extends Component {
-  constructor(props) {
-    super(props);
-    this.renderGridTileAnalysis = this.renderGridTileAnalysis.bind(this);
-  }
+const GridTileAnalysis = ({ id, gridTileAnalysis, ...others }) => {
+  const { data, error, isValidating } = useSWR(id ? `${API_URL}${id}/` : null, {
+    dedupingInterval: 0,
+  });
 
-  renderGridTileAnalysis(gridTileAnalysis) {
-    const { type, ...others } = this.props;
-    switch (type) {
-      default:
-        return <GridTileAnalysisItem gridTileAnalysis={gridTileAnalysis} {...others} />;
-    }
-  }
-
-  componentDidMount() {
-    if (this.props.id) this.props.lazyFetchGridTileAnalysis(this.props.id);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.id !== prevProps.id) this.props.lazyFetchGridTileAnalysis(this.props.id);
-  }
-
-  render() {
-    if (this.props.gridTileAnalysisFetch) {
-      const { gridTileAnalysisFetch } = this.props;
-      if (gridTileAnalysisFetch.pending) {
-        return <Loader />;
-      } else if (gridTileAnalysisFetch.rejected) {
-        if (gridTileAnalysisFetch.meta.response.status === 404)
-          return <Error message="No analyses found" info />;
-        else return <Error message="Error fetching analyses" />;
-      } else if (gridTileAnalysisFetch.fulfilled) {
-        return this.renderGridTileAnalysis(gridTileAnalysisFetch.value);
-      }
-    } else if (this.props.gridTileAnalysis) {
-      return this.renderGridTileAnalysis(this.props.gridTileAnalysis);
+  if (id) {
+    if (isValidating) {
+      return <Loader />;
+    } else if (error) {
+      return error.status === 404 ? (
+        <Error message="No analysis found" info />
+      ) : (
+        <Error message="Error fetching grid tile analysis" />
+      );
+    } else if (data) {
+      return <RenderGridTileAnalysis gridTileAnalysis={data} {...others} />;
     } else return null;
-  }
-}
+  } else if (gridTileAnalysis) {
+    return <RenderGridTileAnalysis gridTileAnalysis={gridTileAnalysis} {...others} />;
+  } else return null;
+};
 
 GridTileAnalysis.propTypes = {
   id: PropTypes.string,
@@ -62,8 +56,4 @@ GridTileAnalysis.defaultProps = {
   type: 'item',
 };
 
-export default connect(props => ({
-  lazyFetchGridTileAnalysis: id => ({
-    gridTileAnalysisFetch: `${API_URL}${props.id}/`,
-  }),
-}))(GridTileAnalysis);
+export default GridTileAnalysis;

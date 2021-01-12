@@ -1,51 +1,46 @@
-import React, { Component } from 'react';
-import { connect } from 'react-refetch';
+import React from 'react';
+import useSWR from 'swr';
 import PropTypes from 'prop-types';
-
-import SurveyHourItem from './SurveyHour/SurveyHourItem';
 
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
 
+import SurveyHourItem from './SurveyHour/SurveyHourItem';
+
 const API_URL = `${process.env.REACT_APP_API_BASE}/surveys/hours/`;
 
-class SurveyHour extends Component {
-  constructor(props) {
-    super(props);
-    this.renderSurveyHour = this.renderSurveyHour.bind(this);
-  }
+/**
+  FOO
+*/
+const RenderSurveyHour = ({ surveyHour, type, ...others }) => {
+  if (!surveyHour) return <Error message="Invalid survey hour" />;
 
-  renderSurveyHour(surveyHour) {
-    const { type, ...others } = this.props;
-    switch (type) {
-      default:
-        return <SurveyHourItem surveyHour={surveyHour} {...others} />;
-    }
+  switch (type) {
+    default:
+      return <SurveyHourItem surveyHour={surveyHour} {...others} />;
   }
+};
 
-  componentDidMount() {
-    if (this.props.id) this.props.lazyFetchSurveyHour(this.props.id);
-  }
+/**
+  FOO
+*/
+const SurveyHour = ({ id, surveyHour, ...others }) => {
+  const { data, error, isValidating } = useSWR(id ? `${API_URL}${id}/` : null, {
+    dedupingInterval: 0,
+  });
 
-  componentDidUpdate(prevProps) {
-    if (this.props.id !== prevProps.id) this.props.lazyFetchSurveyHour(this.props.id);
-  }
-
-  render() {
-    if (this.props.surveyHourFetch) {
-      const { surveyHourFetch } = this.props;
-      if (surveyHourFetch.pending) {
-        return <Loader />;
-      } else if (surveyHourFetch.rejected) {
-        return <Error message="Survey hour invalid" />;
-      } else if (surveyHourFetch.fulfilled) {
-        return this.renderSurveyHour(surveyHourFetch.value);
-      }
-    } else if (this.props.surveyHour) {
-      return this.renderSurveyHour(this.props.surveyHour);
+  if (id) {
+    if (isValidating) {
+      return <Loader />;
+    } else if (error) {
+      return <Error message="Error fetching survey hour" />;
+    } else if (data) {
+      return <RenderSurveyHour surveyHour={data} {...others} />;
     } else return null;
-  }
-}
+  } else if (surveyHour) {
+    return <RenderSurveyHour surveyHour={surveyHour} {...others} />;
+  } else return null;
+};
 
 SurveyHour.propTypes = {
   id: PropTypes.string,
@@ -57,8 +52,4 @@ SurveyHour.defaultProps = {
   type: 'item',
 };
 
-export default connect(props => ({
-  lazyFetchSurveyHour: id => ({
-    surveyHourFetch: `${API_URL}${props.id}/`,
-  }),
-}))(SurveyHour);
+export default SurveyHour;

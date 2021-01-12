@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import useSWR from 'swr';
 import PropTypes from 'prop-types';
 
@@ -17,7 +17,7 @@ const API_URL = `${process.env.REACT_APP_API_BASE}/surveys/grid_tiles/`;
   Selects component to render with, based on type
 */
 const RenderGridTile = ({ gridTile, type, ...others }) => {
-  if (!gridTile) return <Error message="Tile ID invalid" />;
+  if (!gridTile) return <Error message="Invalid grid tile" />;
 
   switch (type) {
     case 'card':

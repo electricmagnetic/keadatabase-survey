@@ -1,7 +1,7 @@
 @import 'assets/css/_variables';
 
 .GridTileMap {
-  height: 800px;
+  height: 860px;
 
   @include media-breakpoint-down(sm) {
     height: 640px;

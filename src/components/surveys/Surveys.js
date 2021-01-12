@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-refetch';
+import React from 'react';
 import PropTypes from 'prop-types';
+import useSWR from 'swr';
 
 import Survey from './Survey';
 
@@ -9,21 +9,19 @@ import Error from '../helpers/Error';
 
 const API_URL = `${process.env.REACT_APP_API_BASE}/surveys/surveys/`;
 
-class Surveys extends Component {
-  render() {
-    const { surveysFetch, ...others } = this.props;
+const Surveys = ({ queryString, ...others }) => {
+  const { data, error, isValidating } = useSWR(`${API_URL}${queryString}`, { dedupingInterval: 0 });
 
-    if (surveysFetch.pending) {
-      return <Loader />;
-    } else if (surveysFetch.rejected) {
-      return <Error message="Error fetching surveys" />;
-    } else if (surveysFetch.fulfilled) {
-      return surveysFetch.value.results.map(survey => (
-        <Survey survey={survey} key={survey.id} {...others} />
-      ));
-    } else return null;
-  }
-}
+  if (isValidating) {
+    return <Loader />;
+  } else if (error) {
+    return <Error message="Error fetching surveys" />;
+  } else if (data) {
+    const surveys = data.results;
+
+    return surveys.map(survey => <Survey survey={survey} key={survey.id} {...others} />);
+  } else return null;
+};
 
 Surveys.propTypes = {
   type: PropTypes.string.isRequired,
@@ -32,8 +30,7 @@ Surveys.propTypes = {
 
 Surveys.defaultProps = {
   type: 'item',
+  queryString: '',
 };
 
-export default connect(props => ({
-  surveysFetch: `${API_URL}${props.queryString ? props.queryString : ''}`,
-}))(Surveys);
+export default Surveys;

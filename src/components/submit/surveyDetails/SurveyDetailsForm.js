@@ -90,9 +90,7 @@ class FormComponent extends Component {
 /**
   Computes initial values for the form, based on gridTiles provided via the queryString.
  */
-const computeInitialValues = props => {
-  const { queryString } = props;
-
+const computeInitialValues = ({ queryString }) => {
   const singleGridTile = queryString.gridTiles.length === 1 ? queryString.gridTiles[0] : false;
 
   const hours = surveyHours.summer.map(hour =>

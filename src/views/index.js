@@ -44,7 +44,7 @@ const HomePage = props => {
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                <Page id={480} />
+                <Page id={480} hideTitle />
               </div>
               <div className="col-md-6">
                 <h2>Recent Grid Tiles</h2>

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-refetch';
+import React from 'react';
 import PropTypes from 'prop-types';
+import useSWR from 'swr';
 
 import GridTile from './GridTile';
 
@@ -9,21 +9,21 @@ import Error from '../helpers/Error';
 
 const API_URL = `${process.env.REACT_APP_API_BASE}/surveys/grid_tiles/`;
 
-class GridTiles extends Component {
-  render() {
-    const { gridTilesFetch, ...others } = this.props;
+const Surveys = ({ queryString, ...others }) => {
+  const { data, error, isValidating } = useSWR(`${API_URL}${queryString}`, { dedupingInterval: 0 });
 
-    if (gridTilesFetch.pending) {
-      return <Loader />;
-    } else if (gridTilesFetch.rejected) {
-      return <Error message="Error fetching grid tiles" />;
-    } else if (gridTilesFetch.fulfilled) {
-      return gridTilesFetch.value.results.map(gridTile => (
-        <GridTile gridTile={gridTile} key={gridTile.id} {...others} />
-      ));
-    } else return null;
-  }
-}
+  if (isValidating) {
+    return <Loader />;
+  } else if (error) {
+    return <Error message="Error fetching grid tiles" />;
+  } else if (data) {
+    const gridTiles = data.results;
+
+    return gridTiles.map(gridTile => (
+      <GridTile gridTile={gridTile} key={gridTile.id} {...others} />
+    ));
+  } else return null;
+};
 
 GridTiles.propTypes = {
   type: PropTypes.string.isRequired,
@@ -32,8 +32,7 @@ GridTiles.propTypes = {
 
 GridTiles.defaultProps = {
   type: 'item',
+  queryString: '',
 };
 
-export default connect(props => ({
-  gridTilesFetch: `${API_URL}${props.queryString ? props.queryString : ''}`,
-}))(GridTiles);
+export default GridTiles;

@@ -1,6 +1,6 @@
 {
   "name": "keadatabase-survey",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": true,
   "homepage": "https://survey.keadatabase.nz",
   "dependencies": {
@@ -26,6 +26,7 @@
     "react-scripts": "^3.4.4",
     "react-typeahead": "^2.0.0-alpha.8",
     "recharts": "^1.8.5",
+    "swr": "^0.4.0",
     "yup": "^0.27.0"
   },
   "scripts": {

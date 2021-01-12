@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { SWRConfig } from 'swr';
 
 import { Header, HomePageHeader } from './components/presentation/Header';
 import { Footer, SubmitPageFooter } from './components/presentation/Footer';
@@ -21,6 +22,8 @@ import SurveyPage from './views/surveys/index';
 import SurveyDetailPage from './views/surveys/detail';
 
 import NoMatchPage from './views/nomatch';
+
+const CACHE_TIME = 24 * 60 * 60 * 1000;
 
 const OtherPagesContainer = () => {
   return (
@@ -66,18 +69,26 @@ const HomePageContainer = () => {
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={HomePageContainer} />
-          <Route component={OtherPagesContainer} />
-        </Switch>
-        <Switch>
-          <Route exact path="/submit" component={SubmitPageFooter} />
-          <Route component={Footer} />
-        </Switch>
-      </div>
-    </Router>
+    <SWRConfig
+      value={{
+        fetcher: (...args) => fetch(...args).then(result => result.json()),
+        dedupingInterval: CACHE_TIME,
+        revalidateOnFocus: false,
+      }}
+    >
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route exact path="/" component={HomePageContainer} />
+            <Route component={OtherPagesContainer} />
+          </Switch>
+          <Switch>
+            <Route exact path="/submit" component={SubmitPageFooter} />
+            <Route component={Footer} />
+          </Switch>
+        </div>
+      </Router>
+    </SWRConfig>
   );
 }
 

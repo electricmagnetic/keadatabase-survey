@@ -1,26 +1,31 @@
 import React from 'react';
-import { connect } from 'react-refetch';
 import PropTypes from 'prop-types';
+import useSWR from 'swr';
 
 import Loader from '../helpers/Loader';
 import Error from '../helpers/Error';
 
-const API_URL = `https://public-api.wordpress.com/wp/v2/sites/blog.keadatabase.nz/pages/`;
+import './Page.scss';
 
-/**
-  Gets a page from the WordPress API
- */
-const Page = ({ id, pageFetch, showTitle }) => {
-  if (pageFetch.pending) {
-    return <Loader />;
-  } else if (pageFetch.rejected) {
-    return <Error message="Page invalid" />;
-  } else if (pageFetch.fulfilled) {
-    const page = pageFetch.value;
+const API_URL = `https://public-api.wordpress.com/wp/v2/sites/blog.keadatabase.nz/pages?per_page=100`;
+
+const Page = props => {
+  const { data, error, isValidating } = useSWR(`${API_URL}`);
+
+  const { hideTitle, id } = props;
+
+  // Add sr-only (screen-reader only) class
+  const className = hideTitle ? 'sr-only' : '';
+
+  if (isValidating) return <Loader />;
+  else if (error) return <Error />;
+  else if (data) {
+    const page = data.find(page => page.id === id);
+
     return (
       <div className="Page">
         <div className="Page-content" key={page.id}>
-          {showTitle && <h2 dangerouslySetInnerHTML={{ __html: page.title.rendered }} />}
+          <h2 dangerouslySetInnerHTML={{ __html: page.title.rendered }} className={className} />
           <p dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
         </div>
       </div>
@@ -30,13 +35,11 @@ const Page = ({ id, pageFetch, showTitle }) => {
 
 Page.propTypes = {
   id: PropTypes.number.isRequired,
-  showTitle: PropTypes.bool.isRequired,
+  hideTitle: PropTypes.bool.isRequired,
 };
 
 Page.defaultProps = {
-  showTitle: false,
+  hideTitle: false,
 };
 
-export default connect(props => ({
-  pageFetch: `${API_URL}${props.id}/`,
-}))(Page);
+export default Page;

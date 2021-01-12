@@ -15,7 +15,7 @@ const AboutPage = props => {
       </section>
       <section className="mb-5">
         <div className="container">
-          <Page id={474} />
+          <Page id={474} hideTitle />
         </div>
       </section>
     </div>

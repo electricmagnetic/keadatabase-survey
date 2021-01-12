@@ -29,7 +29,7 @@ const SubmissionSuccessPage = ({ match }) => {
       </section>
       <section className="mb-5">
         <div className="container">
-          <Page id={556} />
+          <Page id={556} hideTitle />
         </div>
       </section>
     </div>

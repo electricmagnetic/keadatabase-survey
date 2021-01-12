@@ -15,7 +15,7 @@ const InstructionsPage = props => {
       </section>
       <section className="mb-5">
         <div className="container">
-          <Page id={478} />
+          <Page id={478} hideTitle />
         </div>
       </section>
     </div>

@@ -15,7 +15,7 @@ const LegalPage = props => {
       </section>
       <section className="mb-5">
         <div className="container">
-          <Page id={476} />
+          <Page id={476} hideTitle />
         </div>
       </section>
     </div>

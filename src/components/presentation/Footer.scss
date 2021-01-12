@@ -1,7 +1,11 @@
 @import 'assets/css/_variables';
 
+$footer-outer: lighten($brown-faded, 5%);
+$footer-inner: $brown-faded;
+$footer-border: darken($brown-faded, 5%);
+
 footer {
-  background-color: $secondary;
+  background-color: $footer-inner;
 
   p {
     margin: 0;
@@ -11,8 +15,7 @@ footer {
     padding-left: 0;
     list-style: none;
     margin-bottom: 0;
-    margin-left: -($grid-gutter-width);
-    text-transform: uppercase;
+    margin-left: -($grid-gutter-width/2);
 
     li {
       margin-left: $grid-gutter-width/2;
@@ -21,16 +24,32 @@ footer {
     }
   }
 
-  .footer-attribution {
+  .footer-sponsor {
     font-size: $font-size-sm;
-    color: $white;
-    text-align: right;
+  }
+  .footer-attribution {
+    color: $gray-600;
+    font-size: $font-size-sm * 0.9;
+
+    @include media-breakpoint-up(md) {
+      text-align: right;
+    }
+
+    .logo {
+      font-size: $font-size-base;
+      line-height: 0.9;
+      font-family: $headings-font-family;
+    }
+
+    .version {
+    }
+  }
+  .catalyst {
+    color: #ba2025;
   }
 
-  a {
-    color: $gray-200;
-    &:hover {
-      color: $white;
-    }
+  .constrainer {
+    background-color: $footer-outer;
+    border-color: $footer-border;
   }
 }

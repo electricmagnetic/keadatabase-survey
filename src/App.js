@@ -22,18 +22,13 @@ import SurveyDetailPage from './views/surveys/detail';
 
 import NoMatchPage from './views/nomatch';
 
-function App() {
+const OtherPagesContainer = () => {
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={HomePageHeader} />
-          <Route component={Header} />
-        </Switch>
-        <main>
+    <>
+      <Header />
+      <main>
+        <div className="constrainer">
           <Switch>
-            <Route exact path="/" component={HomePage} />
-
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/legal" component={LegalPage} />
             <Route exact path="/instructions" component={InstructionsPage} />
@@ -52,7 +47,31 @@ function App() {
 
             <Route component={NoMatchPage} />
           </Switch>
-        </main>
+        </div>
+      </main>
+    </>
+  );
+};
+
+const HomePageContainer = () => {
+  return (
+    <>
+      <HomePageHeader />
+      <main>
+        <HomePage />
+      </main>
+    </>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/" component={HomePageContainer} />
+          <Route component={OtherPagesContainer} />
+        </Switch>
         <Switch>
           <Route exact path="/submit" component={SubmitPageFooter} />
           <Route component={Footer} />

@@ -1,6 +1,6 @@
 {
   "name": "keadatabase-survey",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "homepage": "https://survey.keadatabase.nz",
   "dependencies": {

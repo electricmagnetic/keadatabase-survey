@@ -12,7 +12,7 @@ const HomePage = props => {
   return (
     <div className="HomePage">
       <Helmet title="Kea Survey Tool" />
-      <section className="mb-5">
+      <section>
         <Banner backgroundImage={banner} size="home">
           <h1 className="mb-4 banner-title">Kea Survey Tool</h1>
           <div className="home-buttons">
@@ -39,19 +39,21 @@ const HomePage = props => {
           </div>
         </Banner>
       </section>
-      <section className="mb-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <Page id={480} />
-            </div>
-            <div className="col-md-6">
-              <h2>Recent Grid Tiles</h2>
-              <GridTilesFromSurveyHours type="card" hideDetails limit={8} />
+      <div className="constrainer">
+        <section className="my-5">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <Page id={480} />
+              </div>
+              <div className="col-md-6">
+                <h2>Recent Grid Tiles</h2>
+                <GridTilesFromSurveyHours type="card" hideDetails limit={8} />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };

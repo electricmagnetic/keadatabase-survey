@@ -1,11 +1,11 @@
 @import 'assets/css/_variables';
 
-$footer-outer: lighten($brown-faded, 5%);
-$footer-inner: $brown-faded;
+$footer-outer: $brown-faded;
+$footer-inner: lighten($brown-faded, 5%);
 $footer-border: darken($brown-faded, 5%);
 
 footer {
-  background-color: $footer-inner;
+  background-color: $footer-outer;
 
   p {
     margin: 0;
@@ -49,7 +49,7 @@ footer {
   }
 
   .constrainer {
-    background-color: $footer-outer;
+    background-color: $footer-inner;
     border-color: $footer-border;
   }
 }

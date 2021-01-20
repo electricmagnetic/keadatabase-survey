@@ -35,7 +35,7 @@ export const initialHourValues = {
  */
 export const initialFullValues = {
   observer: initialObserverValues,
-  date: moment().format('YYYY-MM-DD'),
+  date: '',
   hours: [],
   max_flock_size: '',
   comments: '',

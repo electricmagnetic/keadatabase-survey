@@ -39,7 +39,7 @@ const TripFieldset = ({ fieldOptions, values, setFieldValue }) => (
           fieldOptions={fieldOptions.date}
           name="date"
           type="date"
-          placeholder="Date"
+          placeholder="YYYY-MM-DD"
           helpText="If a multi-day journey, start with earliest date"
           autoFocus
         />

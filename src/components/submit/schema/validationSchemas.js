@@ -42,10 +42,7 @@ export const gridTileValidationSchema = yup
 export const observerValidationSchema = yup
   .object({
     name: yup.string().required(requiredMessage),
-    email: yup
-      .string()
-      .email(emailInvalid)
-      .required(requiredMessage),
+    email: yup.string().email(emailInvalid).required(requiredMessage),
   })
   .required()
   .strict()
@@ -78,12 +75,7 @@ export const fullValidationSchema = yup
       .array()
       .of(
         yup.object().shape({
-          hour: yup
-            .number()
-            .min(0)
-            .max(23)
-            .required(requiredMessage)
-            .typeError(notNumber),
+          hour: yup.number().min(0).max(23).required(requiredMessage).typeError(notNumber),
           activity: yup.string().required(requiredMessage),
           kea: yup.boolean().when('activity', {
             is: value => value !== 'X',
@@ -96,10 +88,7 @@ export const fullValidationSchema = yup
         })
       )
       .required(hourRequired),
-    max_flock_size: yup
-      .number()
-      .min(0)
-      .typeError(notNumber),
+    max_flock_size: yup.number().min(0).typeError(notNumber),
     purpose: yup.string(),
     comments: yup.string(),
     challenge: yup.string().required(),

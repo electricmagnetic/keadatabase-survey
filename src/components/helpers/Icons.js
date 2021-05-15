@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const ActivityIcon = ({ activity }) => {
-  const icon = (function(activity) {
+  const icon = (function (activity) {
     switch (activity) {
       case 'W':
         return 'walking';

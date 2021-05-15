@@ -40,10 +40,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -59,6 +63,9 @@
     ]
   },
   "devDependencies": {
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0",
     "s3-deploy": "^1.4.0",
     "sass": "^1.32.13"
   },
@@ -70,5 +77,8 @@
     "trailingComma": "es5",
     "printWidth": 100,
     "arrowParens": "avoid"
+  },
+  "lint-staged": {
+    "*.{yml,js,css,md}": "prettier --write"
   }
 }

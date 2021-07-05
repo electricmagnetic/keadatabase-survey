@@ -8,6 +8,12 @@ export const gridTileStyle = {
   fillOpacity: 0,
 };
 
+export const selectedGridTileStyle = {
+  color: '#ff0000',
+  weight: 3,
+  fillOpacity: 0,
+};
+
 /**
   Grid tiles outline
  */

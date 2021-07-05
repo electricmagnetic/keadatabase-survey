@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map as LeafletMap, TileLayer, GeoJSON } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, GeoJSON, LayersControl, LayerGroup } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet';
@@ -48,6 +48,12 @@ class BaseMap extends Component {
           minZoom={12}
           subdomains={'abcd'}
         />
+        <LayersControl position="topright" collapsed={false}>
+          <LayersControl.Overlay name="Grid Tiles" checked>
+            <TileLayer url={`https://geo.keadatabase.nz/grid/layer/{z}/{x}/{y}.png`} />
+          </LayersControl.Overlay>
+        </LayersControl>
+
         <GeoJSON data={tilesOutline} style={outlineStyle} />
         {children}
       </LeafletMap>

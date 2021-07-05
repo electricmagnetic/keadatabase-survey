@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { GeoJSON, ScaleControl, Polygon, Tooltip, FeatureGroup } from 'react-leaflet';
+import { ScaleControl, Polygon, Tooltip, FeatureGroup } from 'react-leaflet';
 import { latLngBounds, GeoJSON as LeafletGeoJSON } from 'leaflet';
 
 import BaseMap from './BaseMap';
 import { DEFAULT_ZOOM, DEFAULT_BOUNDS, SELECT_ZOOM } from './defaults';
-import { gridTileStyle } from './style';
+import { getGridTile } from './helpers';
 
+import { selectedGridTileStyle } from './style';
 import './GridTileMap.scss';
 import tiles from '../../assets/geo/tiles.json';
 
@@ -24,10 +25,9 @@ class GridTileSelectMap extends Component {
       },
     };
 
-    this.baseGridTileOnEachFeature = this.baseGridTileOnEachFeature.bind(this);
-    this.gridTileSelected = this.gridTileSelected.bind(this);
     this.updateGridBounds = this.updateGridBounds.bind(this);
     this.onViewportChanged = this.onViewportChanged.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   /**
@@ -59,30 +59,6 @@ class GridTileSelectMap extends Component {
   }
 
   /**
-    Add a grid tile to gridTiles if a feature is selected from the base GeoJSON layer (target.feature).
-    Remove a grid tile from gridTiles if a selectedGridTile polygon is selected (target.options).
-  */
-  gridTileSelected(event) {
-    const { target } = event;
-
-    const currentGridTiles = this.props.values.gridTiles;
-    const selectedGridTile =
-      (target.feature && target.feature.id) || (target.options && target.options.id);
-
-    if (currentGridTiles.includes(selectedGridTile))
-      this.props.setFieldValue(
-        'gridTiles',
-        currentGridTiles.filter(gridTile => gridTile !== selectedGridTile)
-      );
-    else this.props.setFieldValue('gridTiles', currentGridTiles.concat([selectedGridTile]));
-  }
-
-  /**
-    Add a click handler for each feature on the base GeoJSON layer.
-  */
-  baseGridTileOnEachFeature = (feature, layer) => layer.on('click', this.gridTileSelected);
-
-  /**
     Create a Polygon for each selected gridTile. Retrieve coordinates from raw GeoJSON, then convert (due to differing conventions).
   */
   createSelectedGridTile = selectedTile => (
@@ -91,7 +67,7 @@ class GridTileSelectMap extends Component {
         .find(tile => tile.id === selectedTile)
         .geometry.coordinates.map(coordinate => LeafletGeoJSON.coordsToLatLngs(coordinate))}
       key={selectedTile}
-      color="red"
+      {...selectedGridTileStyle}
       onClick={this.gridTileSelected}
       id={selectedTile}
     >
@@ -102,17 +78,33 @@ class GridTileSelectMap extends Component {
   );
 
   /**
+    Find a grid tile (if any) at the point clicked and update the state to include it.
+   */
+  handleClick(event) {
+    const currentGridTiles = this.props.values.gridTiles;
+    const selectedGridTile = getGridTile(event.latlng.lat, event.latlng.lng)?.id;
+
+    if (selectedGridTile) {
+      if (currentGridTiles.includes(selectedGridTile))
+        this.props.setFieldValue(
+          'gridTiles',
+          currentGridTiles.filter(gridTile => gridTile !== selectedGridTile)
+        );
+      else this.props.setFieldValue('gridTiles', currentGridTiles.concat([selectedGridTile]));
+    }
+  }
+
+  /**
     Render map with base GeoJSON and selected tiles as a FeatureGroup.
   */
   render() {
     return (
       <div className="GridTileMap">
-        <BaseMap viewport={this.state.viewport} onViewportChanged={this.onViewportChanged}>
-          <GeoJSON
-            data={tiles}
-            onEachFeature={this.baseGridTileOnEachFeature}
-            style={gridTileStyle}
-          />
+        <BaseMap
+          viewport={this.state.viewport}
+          onViewportChanged={this.onViewportChanged}
+          onClick={this.handleClick}
+        >
           {this.props.values.gridTiles && (
             <FeatureGroup
               onLayerAdd={event => this.updateGridBounds(event)}

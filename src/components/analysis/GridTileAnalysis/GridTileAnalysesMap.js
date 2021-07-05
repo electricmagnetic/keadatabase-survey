@@ -66,7 +66,7 @@ class GridTileAnalysisMap extends Component {
 
     return (
       <div className="GridTileMap">
-        <BaseMap>
+        <BaseMap hideGridTiles>
           {gridTileAnalyses.map(gridTileAnalysis => this.createGridTile(gridTileAnalysis))}
           <ScaleControl />
         </BaseMap>

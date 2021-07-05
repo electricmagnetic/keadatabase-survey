@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map as LeafletMap, TileLayer, GeoJSON, LayersControl, LayerGroup } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, GeoJSON, LayersControl } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet';
@@ -23,7 +23,8 @@ class BaseMap extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, hideGridTiles } = this.props;
+
     return (
       <LeafletMap
         className="map"
@@ -49,7 +50,7 @@ class BaseMap extends Component {
           subdomains={'abcd'}
         />
         <LayersControl position="topright" collapsed={false}>
-          <LayersControl.Overlay name="Grid Tiles" checked>
+          <LayersControl.Overlay name="Grid Tiles" checked={!hideGridTiles}>
             <TileLayer url={`https://geo.keadatabase.nz/grid/layer/{z}/{x}/{y}.png`} />
           </LayersControl.Overlay>
         </LayersControl>
@@ -60,5 +61,9 @@ class BaseMap extends Component {
     );
   }
 }
+
+BaseMap.defaultProps = {
+  hideGridTiles: false,
+};
 
 export default BaseMap;

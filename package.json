@@ -36,8 +36,6 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "s3-deploy './build/**' --cwd './build/' --region ap-southeast-2 --delete-removed --distId E18DLAKMGVQXJO --invalidate '/index.html' --bucket survey.keadatabase.nz",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -67,7 +65,6 @@
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.0",
-    "s3-deploy": "^1.4.0",
     "sass": "^1.32.13"
   },
   "prettier": {

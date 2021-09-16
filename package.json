@@ -29,7 +29,7 @@
     "react-moment": "^0.9.7",
     "react-refetch": "^3.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "^4.0.0",
     "react-typeahead": "^2.0.0-alpha.8",
     "recharts": "^1.8.5",
     "swr": "^0.5.6",

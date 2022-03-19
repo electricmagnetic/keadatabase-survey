@@ -27,3 +27,6 @@ src/**/*.css
 
 # jsdoc
 /out
+
+.firebase/
+.firebaserc

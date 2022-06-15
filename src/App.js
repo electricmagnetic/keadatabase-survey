@@ -1,27 +1,26 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
 import { Header, HomePageHeader } from './components/presentation/Header';
 import { Footer, SubmitPageFooter } from './components/presentation/Footer';
+import Loader from './components/helpers/Loader';
 
 import HomePage from './views/index';
-import AboutPage from './views/about';
-import LegalPage from './views/legal';
-import InstructionsPage from './views/instructions';
-
-import SubmissionPage from './views/submit/index';
-import SubmissionSuccessPage from './views/submit/success';
-
-import GridPage from './views/grid/index';
-import GridDetailPage from './views/grid/detail';
-
-import AnalysisPage from './views/analysis/index';
-
-import SurveyPage from './views/surveys/index';
-import SurveyDetailPage from './views/surveys/detail';
-
 import NoMatchPage from './views/nomatch';
+
+const AboutPage = lazy(() => import('./views/about'));
+const LegalPage = lazy(() => import('./views/legal'));
+const InstructionsPage = lazy(() => import('./views/instructions'));
+
+const SubmissionPage = lazy(() => import('./views/submit/index'));
+const SubmissionSuccessPage = lazy(() => import('./views/submit/success'));
+
+const GridPage = lazy(() => import('./views/grid/index'));
+const GridDetailPage = lazy(() => import('./views/grid/detail'));
+const AnalysisPage = lazy(() => import('./views/analysis/index'));
+const SurveyPage = lazy(() => import('./views/surveys/index'));
+const SurveyDetailPage = lazy(() => import('./views/surveys/detail'));
 
 const CACHE_TIME = 24 * 60 * 60 * 1000;
 const fetcher = async url => {
@@ -41,29 +40,31 @@ const OtherPagesContainer = () => {
   return (
     <>
       <Header />
-      <main>
-        <div className="constrainer">
-          <Switch>
-            <Route exact path="/about" component={AboutPage} />
-            <Route exact path="/legal" component={LegalPage} />
-            <Route exact path="/instructions" component={InstructionsPage} />
+      <Suspense fallback={<Loader />}>
+        <main>
+          <div className="constrainer">
+            <Switch>
+              <Route exact path="/about" component={AboutPage} />
+              <Route exact path="/legal" component={LegalPage} />
+              <Route exact path="/instructions" component={InstructionsPage} />
 
-            <Route exact path="/submit" component={SubmissionPage} />
-            <Route exact path="/submit/success" component={SubmissionSuccessPage} />
-            <Route exact path="/submit/success/:slug" component={SubmissionSuccessPage} />
+              <Route exact path="/submit" component={SubmissionPage} />
+              <Route exact path="/submit/success" component={SubmissionSuccessPage} />
+              <Route exact path="/submit/success/:slug" component={SubmissionSuccessPage} />
 
-            <Route exact path="/grid" component={GridPage} />
-            <Route exact path="/grid/:slug" component={GridDetailPage} />
+              <Route exact path="/grid" component={GridPage} />
+              <Route exact path="/grid/:slug" component={GridDetailPage} />
 
-            <Route exact path="/analysis" component={AnalysisPage} />
+              <Route exact path="/analysis" component={AnalysisPage} />
 
-            <Route exact path="/surveys" component={SurveyPage} />
-            <Route exact path="/surveys/:slug" component={SurveyDetailPage} />
+              <Route exact path="/surveys" component={SurveyPage} />
+              <Route exact path="/surveys/:slug" component={SurveyDetailPage} />
 
-            <Route component={NoMatchPage} />
-          </Switch>
-        </div>
-      </main>
+              <Route component={NoMatchPage} />
+            </Switch>
+          </div>
+        </main>
+      </Suspense>
     </>
   );
 };

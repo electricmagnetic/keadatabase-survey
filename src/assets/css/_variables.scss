@@ -1,5 +1,5 @@
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/mixins';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
 
 // Custom variables go here
 
@@ -35,4 +35,4 @@ $navbar-light-hover-color: rgba($black, 0.6);
 
 $navbar-nav-link-padding-x: 1rem;
 
-@import 'bootstrap/scss/variables';
+@import '~bootstrap/scss/variables';

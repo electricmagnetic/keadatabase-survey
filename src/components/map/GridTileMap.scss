@@ -1,4 +1,4 @@
-@import 'assets/css/_variables';
+@import 'src/assets/css/_variables';
 
 .GridTileMap {
   height: 860px;
@@ -24,7 +24,7 @@
     min-width: 96px;
 
     .leaflet-popup-content {
-      margin: $spacer/2;
+      margin: calc($spacer / 2);
     }
   }
 }

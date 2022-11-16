@@ -4,26 +4,19 @@ A React-based survey tool for the Department of Conservation-backed kea populati
 
 ## Setup
 
-You will need to have Node >= 8 installed (and npm). Then run:  
-`npm install`
+You will need to have Node >= 18 installed (and pnpm). Then run: `pnpm install`
 
 ## Running
 
-To run on your local machine at <http://localhost:3000/> run:  
-`npm start`
-
-You will need to ensure that the SCSS has been compiled beforehand by running:  
-`npm run watch-css`
+To run on your local machine at <http://localhost:3000/> run: `pnpm start`
 
 ## Building
 
-To build the app for production use, run:  
-`npm build-css` then `npm run build`
+To build the app for production use, run: `npm run build`
 
 ## Documentation
 
-Some basic documentation can be generated using:
-`jsdoc src/**/*.js`
+Some basic documentation can be generated using: `jsdoc src/**/*.js`
 
 ## Layout
 
@@ -48,13 +41,9 @@ Some basic documentation can be generated using:
 
 Ensure you have the following:
 
-- The `awscli` Python package installed and configured with id and secret key.
-- `REACT_APP_MAPBOX_API_KEY`, `REACT_APP_LINZ_API_KEY`, defined in `.env.local`
+- `REACT_APP_MAPBOX_API_KEY`, `REACT_APP_LINZ_API_KEY` and `REACT_APP_SENTRY_DSN`, defined in `.env.local`
 
-To deploy to Amazon S3 (and hence make available online):  
-`npm run deploy`
-
-**This will automatically build the SCSS and source code, and then invalidate the CloudFront cache.**
+To deploy to Firebase run: `npm run deploy`
 
 ## Bug reports
 
@@ -63,7 +52,7 @@ Should be filed on the Kea Database Trello board (not presently public)
 ## Licence
 
 Kea Survey Tool  
-Copyright (C) 2021 Electric Magnetic Limited
+Copyright (C) 2022 Electric Magnetic Limited
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
